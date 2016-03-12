@@ -144,26 +144,66 @@
         align-content: space-around;
     }
 
-    $view-size: null;
-    @each $size in xs, sm, md, lg {
-        @if $size == xs {
-            $view-size: $view-xs;
+    @each $size in map-keys($sizes) {
+        .visible-#{$size} {
+            display: none !important;
         }
-        @if $size == sm {
-            $view-size: $view-sm;
+        .hidden-#{$size} {
+            display: block !important;
         }
-        @if $size == md {
-            $view-size: $view-md;
+        .frow.hidden-#{$size} {
+            display: flex !important;
         }
-        @if $size == lg {
-            $view-size: $view-lg;
-        }
+    }
 
-        @media (min-width: $view-size) {
-            @for $i from 1 through $max-columns {
-                @for $m from 1 through $i {
-                    .col-#{$size}-#{$m}-#{$i} {
-                        width: percentage($m/$i);
+    @each $size in map-keys($sizes) {
+        @if index(map-keys($sizes), $size) == 1 {
+            @media (max-width: nth(nth($sizes, 2), 2)-1) {
+                .visible-#{$size} {
+                    display: block !important;
+                }
+                .frow.visible-#{$size} {
+                    display: flex !important;
+                }
+                .hidden-#{$size} {
+                    display: none !important;
+                }
+            }
+        }
+        @else if index(map-keys($sizes), $size) != 1 and index(map-keys($sizes), $size) < length($sizes) {
+            @media (min-width: map-get($sizes, $size)) and (max-width: nth(nth($sizes, index(map-keys($sizes), $size)+1), 2)-1) {
+                .visible-#{$size} {
+                    display: block !important;
+                }
+                .frow.visible-#{$size} {
+                    display: flex !important;
+                }
+                .hidden-#{$size} {
+                    display: none !important;
+                }
+            }
+        }
+        @else if index(map-keys($sizes), $size) == length($sizes) {
+            @media (min-width: nth(nth($sizes, length($sizes)), 2)) {
+                .visible-#{$size} {
+                    display: block !important;
+                }
+                .frow.visible-#{$size} {
+                    display: flex !important;
+                }
+                .hidden-#{$size} {
+                    display: none !important;
+                }
+            }
+        }
+    }
+
+    @each $size in map-keys($sizes) {
+        @media (min-width: map-get($sizes, $size)) {
+            @for $denominator from 1 through $max-columns {
+                @for $numerator from 1 through $denominator {
+                    .col-#{$size}-#{$numerator}-#{$denominator} {
+                        width: percentage($numerator/$denominator);
                     }
                 }
             }
