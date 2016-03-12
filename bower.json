@@ -1,0 +1,32 @@
+{
+  "name": "frow",
+  "homepage": "https://github.com/Beg-in/frow",
+  "authors": [
+    "Cody Sherman <cody@beg.in>"
+  ],
+  "description": "CSS responsive grid framework utilizing flex",
+  "main": "assets/_frow.scss",
+  "moduleType": [],
+  "keywords": [
+    "css",
+    "css grid",
+    "responsive css",
+    "responsive",
+    "flex",
+    "css flex",
+    "sass",
+    "mobile-first",
+    "front-end",
+    "front end",
+    "framework",
+    "web"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
