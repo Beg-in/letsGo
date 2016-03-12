@@ -1,3 +1,7 @@
+*, :after, :before {
+    box-sizing: border-box;
+}
+
 .frow-container {
     margin-right: auto;
     margin-left: auto;
