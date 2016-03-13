@@ -5,7 +5,7 @@
     "Cody Sherman <cody@beg.in>"
   ],
   "description": "CSS responsive grid framework utilizing flex",
-  "main": "assets/_frow.scss",
+  "main": "_frow.scss",
   "moduleType": [],
   "keywords": [
     "css",

@@ -1,12 +1,13 @@
-*, :after, :before {
-    box-sizing: border-box;
-}
+// Grid system
+//
+// Generate semantic grid columns with these mixins.
 
+// Centered container element
 .frow-container {
     margin-right: auto;
     margin-left: auto;
-    padding-left: $gutters;
-    padding-right: $gutters;
+    padding-left: $grid-gutter-width / 2;
+    padding-right: $grid-gutter-width / 2;
 }
 @media (min-width: 768px) {
     .frow-container {
@@ -24,6 +25,10 @@
     }
 }
 
+// Flexible row
+//
+// Flexible rows contain your columns.
+
 .frow {
     // @extend .row;
     display: flex;
@@ -31,12 +36,12 @@
     justify-content: center;
 
     &.gutters {
-        margin-left: -$gutters;
-        margin-right: -$gutters;
+        margin-left: -$grid-gutter-width / 2;
+        margin-right: -$grid-gutter-width / 2;
 
         &>* {
-            padding-left: $gutters;
-            padding-right: $gutters;
+            padding-left: $grid-gutter-width / 2;
+            padding-right: $grid-gutter-width / 2;
         }
     }
 
@@ -52,7 +57,7 @@
     //     height: 100%;
     // }
 
-    // shortcuts (beta)
+    // Shortcuts (beta)
     &.centered {
         justify-content: center;
         align-items: center;
@@ -83,7 +88,7 @@
         justify-content: flex-end;
     }
 
-    // flex-direction
+    // Flex-direction
     &.direction-row {
         flex-direction: row;
     }
@@ -97,7 +102,7 @@
         flex-direction: column-reverse;
     }
 
-    // justify-content
+    // Justify-content
     &.justify-start {
         justify-content: flex-start;
     }
@@ -114,7 +119,7 @@
         justify-content: space-around;
     }
 
-    // align-items
+    // Align-items
     &.items-stretch {
         align-items: stretch;
     }
@@ -131,7 +136,7 @@
         align-items: baseline;
     }
 
-    // align-content
+    // Align-content
     &.content-start {
         align-content: flex-start;
     }
@@ -147,68 +152,35 @@
     &.content-around {
         align-content: space-around;
     }
+}
 
-    @each $size in map-keys($sizes) {
-        .visible-#{$size} {
-            display: none !important;
-        }
-        .hidden-#{$size} {
-            display: block !important;
-        }
-        .frow.visible-#{$size} {
-            display: flex !important;
+// Columns
+//
+// Generate the various columns widths.
+
+$sizes: map-merge($sizes-mobile, $sizes-desktop);
+$sizes-names: map-keys($sizes);
+
+$all-columns: ();
+@for $denominator from 1 through $grid-max-columns {
+    @for $numerator from 1 through $denominator {
+      @each $size in $sizes-names {
+        $all-columns: append($all-columns,
+            '.col-#{$size}-#{$numerator}-#{$denominator}',
+                comma);
         }
     }
+}
+#{$all-columns} {
+    width:100%;
+}
 
-    @each $size in map-keys($sizes) {
-        @if index(map-keys($sizes), $size) == 1 {
-            @media (max-width: nth(nth($sizes, 2), 2)-1) {
-                .visible-#{$size} {
-                    display: block !important;
-                }
-                .frow.visible-#{$size} {
-                    display: flex !important;
-                }
-                .hidden-#{$size} {
-                    display: none !important;
-                }
-            }
-        }
-        @else if index(map-keys($sizes), $size) != 1 and index(map-keys($sizes), $size) < length($sizes) {
-            @media (min-width: map-get($sizes, $size)) and (max-width: nth(nth($sizes, index(map-keys($sizes), $size)+1), 2)-1) {
-                .visible-#{$size} {
-                    display: block !important;
-                }
-                .frow.visible-#{$size} {
-                    display: flex !important;
-                }
-                .hidden-#{$size} {
-                    display: none !important;
-                }
-            }
-        }
-        @else if index(map-keys($sizes), $size) == length($sizes) {
-            @media (min-width: nth(nth($sizes, length($sizes)), 2)) {
-                .visible-#{$size} {
-                    display: block !important;
-                }
-                .frow.visible-#{$size} {
-                    display: flex !important;
-                }
-                .hidden-#{$size} {
-                    display: none !important;
-                }
-            }
-        }
-    }
-
-    @each $size in map-keys($sizes) {
-        @media (min-width: map-get($sizes, $size)) {
-            @for $denominator from 1 through $max-columns {
-                @for $numerator from 1 through $denominator {
-                    .col-#{$size}-#{$numerator}-#{$denominator} {
-                        width: percentage($numerator/$denominator);
-                    }
+@each $size in $sizes-names {
+    @media (min-width: map-get($sizes, $size)) {
+        @for $denominator from 1 through $grid-max-columns {
+            @for $numerator from 1 through $denominator {
+                .col-#{$size}-#{$numerator}-#{$denominator} {
+                    width: percentage($numerator/$denominator);
                 }
             }
         }

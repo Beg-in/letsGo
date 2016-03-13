@@ -1,0 +1,28 @@
+//
+// Utility classes
+// --------------------------------------------------
+
+
+// Clearfix
+// -------------------------
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+// Cursor pointer and improvement to AngularJS's ng-click
+// -------------------------
+.clickable, *[ng-click] {
+    cursor: pointer;
+}
+
+// Full height rules
+// -------------------------
+.height100 {
+    height: 100%;
+}
+
+.min100 {
+    min-height: 100%;
+}
