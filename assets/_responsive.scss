@@ -155,7 +155,7 @@
         .hidden-#{$size} {
             display: block !important;
         }
-        .frow.hidden-#{$size} {
+        .frow.visible-#{$size} {
             display: flex !important;
         }
     }
