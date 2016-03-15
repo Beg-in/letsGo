@@ -1,0 +1,30 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto';
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 200px;
+    font-weight: 100;
+    /*text-transform: uppercase;*/
+    /*font-style: italic;*/
+}
+
+h2 {
+    font-size: 100px;
+    font-weight: 100;
+    text-transform: uppercase;
+    /*font-style: italic;*/
+}
+
+.header {
+    background-color: #03A9F4;
+    height: 400px;
+    color: #fff;
+}
