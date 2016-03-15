@@ -77,15 +77,15 @@
     }
     &.column-start {
         flex-direction: column;
-        justify-content: flex-start;
+        align-items: flex-start;
     }
     &.column-center {
         flex-direction: column;
-        justify-content: center;
+        align-items: center;
     }
     &.column-end {
         flex-direction: column;
-        justify-content: flex-end;
+        align-items: flex-end;
     }
 
     // Flex-direction
