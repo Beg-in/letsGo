@@ -26,3 +26,13 @@
 .min100 {
     min-height: 100%;
 }
+
+// Card shadows
+// -------------------------
+.card-shadow {
+    box-shadow: $card-shadow;
+}
+
+.dark-card-shadow {
+    box-shadow: $dark-card-shadow;
+}
