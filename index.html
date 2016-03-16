@@ -357,6 +357,9 @@
                         If the fractions don't add up to one, Frow makes them centered and nice. Or use simple rules to change the behaviour.
                     </p>
                     <div class="grid-example">
+                        <div class="grid-frow-type">
+                            class="frow"
+                        </div>
                         <div class="frow">
                             <div class="col-md-6-10">
                                 <div class="grid-example-div frow centered">
@@ -366,6 +369,9 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="grid-frow-type">
+                            class="frow row-start"
+                        </div>
                         <div class="frow row-start">
                             <div class="col-md-6-10">
                                 <div class="grid-example-div frow centered">
@@ -374,6 +380,9 @@
                                     </p>
                                 </div>
                             </div>
+                        </div>
+                        <div class="grid-frow-type">
+                            class="frow row-end"
                         </div>
                         <div class="frow row-end">
                             <div class="col-md-6-10">
@@ -389,11 +398,48 @@
                         CSS Flex even allows for elements to be centered horizontally AND vertically! With Frow, one class and you're done.
                     </p>
                     <div class="grid-example" style="height:300px;">
+                        <div class="grid-frow-type">
+                            class="frow centered"
+                        </div>
                         <div class="frow centered">
                             <div class="col-md-1-3">
                                 <div class="grid-example-div frow centered">
                                     <p>
                                         .col-md-1-3 (inside .frow.centered)
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>
+                        Gutters optional
+                    </h4>
+                    <p>
+                        Frow is designed to work both as your grid system as well as on design styles within. For the overall grid system, gutters between the columns are probably a good idea. Just add the .gutters class to the .frow and you're done. With default settings, the gutters are 30 pixels wide.
+                    </p>
+                    <div class="grid-example">
+                        <div class="grid-frow-type">
+                            class="frow gutters"
+                        </div>
+                        <div class="frow gutters">
+                            <div class="col-md-1-4">
+                                <div class="grid-example-div frow centered">
+                                    <p>
+                                        .col-md-1-4
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-2-4">
+                                <div class="grid-example-div frow centered">
+                                    <p>
+                                        .col-md-2-4
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-1-4">
+                                <div class="grid-example-div frow centered">
+                                    <p>
+                                        .col-md-1-4
                                     </p>
                                 </div>
                             </div>

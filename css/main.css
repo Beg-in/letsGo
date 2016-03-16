@@ -25,19 +25,23 @@ h2 {
 }
 
 h3 {
-    margin-top: 30px;
+    margin-top: 40px;
     font-size: 40px;
-    font-weight: 100;
+    font-weight: 700;
     /*text-transform: uppercase;*/
     /*font-style: italic;*/
 }
 
 h4 {
-    margin-top: 30px;
+    margin-top: 10px;
     font-size: 30px;
     font-weight: 300;
     /*text-transform: uppercase;*/
     /*font-style: italic;*/
+}
+
+p {
+    margin: 10px 0;
 }
 
 .header {
@@ -47,7 +51,12 @@ h4 {
 }
 
 .grid-example {
-    background-color: #ddd;
+    background-color: #eee;
+    margin-bottom: 60px;
+}
+
+.grid-frow-type {
+    padding: 10px;
 }
 
 .frow.grid-example-div {
