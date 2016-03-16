@@ -62,30 +62,34 @@
         justify-content: center;
         align-items: center;
         align-content: center;
+        min-height: 100%;
     }
     &.row-start {
         flex-direction: row;
-        align-items: flex-start;
+        justify-content: flex-start;
     }
     &.row-center {
         flex-direction: row;
-        align-items: center;
+        justify-content: center;
     }
     &.row-end {
         flex-direction: row;
-        align-items: flex-end;
+        justify-content: flex-end;
     }
     &.column-start {
         flex-direction: column;
         align-items: flex-start;
+        align-content: flex-start;
     }
     &.column-center {
         flex-direction: column;
         align-items: center;
+        align-content: center;
     }
     &.column-end {
         flex-direction: column;
         align-items: flex-end;
+        align-content: flex-end;
     }
 
     // Flex-direction
