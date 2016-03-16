@@ -1,2 +1,2 @@
 # frow
-CSS Flexible Row Grid System using Flex
+Flex Row CSS Grid System
