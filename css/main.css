@@ -50,7 +50,7 @@ h4 {
     background-color: #ddd;
 }
 
-.grid-example-div {
+.frow.grid-example-div {
     background-color: #03A9F4;
     min-height: 70px;
     margin-bottom: 10px;
