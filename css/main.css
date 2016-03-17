@@ -11,16 +11,15 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 }
 
 h1 {
-    font-size: 200px;
+    font-size: 50px;
     font-weight: 100;
     /*text-transform: uppercase;*/
     /*font-style: italic;*/
 }
 
 h2 {
-    font-size: 50px;
+    font-size: 35px;
     font-weight: 100;
-    text-align: center;
     /*text-transform: uppercase;*/
     /*font-style: italic;*/
 }
@@ -51,6 +50,21 @@ h5 {
     font-style: italic;
 }
 
+.header.home h1 {
+    font-size: 200px;
+    font-weight: 100;
+    /*text-transform: uppercase;*/
+    /*font-style: italic;*/
+}
+
+.header.home h2 {
+    font-size: 50px;
+    font-weight: 100;
+    text-align: center;
+    /*text-transform: uppercase;*/
+    /*font-style: italic;*/
+}
+
 @media (max-width: 991px) {
     html, body {
         font-size: 15px;
@@ -70,6 +84,12 @@ h5 {
     h5 {
         font-size: 20px;
     }
+    .header.home h1 {
+        font-size: 50px;
+    }
+    .header.home h2 {
+        font-size: 20px;
+    }
 }
 
 p {
@@ -79,8 +99,12 @@ p {
 a.header {
     display: block;
     background-color: #03A9F4;
-    height: 400px;
+    height: 140px;
     color: #fff;
+}
+
+a.header.home {
+    height: 400px;
 }
 
 a.header:hover, a.header:focus, a.header:active, a.header:visited {
@@ -89,7 +113,7 @@ a.header:hover, a.header:focus, a.header:active, a.header:visited {
 }
 
 @media (max-width: 991px) {
-    a.header {
+    a.header.home {
         height: 100px;
     }
 }
@@ -159,7 +183,7 @@ a.header:hover, a.header:focus, a.header:active, a.header:visited {
 }
 
 .frow.grid-example-div {
-    background-color: #9575CD;
+    background-color: #03A9F4;
     min-height: 70px;
     margin-bottom: 10px;
     border: 1px solid #eee;
@@ -168,7 +192,7 @@ a.header:hover, a.header:focus, a.header:active, a.header:visited {
 }
 
 .grid-example-stretch {
-    background-color: #9575CD;
+    background-color: #03A9F4;
     color: #fff;
     border: 1px solid #eee;
     border-radius: 3px;
