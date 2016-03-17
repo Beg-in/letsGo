@@ -43,6 +43,9 @@ $frow-hidden-sizes-all: ();
             .hidden-#{$size} {
                 display: none !important;
             }
+            .frow.hidden-#{$size} {
+                display: none !important;
+            }
         }
     }
     @else if index($sizes-names, $size) != 1 and index($sizes-names, $size) < length($sizes) {
@@ -56,6 +59,9 @@ $frow-hidden-sizes-all: ();
             .hidden-#{$size} {
                 display: none !important;
             }
+            .frow.hidden-#{$size} {
+                display: none !important;
+            }
         }
     }
     @else if index($sizes-names, $size) == length($sizes) {
@@ -67,6 +73,9 @@ $frow-hidden-sizes-all: ();
                 display: flex !important;
             }
             .hidden-#{$size} {
+                display: none !important;
+            }
+            .frow.hidden-#{$size} {
                 display: none !important;
             }
         }
