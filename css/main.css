@@ -113,7 +113,7 @@ a.header:hover, a.header:focus, a.header:active, a.header:visited {
 }
 
 @media (max-width: 991px) {
-    a.header.home {
+    a.header, a.header.home {
         height: 100px;
     }
 }
@@ -131,6 +131,10 @@ a.header:hover, a.header:focus, a.header:active, a.header:visited {
 
 .tab-bar ul li {
     margin: 0 20px;
+}
+
+.mobile-tab {
+    padding: 10px 0;
 }
 
 .frow-setup p {
