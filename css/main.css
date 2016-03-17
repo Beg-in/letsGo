@@ -20,12 +20,14 @@ h1 {
 h2 {
     font-size: 50px;
     font-weight: 100;
+    text-align: center;
     /*text-transform: uppercase;*/
     /*font-style: italic;*/
 }
 
 h3 {
     margin-top: 40px;
+    margin-bottom: 40px;
     font-size: 40px;
     font-weight: 700;
     /*text-transform: uppercase;*/
@@ -40,30 +42,137 @@ h4 {
     /*font-style: italic;*/
 }
 
-p {
-    margin: 10px 0;
+h5 {
+    margin-top: 20px;
+    margin-bottom: 3px;
+    font-size: 25px;
+    font-weight: 300;
+    /*text-transform: uppercase;*/
+    font-style: italic;
 }
 
-.header {
+@media (max-width: 991px) {
+    html, body {
+        font-size: 15px;
+    }
+    h1 {
+        font-size: 50px;
+    }
+    h2 {
+        font-size: 20px;
+    }
+    h3 {
+        font-size: 30px;
+    }
+    h4 {
+        font-size: 25px;
+    }
+    h5 {
+        font-size: 20px;
+    }
+}
+
+p {
+    margin: 15px 0;
+}
+
+a.header {
+    display: block;
     background-color: #03A9F4;
     height: 400px;
     color: #fff;
 }
 
+a.header:hover, a.header:focus, a.header:active, a.header:visited {
+    color: #fff;
+    text-decoration: none;
+}
+
+@media (max-width: 991px) {
+    a.header {
+        height: 100px;
+    }
+}
+
+.tab-bar {
+    background-color: #eee;
+
+}
+
+.tab-bar ul {
+    margin: 0;
+    list-style-type: none;
+    min-height: 50px;
+}
+
+.tab-bar ul li {
+    margin: 0 20px;
+}
+
+.frow-setup p {
+    margin: 10px 0 5px;
+}
+
+.fake-code {
+    padding: 10px 10px;
+    display: block;
+    border-radius: 3px;
+    background-color: #4F4F51;
+    color: #E6E6E6;
+    font-family: Inconsolata, sans-serif;
+    font-size: 16px;
+}
+
+.grid-frow-code {
+    padding: 10px 10px;
+    display: block;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background-color: #4F4F51;
+    color: #E6E6E6;
+    font-family: Inconsolata, sans-serif;
+    font-size: 16px;
+}
+
+.fake-comment {
+    color: #AFAFAF;
+}
+
 .grid-example {
     background-color: #eee;
     margin-bottom: 60px;
+    border-radius: 3px;
+    padding: 15px 0;
 }
 
-.grid-frow-type {
-    padding: 10px;
+.grid-frow-code + .grid-example {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.grid-example-group .grid-example {
+    margin-bottom: 30px;
+}
+
+.grid-example-group .grid-example:last-of-type {
+    margin-bottom: 60px;
 }
 
 .frow.grid-example-div {
-    background-color: #03A9F4;
+    background-color: #9575CD;
     min-height: 70px;
     margin-bottom: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    font-size: 16px;
+}
+
+.grid-example-stretch {
+    background-color: #9575CD;
+    color: #fff;
+    border: 1px solid #eee;
+    border-radius: 3px;
+    font-size: 16px;
 }
 
 .grid-example-div p {
@@ -76,6 +185,30 @@ p {
     margin-top: 10px;
 }
 
-.grid-example>.frow:last-of-type .grid-example-div {
-    margin: 0;
+@media (min-width: 992px) {
+    .grid-example>.frow:last-of-type .grid-example-div {
+        margin: 0;
+    }
+}
+@media (max-width: 991px) {
+    .grid-example>.frow:last-of-type>div:last-child .grid-example-div {
+        margin: 0;
+    }
+}
+
+.next {
+    font-size: 30px;
+    margin-top: 50px;
+    font-weight: 300;
+}
+
+a.next-page, a.next-page:hover {
+    font-size: 30px;
+    text-align: center;
+    background-color: #03A9F4;
+    color: #fff;
+    padding: 10px;
+    border-radius: 3px;
+    text-decoration: none;
+    font-weight: 100;
 }
