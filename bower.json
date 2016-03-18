@@ -2,10 +2,10 @@
   "name": "frow",
   "homepage": "https://github.com/Beg-in/frow",
   "authors": [
-    "Cody Sherman <cody@beg.in>"
+    "Cody Sherman <cody@beg.in> (http://codysherman.com)"
   ],
-  "description": "CSS responsive grid framework utilizing flex",
-  "main": "_frow.scss",
+  "description": "Flex row CSS grid system",
+  "main": "sass/_frow.scss",
   "moduleType": [],
   "keywords": [
     "css",
@@ -24,6 +24,7 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
+    "gulpfile.js"
     "node_modules",
     "bower_components",
     "test",
