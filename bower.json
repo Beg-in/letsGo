@@ -4,7 +4,7 @@
   "authors": [
     "Cody Sherman <cody@beg.in> (http://codysherman.com)"
   ],
-  "description": "Flex row CSS grid system",
+  "description": "Flex Row CSS Grid System",
   "main": "sass/_frow.scss",
   "moduleType": [],
   "keywords": [
@@ -24,7 +24,7 @@
   "license": "MIT",
   "ignore": [
     "**/.*",
-    "gulpfile.js"
+    "gulpfile.js",
     "node_modules",
     "bower_components",
     "test",
