@@ -44,8 +44,6 @@ svg {
     .frow.gutters > * {
       padding-left: 15px;
       padding-right: 15px; }
-  .frow > div > img {
-    width: 100%; }
   .frow.centered {
     justify-content: center;
     align-items: center;
@@ -90,14 +88,14 @@ svg {
     justify-content: space-between; }
   .frow.justify-around {
     justify-content: space-around; }
-  .frow.items-stretch {
-    align-items: stretch; }
   .frow.items-start {
     align-items: flex-start; }
   .frow.items-end {
     align-items: flex-end; }
   .frow.items-center {
     align-items: center; }
+  .frow.items-stretch {
+    align-items: stretch; }
   .frow.items-baseline {
     align-items: baseline; }
   .frow.content-start {
