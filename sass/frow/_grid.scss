@@ -49,9 +49,9 @@
     //     float: none;
     // }
 
-    &>div>img {
-        width: 100%;
-    }
+    // &>div>img {
+    //     width: 100%;
+    // }
 
     // &>div, &>img {
     //     height: 100%;
@@ -124,9 +124,6 @@
     }
 
     // Align-items
-    &.items-stretch {
-        align-items: stretch;
-    }
     &.items-start {
         align-items: flex-start;
     }
@@ -135,6 +132,9 @@
     }
     &.items-center {
         align-items: center;
+    }
+    &.items-stretch {
+        align-items: stretch;
     }
     &.items-baseline {
         align-items: baseline;
