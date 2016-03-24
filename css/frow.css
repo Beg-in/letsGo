@@ -752,10 +752,10 @@ svg {
 .clickable, *[ng-click] {
   cursor: pointer; }
 
-.height100 {
+.height-100 {
   height: 100%; }
 
-.min100 {
+.min-100 {
   min-height: 100%; }
 
 .card-shadow {
