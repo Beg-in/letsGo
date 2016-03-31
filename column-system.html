@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
         <title>Get Frow</title>
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,700,400italic,700italic' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" href="static-css/frow.css" media="screen" title="Frow CSS" charset="utf-8">
+        <link rel="stylesheet" href="css/frow.css" media="screen" title="Frow CSS" charset="utf-8">
         <link rel="stylesheet" href="static-css/main.css" media="screen" charset="utf-8">
     </head>
     <body>
@@ -434,7 +434,7 @@
                         CSS Flex even allows for elements to be centered horizontally AND vertically! With Frow, one class and you're done.
                     </p>
                     <div class="grid-frow-code">
-                        class="frow centered"
+                        class="frow centered" <span class="fake-comment">// See all shortcuts: <a href="frow-shortcuts.html">Frow Shortcuts</a></span>
                     </div>
                     <div class="grid-example" style="height:300px;">
                         <div class="frow centered">
@@ -448,10 +448,44 @@
                         </div>
                     </div>
                     <h4>
-                        Gutters Optional
+                        Vertical Grids Work Too
                     </h4>
                     <p>
-                        Frow is designed to work both as your grid system as well as on design styles within the grid. For the overall grid system, gutters between the columns are probably a good idea. Just add the .gutters class to the .frow and you're done. With default settings, the gutters are 30 pixels wide.
+                        Frow can layout elements in vertical columns! Just add .column-center, .column-start, or .column-end.
+                    </p>
+                    <div class="grid-frow-code">
+                        class="frow column-center" <span class="fake-comment">// See all shortcuts: <a href="frow-shortcuts.html">Frow Shortcuts</a></span>
+                    </div>
+                    <div class="grid-example">
+                        <div class="frow column-center">
+                            <div class="col-md-1-4 col-sm-1-4 col-xs-1-4">
+                                <div class="grid-example-div frow centered">
+                                    <p>
+                                        .col-md-1-4
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-2-4 col-sm-2-4 col-xs-2-4">
+                                <div class="grid-example-div frow centered">
+                                    <p>
+                                        .col-md-2-4
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-1-4 col-sm-1-4 col-xs-1-4">
+                                <div class="grid-example-div frow centered">
+                                    <p>
+                                        .col-md-1-4
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h4>
+                        Gutters
+                    </h4>
+                    <p>
+                        Frow is designed to work both as your grid system as well as on design styles within the grid. For your page's main grid system, gutters between the columns are probably a good idea. Just add the .gutters class to the .frow and you're done. With default settings, the gutters are 30 pixels wide.
                     </p>
                     <div class="grid-frow-code">
                         class="frow gutters"
@@ -482,37 +516,47 @@
                         </div>
                     </div>
                     <h4>
-                        Vertical Columns Work Too
+                        Column System Optional
                     </h4>
                     <p>
-                        Frow can layout elements in vertical columns! Just add .column-center, .column-start, or .column-end.
+                        The rules for Frow all effect the CSS display:flex, so a .frow can, and should, be used even when not conforming to a particular grid system. Use a .frow for any group of elements on the page and take full advantage of display:flex's awesome power. A list of images, buttons, icons, or whatever else, anything can be sorted with a .frow.
                     </p>
                     <div class="grid-frow-code">
-                        class="frow column-center"
+                        class="frow row-start"
                     </div>
                     <div class="grid-example">
-                        <div class="frow column-center">
-                            <div class="col-md-1-4 col-sm-1-4 col-xs-1-4">
-                                <div class="grid-example-div frow centered">
-                                    <p>
-                                        .col-md-1-4
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-md-2-4 col-sm-2-4 col-xs-2-4">
-                                <div class="grid-example-div frow centered">
-                                    <p>
-                                        .col-md-2-4
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="col-md-1-4 col-sm-1-4 col-xs-1-4">
-                                <div class="grid-example-div frow centered">
-                                    <p>
-                                        .col-md-1-4
-                                    </p>
-                                </div>
-                            </div>
+                        <div class="frow row-start">
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
+                            <div class="freeform-example"></div>
                         </div>
                     </div>
                 </div>

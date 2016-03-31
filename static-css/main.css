@@ -166,6 +166,11 @@ a.header:hover, a.header:focus, a.header:active, a.header:visited {
     color: #AFAFAF;
 }
 
+.fake-comment a {
+    color: #AFAFAF;
+    text-decoration: underline;
+}
+
 .grid-example {
     background-color: #eee;
     margin-bottom: 60px;
@@ -195,6 +200,16 @@ a.header:hover, a.header:focus, a.header:active, a.header:visited {
     font-size: 16px;
 }
 
+.frow.grid-example-div.dotted-div {
+    background-color: transparent;
+    border: 2px dashed #333;
+    margin: 0 2px;
+}
+
+.frow.grid-example-div.dotted-div p {
+    color: #333;
+}
+
 .grid-example-stretch {
     background-color: #03A9F4;
     color: #fff;
@@ -222,6 +237,49 @@ a.header:hover, a.header:focus, a.header:active, a.header:visited {
     .grid-example>.frow:last-of-type>div:last-child .grid-example-div {
         margin: 0;
     }
+}
+
+.freeform-example {
+    height: 55px;
+    width: 55px;
+    margin: 5px;
+    background-color: #03A9F4;
+}
+
+.freeform-example:nth-child(9n+0) {
+    background-color: #2196F3; // Blue
+}
+
+.freeform-example:nth-child(9n+1) {
+    background-color: #009688; // Teal
+}
+
+.freeform-example:nth-child(9n+2) {
+    background-color: #FF5722; // Deep Orange
+}
+
+.freeform-example:nth-child(9n+3) {
+    background-color: #4CAF50; // Green
+}
+
+.freeform-example:nth-child(9n+4) {
+    background-color: #673AB7; // Deep Purple
+}
+
+.freeform-example:nth-child(9n+5) {
+    background-color: #00BCD4; // Cyan
+}
+
+.freeform-example:nth-child(9n+6) {
+    background-color: #FFC107; // Amber
+}
+
+.freeform-example:nth-child(9n+7) {
+    background-color: #3F51B5; // Indigo
+}
+
+.freeform-example:nth-child(9n+8) {
+    background-color: #FF9800; // Orange
 }
 
 .next {
