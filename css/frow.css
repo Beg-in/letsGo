@@ -12,6 +12,8 @@ a {
   a:hover, a:focus {
     color: #0d0d0d;
     text-decoration: underline; }
+  p a {
+    text-decoration: underline; }
 
 svg {
   display: block; }
