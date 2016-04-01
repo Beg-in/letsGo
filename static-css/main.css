@@ -234,7 +234,7 @@ a.header:hover, a.header:focus, a.header:active, a.header:visited {
     }
 }
 @media (max-width: 991px) {
-    .grid-example>.frow:last-of-type>div:last-child .grid-example-div {
+    .grid-example:not(.always-margin)>.frow:last-of-type>div:last-child .grid-example-div {
         margin: 0;
     }
 }
