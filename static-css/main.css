@@ -1,7 +1,7 @@
 html, body {
     margin: 0 0 25px;
     padding: 0;
-    font-family: 'Roboto';
+    font-family: 'Fira Sans';
     font-size: 18px;
 }
 
@@ -12,14 +12,19 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 h1 {
     font-size: 50px;
-    font-weight: 100;
+    font-weight: 300;
     /*text-transform: uppercase;*/
     /*font-style: italic;*/
 }
 
+h1 svg {
+    width: 150px;
+    fill: #fff;
+}
+
 h2 {
     font-size: 35px;
-    font-weight: 100;
+    font-weight: 300;
     /*text-transform: uppercase;*/
     /*font-style: italic;*/
 }
@@ -50,19 +55,26 @@ h5 {
     font-style: italic;
 }
 
-.header.home h1 {
-    font-size: 200px;
-    font-weight: 100;
-    /*text-transform: uppercase;*/
-    /*font-style: italic;*/
-}
+@media (min-width: 992px) {
+    .header.home h1 {
+        font-size: 200px;
+        font-weight: 300;
+        /*text-transform: uppercase;*/
+        /*font-style: italic;*/
+    }
 
-.header.home h2 {
-    font-size: 50px;
-    font-weight: 100;
-    text-align: center;
-    /*text-transform: uppercase;*/
-    /*font-style: italic;*/
+    .header.home h1 svg {
+        width: 350px;
+        margin-bottom: 20px;
+    }
+
+    .header.home h2 {
+        font-size: 50px;
+        font-weight: 300;
+        text-align: center;
+        /*text-transform: uppercase;*/
+        /*font-style: italic;*/
+    }
 }
 
 @media (max-width: 991px) {
@@ -82,12 +94,6 @@ h5 {
         font-size: 25px;
     }
     h5 {
-        font-size: 20px;
-    }
-    .header.home h1 {
-        font-size: 50px;
-    }
-    .header.home h2 {
         font-size: 20px;
     }
 }
@@ -147,7 +153,7 @@ a.header:hover, a.header:focus, a.header:active, a.header:visited {
     border-radius: 3px;
     background-color: #4F4F51;
     color: #E6E6E6;
-    font-family: Inconsolata, sans-serif;
+    font-family: 'Inconsolata', sans-serif;
     font-size: 16px;
 }
 
@@ -197,7 +203,7 @@ a.header:hover, a.header:focus, a.header:active, a.header:visited {
     margin-bottom: 10px;
     border: 1px solid #eee;
     border-radius: 3px;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 .frow.grid-example-div.dotted-div {
@@ -296,5 +302,5 @@ a.next-page, a.next-page:hover {
     padding: 10px;
     border-radius: 3px;
     text-decoration: none;
-    font-weight: 100;
+    font-weight: 300;
 }
