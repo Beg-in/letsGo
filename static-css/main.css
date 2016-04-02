@@ -253,39 +253,39 @@ a.header:hover, a.header:focus, a.header:active, a.header:visited {
 }
 
 .freeform-example:nth-child(9n+0) {
-    background-color: #2196F3; // Blue
+    background-color: #2196F3; /* Blue */
 }
 
 .freeform-example:nth-child(9n+1) {
-    background-color: #009688; // Teal
+    background-color: #009688; /* Teal */
 }
 
 .freeform-example:nth-child(9n+2) {
-    background-color: #FF5722; // Deep Orange
+    background-color: #FF5722; /* Deep Orange */
 }
 
 .freeform-example:nth-child(9n+3) {
-    background-color: #4CAF50; // Green
+    background-color: #4CAF50; /* Green */
 }
 
 .freeform-example:nth-child(9n+4) {
-    background-color: #673AB7; // Deep Purple
+    background-color: #673AB7; /* Deep Purple */
 }
 
 .freeform-example:nth-child(9n+5) {
-    background-color: #00BCD4; // Cyan
+    background-color: #00BCD4; /* Cyan */
 }
 
 .freeform-example:nth-child(9n+6) {
-    background-color: #FFC107; // Amber
+    background-color: #FFC107; /* Amber */
 }
 
 .freeform-example:nth-child(9n+7) {
-    background-color: #3F51B5; // Indigo
+    background-color: #3F51B5; /* Indigo */
 }
 
 .freeform-example:nth-child(9n+8) {
-    background-color: #FF9800; // Orange
+    background-color: #FF9800; /* Orange */
 }
 
 .next {
