@@ -1,4 +1,4 @@
 # frow
 Flex Row CSS Grid System
 
-Information at: <http://beg.in/frow>
+Information at: <http://usefrow.com>
