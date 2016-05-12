@@ -14,7 +14,11 @@
 // Cursor pointer and improvement to AngularJS's ng-click
 // -------------------------
 .clickable, *[ng-click] {
-    cursor: pointer;
+    cursor: pointer !important;
+}
+
+.not-clickable, *[ng-click] {
+    cursor: default !important;
 }
 
 // Full height rules
