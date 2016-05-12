@@ -754,7 +754,7 @@ svg {
 .clickable, *[ng-click] {
   cursor: pointer !important; }
 
-.not-clickable, *[ng-click] {
+.not-clickable {
   cursor: default !important; }
 
 .height-100 {
