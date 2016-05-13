@@ -763,6 +763,9 @@ svg {
 .min-100 {
   min-height: 100%; }
 
+.frow-hidden {
+  display: none !important; }
+
 .card-shadow {
   box-shadow: 0px 1px 3px 0px #A0A0A0; }
 
