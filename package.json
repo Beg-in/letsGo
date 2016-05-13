@@ -1,7 +1,7 @@
 {
   "name": "frow",
   "version": "0.9.3",
-  "description": "Flex Row CSS Grid System",
+  "description": "Flex Row CSS Grid System http://usefrow.com",
   "main": "sass/_frow.scss",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
