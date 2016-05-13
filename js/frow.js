@@ -1,37 +1,35 @@
-"use strict";
+'use strict';
 
-var checkIfClass = function() {
-    function hasClass(element, class) {
-        return (' ' + element.className + ' ').indexOf(' ' + class + ' ') > -1;
-    }
-}
+var checkIfClass = function(element) {
+    return (' ' + element.className + ' ').indexOf(' frow-hidden ') > -1;
+};
 
 var hideElement = function(element, hideDelay) {
+    console.log(element);
     if (hideDelay) {
-        .classList.add('frow-hiding');
+        element.classList.add('frow-hiding');
         setTimeout(function(){
-                element.style.display = 'none';
-                .classList.remove('frow-hiding');
+                element.classList.add('frow-hidden');
+                element.classList.remove('frow-hiding');
             }, hideDelay);
     } else {
-        element.style.display = 'none';
+        element.classList.add('frow-hidden');
     }
-}
+};
 
-var frowChange = function(id, setting, hideDelay) {
+var frowShow = function(id, setting, hideDelay) {
     if (id) {
-        console.log(typeof id);
         if (typeof id === 'string') {
             var element = document.getElementById(id);
             if (setting === true) {
-                element.style.display = 'none';
+                element.classList.remove('frow-hidden');
             } else if (setting === false) {
-                element.style.display = 'block';
+                hideElement(element, hideDelay);
             } else if (setting === 'toggle') {
-                if (element.style.display === 'none') {
-                    element.style.display = 'block';
+                if (checkIfClass(element)) {
+                    element.classList.remove('frow-hidden');
                 } else {
-                    element.style.display = 'none';
+                    hideElement(element, hideDelay);
                 }
             }
         } else {
@@ -40,4 +38,4 @@ var frowChange = function(id, setting, hideDelay) {
     } else {
         console.log('frowChange missing id');
     }
-}
+};
