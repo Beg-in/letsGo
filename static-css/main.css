@@ -1,3 +1,8 @@
+*.frow-animate {
+    transition: all 0s ease 0s;
+    animation: none 0s ease 0s 1 normal none running;
+}
+
 html, body {
     margin: 0 0 25px;
     padding: 0;
@@ -125,8 +130,43 @@ a.header:hover, a.header:focus, a.header:active, a.header:visited {
 
 .tab-bar {
     background-color: #eee;
-
 }
+
+@keyframes appear {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes disappear {
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+#test {
+    background-color: #fff;
+    opacity: 1;
+    transition: width 2s;
+}
+
+#test.frow-showing {
+    opacity: 1;
+}
+
+#test.frow-hiding {
+    opacity: 0;
+}
+
+/*#test.frow-showing {
+    animation: appear 2s;
+    transition: width 2s;
+    opacity: 1;
+}
+
+#test.frow-hiding {
+    animation: disappear 2s;
+    transition: width 2s;
+    opacity: 0;
+}*/
 
 .tab-bar ul {
     margin: 0;
