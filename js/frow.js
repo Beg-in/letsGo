@@ -1,58 +1,43 @@
 'use strict';
 
 var checkIfClass = function(element) {
-    return (' ' + element.className + ' ').indexOf(' frow-hidden ') > -1;
+    return (' ' + element.className + ' ').indexOf(' frow-hide ') > -1;
 };
 
 var showElement = function(element, styles) {
     var showElementDone = function() {
-        element.removeEventListener('animationend', showElementDone, false);
-        element.removeEventListener('transitionend', showElementDone, false);
-        element.classList.remove('frow-showing');
+        element.classList.remove('frow-hide-remove');
+        element.classList.remove('frow-hide-remove-active');
         element.classList.remove('frow-animate');
     };
 
-    var showElementStart = function() {
-        element.addEventListener('animationend', showElementDone, false);
-        element.addEventListener('transitionend', showElementDone, false);
-    };
-
     element.classList.add('frow-animate');
-    element.classList.add('frow-showing');
-    element.classList.remove('frow-hidden');
+    element.classList.add('frow-hide-remove');
+    element.classList.remove('frow-hide');
+    element.classList.add('frow-hide-remove-active');
     if ((styles.animationDuration !== '0s') || (styles.transitionDuration !== '0s')) {
-        console.log('lets goooo');
-        showElementStart();
+        var maxAnimateTime = Math.ceil(Math.max(Number(styles.transitionDuration.slice(0, -1)), Number(styles.animationDuration.slice(0, -1)))*1000);
+        setTimeout(showElementDone, maxAnimateTime);
     } else {
-        console.log('no animation or transition');
         showElementDone();
     }
 };
 
 var hideElement = function(element, styles) {
     var hideElementDone = function() {
-        element.removeEventListener('animationend', hideElementDone, false);
-        element.removeEventListener('transitionend', hideElementDone, false);
-        element.classList.add('frow-hidden');
-        element.classList.remove('frow-hiding');
+        element.classList.add('frow-hide');
+        element.classList.remove('frow-hide-add');
+        element.classList.remove('frow-hide-add-active');
         element.classList.remove('frow-animate');
     };
 
-    var hideElementStart = function() {
-        element.addEventListener('animationend', hideElementDone, false);
-        element.addEventListener('transitionend', hideElementDone, false);
-    };
-
     element.classList.add('frow-animate');
-    element.classList.add('frow-hiding');
-    console.log(styles);
+    element.classList.add('frow-hide-add');
+    element.classList.add('frow-hide-add-active');
     if ((styles.animationDuration !== '0s') || (styles.transitionDuration !== '0s')) {
-        console.log('lets goooo');
-        hideElementStart();
-        // element.addEventListener('animationstart', hideElementStart, false);
-        // element.addEventListener('transitionstart', hideElementStart, false);
+        var maxAnimateTime = Math.ceil(Math.max(Number(styles.transitionDuration.slice(0, -1)), Number(styles.animationDuration.slice(0, -1)))*1000);
+        setTimeout(hideElementDone, maxAnimateTime);
     } else {
-        console.log('no animation or transition');
         hideElementDone();
     }
 };
