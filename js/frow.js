@@ -4,8 +4,22 @@ var checkIfClass = function(element) {
     return (' ' + element.className + ' ').indexOf(' frow-hide ') > -1;
 };
 
+var findAnimateTime = function(times) {
+    if (times.indexOf(',') > -1) {
+        times = times.split(',');
+        for (var i = 0; i < times.length; i++) {
+            times[i] = Number(times[i].slice(0, -1));
+        }
+        times = Math.max.apply(null, times);
+    } else {
+        times = Number(times.slice(0, -1));
+    }
+    return times;
+};
+
 var showElement = function(element, styles) {
     var showElementDone = function() {
+        element.removeEventListener('animationend', showElementDone, false);
         element.classList.remove('frow-hide-remove');
         element.classList.remove('frow-hide-remove-active');
         element.classList.remove('frow-animate');
@@ -14,17 +28,25 @@ var showElement = function(element, styles) {
     element.classList.add('frow-animate');
     element.classList.add('frow-hide-remove');
     element.classList.remove('frow-hide');
-    element.classList.add('frow-hide-remove-active');
-    if ((styles.animationDuration !== '0s') || (styles.transitionDuration !== '0s')) {
-        var maxAnimateTime = Math.ceil(Math.max(Number(styles.transitionDuration.slice(0, -1)), Number(styles.animationDuration.slice(0, -1)))*1000);
-        setTimeout(showElementDone, maxAnimateTime);
-    } else {
-        showElementDone();
-    }
+    setTimeout(function() {
+        element.classList.add('frow-hide-remove-active');
+        if ((styles.transitionDuration !== '0s') || (styles.animationDuration !== '0s')) {
+            var maxTransitionTime = findAnimateTime(styles.transitionDuration);
+            var maxAnimationTime = findAnimateTime(styles.animationDuration);
+            var maxTime = Math.ceil(Math.max(maxTransitionTime, maxAnimationTime)*1000);
+            setTimeout(showElementDone, maxTime);
+            if (styles.animationDuration !== '0s') {
+                element.addEventListener('animationend', showElementDone, false);
+            }
+        } else {
+            showElementDone();
+        }
+    }, 0);
 };
 
 var hideElement = function(element, styles) {
     var hideElementDone = function() {
+        element.removeEventListener('animationend', hideElementDone, false);
         element.classList.add('frow-hide');
         element.classList.remove('frow-hide-add');
         element.classList.remove('frow-hide-add-active');
@@ -33,13 +55,20 @@ var hideElement = function(element, styles) {
 
     element.classList.add('frow-animate');
     element.classList.add('frow-hide-add');
-    element.classList.add('frow-hide-add-active');
-    if ((styles.animationDuration !== '0s') || (styles.transitionDuration !== '0s')) {
-        var maxAnimateTime = Math.ceil(Math.max(Number(styles.transitionDuration.slice(0, -1)), Number(styles.animationDuration.slice(0, -1)))*1000);
-        setTimeout(hideElementDone, maxAnimateTime);
-    } else {
-        hideElementDone();
-    }
+    setTimeout(function() {
+        element.classList.add('frow-hide-add-active');
+        if ((styles.transitionDuration !== '0s') || (styles.animationDuration !== '0s')) {
+            var maxTransitionTime = findAnimateTime(styles.transitionDuration);
+            var maxAnimationTime = findAnimateTime(styles.animationDuration);
+            var maxTime = Math.ceil(Math.max(maxTransitionTime, maxAnimationTime)*1000);
+            setTimeout(hideElementDone, maxTime);
+            if (styles.animationDuration !== '0s') {
+                element.addEventListener('animationend', hideElementDone, false);
+            }
+        } else {
+            hideElementDone();
+        }
+    }, 0);
 };
 
 var frowShow = function(id, setting) {

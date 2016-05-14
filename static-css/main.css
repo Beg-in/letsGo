@@ -137,22 +137,31 @@ a.header:hover, a.header:focus, a.header:active, a.header:visited {
     to {opacity: 0;}
 }
 
-#test {
-    background-color: #fff;
+#test.frow-hide-remove {
+    opacity: 0;
+}
+
+#test.frow-hide-remove.frow-hide-remove-active {
+    transition: opacity 2s, width 3s;
     opacity: 1;
 }
 
-#test.frow-hide-remove-active {
-    animation: appear 2s;
-    /*transition: opacity 2s;*/
+#test.frow-hide-add {
     opacity: 1;
 }
 
 #test.frow-hide-add-active {
-    animation: disappear 2s;
-    /*transition: opacity 2s;*/
+    transition: opacity 2s, width 3s;
     opacity: 0;
 }
+
+/*#test.frow-hide-remove-active {
+    animation: appear 2s;
+}
+
+#test.frow-hide-add-active {
+    animation: disappear 2s;
+}*/
 
 .tab-bar ul {
     margin: 0;
