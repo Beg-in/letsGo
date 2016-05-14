@@ -1,8 +1,3 @@
-*.frow-animate {
-    transition: all 0s ease 0s;
-    animation: none 0s ease 0s 1 normal none running;
-}
-
 html, body {
     margin: 0 0 25px;
     padding: 0;
@@ -145,28 +140,19 @@ a.header:hover, a.header:focus, a.header:active, a.header:visited {
 #test {
     background-color: #fff;
     opacity: 1;
-    transition: width 2s;
 }
 
-#test.frow-showing {
-    opacity: 1;
-}
-
-#test.frow-hiding {
-    opacity: 0;
-}
-
-/*#test.frow-showing {
+#test.frow-hide-remove-active {
     animation: appear 2s;
-    transition: width 2s;
+    /*transition: opacity 2s;*/
     opacity: 1;
 }
 
-#test.frow-hiding {
+#test.frow-hide-add-active {
     animation: disappear 2s;
-    transition: width 2s;
+    /*transition: opacity 2s;*/
     opacity: 0;
-}*/
+}
 
 .tab-bar ul {
     margin: 0;
