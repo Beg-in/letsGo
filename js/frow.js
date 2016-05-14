@@ -57,7 +57,9 @@ var frowShow = function(target, command, attribute) {
     if (target) {
         if (command) {
             if (typeof target === 'string') {
+                var targetType = null;
                 if (target.charAt(0) === '#') {
+                    targetType = 'id';
                     target = target.substring(1);
                     var element = document.getElementById(target);
                     if (element !== null) {
@@ -70,7 +72,7 @@ var frowShow = function(target, command, attribute) {
                                     alterAttribute(element, styles, true);
                                 }
                             } else {
-                                console.log('frowShow using \'show\' or \'hide\' command can not have an \'attribute\' parameter.');
+                                console.log('frowShow: using \'show\' or \'hide\' command can not have an \'attribute\' parameter.');
                             }
                         } else if ((command === 'add') || (command === 'remove')) {
                             if (attribute) {
@@ -80,7 +82,7 @@ var frowShow = function(target, command, attribute) {
                                     alterAttribute(element, styles, false, attribute);
                                 }
                             } else {
-                                console.log('frowShow using \'add\' or \'remove\' command must also have an \'attribute\' parameter.');
+                                console.log('frowShow: using \'add\' or \'remove\' command must also have an \'attribute\' parameter.');
                             }
                         } else if (command === 'toggle') {
                             if (checkIfClass(element, attribute)) {
@@ -89,14 +91,20 @@ var frowShow = function(target, command, attribute) {
                                 alterAttribute(element, styles, true, attribute);
                             }
                         } else {
-                            console.log('frowShow \'command\' parameter is not the string \'show\', \'hide\', \'add\', \'remove\', or \'toggle\'.');
+                            console.log('frowShow: \'command\' parameter is not the string \'show\', \'hide\', \'add\', \'remove\', or \'toggle\'.');
                         }
                     } else {
-                        console.log('No element of id \'' + target + '\' found on page.');
+                        console.log('frowShow: no element of ' + targetType + ' \'' + target + '\' found on page.');
                     }
-                } else if (target.charAt(0) === '.') {
-                    target = target.substring(1);
-                    var element = document.getElementsByClassName(target);
+                } else {
+                    if (target.charAt(0) === '.') {
+                        targetType = 'class';
+                        target = target.substring(1);
+                        var element = document.getElementsByClassName(target);
+                    } else {
+                        targetType = 'tag';
+                        var element = document.getElementsByTagName(target);
+                    }
                     if (element.length > 0) {
                         if ((command === 'show') || (command === 'hide')) {
                             if (!attribute) {
@@ -112,7 +120,7 @@ var frowShow = function(target, command, attribute) {
                                     }
                                 }
                             } else {
-                                console.log('frowShow using \'show\' or \'hide\' command can not have an \'attribute\' parameter.');
+                                console.log('frowShow: using \'show\' or \'hide\' command can not have an \'attribute\' parameter.');
                             }
                         } else if ((command === 'add') || (command === 'remove')) {
                             if (attribute) {
@@ -128,7 +136,7 @@ var frowShow = function(target, command, attribute) {
                                     }
                                 }
                             } else {
-                                console.log('frowShow using \'add\' or \'remove\' command must also have an \'attribute\' parameter.');
+                                console.log('frowShow: using \'add\' or \'remove\' command must also have an \'attribute\' parameter.');
                             }
                         } else if (command === 'toggle') {
                             for (var i = 0; i < element.length; i++) {
@@ -140,21 +148,19 @@ var frowShow = function(target, command, attribute) {
                                 }
                             }
                         } else {
-                            console.log('frowShow \'command\' parameter is not the string \'show\', \'hide\', \'add\', \'remove\', or \'toggle\'.');
+                            console.log('frowShow: \'command\' parameter is not the string \'show\', \'hide\', \'add\', \'remove\', or \'toggle\'.');
                         }
                     } else {
-                        console.log('No elements of class \'' + target + '\' found on page.');
+                        console.log('frowShow: no element of ' + targetType + ' \'' + target + '\' found on page.');
                     }
-                } else {
-                    console.log('frowShow \'target\' parameter does not begin with either \'#\' or \'.\'')
                 }
             } else {
-                console.log('frowShow \'target\' parameter is not a string type.');
+                console.log('frowShow: \'target\' parameter is not a string type.');
             }
         } else {
-            console.log('frowShow missing \'command\' parameter.');
+            console.log('frowShow: missing \'command\' parameter.');
         }
     } else {
-        console.log('frowShow missing \'target\' parameter.');
+        console.log('frowShow: missing \'target\' parameter.');
     }
 };
