@@ -14,7 +14,8 @@ a {
     text-decoration: none;
 
     &:hover,
-    &:focus {
+    &:focus,
+    &:active {
         color: $link-hover-color;
         text-decoration: $link-hover-decoration;
     }
@@ -27,4 +28,15 @@ a {
 // SVGs
 svg {
     display: block;
+}
+
+// Unordered lists
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+// List items
+li {
+    list-style-type: none;
 }
