@@ -9,7 +9,7 @@
 a {
   color: #333333;
   text-decoration: none; }
-  a:hover, a:focus {
+  a:hover, a:focus, a:active {
     color: #0d0d0d;
     text-decoration: underline; }
   p a {
@@ -17,6 +17,13 @@ a {
 
 svg {
   display: block; }
+
+ul {
+  margin: 0;
+  padding: 0; }
+
+li {
+  list-style-type: none; }
 
 .frow-container {
   margin-right: auto;
