@@ -1,9 +1,12 @@
 'use strict';
 
+var frowShowRunning = false;
+var frowTicketsOut = 0;
+var frowTicketsDone = 0;
+
 var checkIfAttribute = function(element, attribute, attributeIsClass) {
     if (!attribute || attributeIsClass) {
         attribute = (attribute) ? attribute : 'frow-hide';
-        console.log((' ' + element.className + ' ').indexOf(' ' + attribute + ' ') > -1);
         return (' ' + element.className + ' ').indexOf(' ' + attribute + ' ') > -1;
     } else if (attribute.indexOf('=') > -1) {
         attribute = attribute.split('=');
@@ -26,11 +29,10 @@ var findAnimateTime = function(times) {
     return times;
 };
 
-var alterAttribute = function(element, styles, add, attribute, attributeIsClass) {
+var alterAttribute = function(element, styles, add, attribute, attributeIsClass, lastOne) {
     var command = (add) ? 'add' : 'remove';
 
-    if (!attribute || attributeIsClass) {
-        attribute = (attribute) ? attribute : 'frow-hide';
+    if (attributeIsClass) {
         var alterAttributeDone = function() {
             element.removeEventListener('animationend', alterAttributeDone, false);
             if (add) {
@@ -39,6 +41,10 @@ var alterAttribute = function(element, styles, add, attribute, attributeIsClass)
             element.classList.remove(attribute + '-' + command);
             element.classList.remove(attribute + '-' + command + '-active');
             element.classList.remove('frow-animate');
+            if (lastOne) {
+                frowTicketsDone++;
+                frowShowRunning = false;
+            }
         };
 
         element.classList.add('frow-animate');
@@ -79,15 +85,20 @@ var alterAttribute = function(element, styles, add, attribute, attributeIsClass)
                 element.removeAttribute(attribute);
             }
         }
+        if (lastOne) {
+            frowTicketsDone++;
+            frowShowRunning = false;
+        }
     }
 };
 
-var frowShow = function(target, command, attribute) {
+var router = function(target, command, attribute) {
     if (target) {
         if (command) {
             if (typeof target === 'string') {
                 var targetType = null;
                 var attributeIsClass = null;
+                var lastOne = false;
                 if (target.charAt(0) === '#') {
                     targetType = 'id';
                     target = target.substring(1);
@@ -97,9 +108,9 @@ var frowShow = function(target, command, attribute) {
                         if (command === 'show' || command === 'hide') {
                             if (!attribute) {
                                 if (command === 'show') {
-                                    alterAttribute(element, styles, false);
+                                    alterAttribute(element, styles, false, 'frow-hide', true, true);
                                 } else if (command === 'hide') {
-                                    alterAttribute(element, styles, true);
+                                    alterAttribute(element, styles, true, 'frow-hide', true, true);
                                 }
                             } else {
                                 console.log('frowShow: using \'show\' or \'hide\' command can not have an \'attribute\' parameter.');
@@ -111,9 +122,9 @@ var frowShow = function(target, command, attribute) {
                                     attribute = attribute.substring(1);
                                 }
                                 if (command === 'add') {
-                                    alterAttribute(element, styles, true, attribute, attributeIsClass);
+                                    alterAttribute(element, styles, true, attribute, attributeIsClass, true);
                                 } else if (command === 'remove') {
-                                    alterAttribute(element, styles, false, attribute, attributeIsClass);
+                                    alterAttribute(element, styles, false, attribute, attributeIsClass, true);
                                 }
                             } else {
                                 console.log('frowShow: using \'add\' or \'remove\' command must also have an \'attribute\' parameter.');
@@ -122,11 +133,14 @@ var frowShow = function(target, command, attribute) {
                             if (attribute && attribute.charAt(0) === '.') {
                                 attributeIsClass = true;
                                 attribute = attribute.substring(1);
+                            } else if (!attribute) {
+                                attributeIsClass = true;
+                                attribute = 'frow-hide';
                             }
                             if (checkIfAttribute(element, attribute, attributeIsClass)) {
-                                alterAttribute(element, styles, false, attribute, attributeIsClass);
+                                alterAttribute(element, styles, false, attribute, attributeIsClass, true);
                             } else {
-                                alterAttribute(element, styles, true, attribute, attributeIsClass);
+                                alterAttribute(element, styles, true, attribute, attributeIsClass, true);
                             }
                         } else {
                             console.log('frowShow: \'command\' parameter is not the string \'show\', \'hide\', \'add\', \'remove\', or \'toggle\'.');
@@ -150,12 +164,18 @@ var frowShow = function(target, command, attribute) {
                                 if (command === 'show') {
                                     for (var i = 0; i < element.length; i++) {
                                         var styles = window.getComputedStyle(element[i], null);
-                                        alterAttribute(element[i], styles, false);
+                                        if (i === (element.length - 1) ) {
+                                            lastOne = true;
+                                        }
+                                        alterAttribute(element[i], styles, false, 'frow-hide', true, lastOne);
                                     }
                                 } else if (command === 'hide') {
                                     for (var i = 0; i < element.length; i++) {
                                         var styles = window.getComputedStyle(element[i], null);
-                                        alterAttribute(element[i], styles, true);
+                                        if (i === (element.length - 1) ) {
+                                            lastOne = true;
+                                        }
+                                        alterAttribute(element[i], styles, true, 'frow-hide', true, lastOne);
                                     }
                                 }
                             } else {
@@ -170,12 +190,18 @@ var frowShow = function(target, command, attribute) {
                                 if (command === 'add') {
                                     for (var i = 0; i < element.length; i++) {
                                         var styles = window.getComputedStyle(element[i], null);
-                                        alterAttribute(element[i], styles, true, attribute, attributeIsClass);
+                                        if (i === (element.length - 1) ) {
+                                            lastOne = true;
+                                        }
+                                        alterAttribute(element[i], styles, true, attribute, attributeIsClass, lastOne);
                                     }
                                 } else if (command === 'remove') {
                                     for (var i = 0; i < element.length; i++) {
                                         var styles = window.getComputedStyle(element[i], null);
-                                        alterAttribute(element[i], styles, false, attribute, attributeIsClass);
+                                        if (i === (element.length - 1) ) {
+                                            lastOne = true;
+                                        }
+                                        alterAttribute(element[i], styles, false, attribute, attributeIsClass, lastOne);
                                     }
                                 }
                             } else {
@@ -188,10 +214,13 @@ var frowShow = function(target, command, attribute) {
                             }
                             for (var i = 0; i < element.length; i++) {
                                 var styles = window.getComputedStyle(element[i], null);
+                                if (i === (element.length - 1) ) {
+                                    lastOne = true;
+                                }
                                 if (checkIfAttribute(element[i], attribute, attributeIsClass)) {
-                                    alterAttribute(element[i], styles, false, attribute, attributeIsClass);
+                                    alterAttribute(element[i], styles, false, attribute, attributeIsClass, lastOne);
                                 } else {
-                                    alterAttribute(element[i], styles, true, attribute, attributeIsClass);
+                                    alterAttribute(element[i], styles, true, attribute, attributeIsClass, lastOne);
                                 }
                             }
                         } else {
@@ -211,3 +240,19 @@ var frowShow = function(target, command, attribute) {
         console.log('frowShow: missing \'target\' parameter.');
     }
 };
+
+var frowShow = function(target, command, attribute, claimedTicket) {
+    if (!claimedTicket) {
+        frowTicketsOut++;
+        claimedTicket = frowTicketsOut;
+    }
+
+    if (frowShowRunning && frowTicketsDone !== claimedTicket) {
+        setTimeout(function () {
+            frowShow(target, command, attribute, claimedTicket);
+        }, 0);
+    } else {
+        frowShowRunning = true;
+        router(target, command, attribute);
+    }
+}
