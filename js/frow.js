@@ -84,19 +84,11 @@ var alterAttribute = function(element, styles, add, attribute, attributeIsClass,
             } else {
                 element.removeAttribute(attribute);
             }
-<<<<<<< HEAD
         }
         if (lastOne) {
             frowTicketsDone++;
             frowShowRunning = false;
         }
-=======
-        }
-        if (lastOne) {
-            frowTicketsDone++;
-            frowShowRunning = false;
-        }
->>>>>>> js
     }
 };
 
