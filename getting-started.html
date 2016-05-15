@@ -7,7 +7,6 @@
         <link rel="icon" type="image/png" href="favicon.png">
         <meta name="theme-color" content="#03A9F4">
         <link rel="icon" sizes="192x192" href="highres.png">
-        <!-- <link href='https://fonts.googleapis.com/css?family=Inconsolata|Fira+Sans:400,300,500,700,300italic,400italic,500italic,700italic' rel='stylesheet' type='text/css'> -->
         <link href='https://fonts.googleapis.com/css?family=Inconsolata|Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/frow.css" media="screen" title="Frow CSS">
         <link rel="stylesheet" href="static-css/main.css" media="screen">
@@ -88,9 +87,9 @@
                         Initial page setup
                     </h4>
                     <div class="tabs-container">
-                        <button id="npm-tab" class="install-tab" disabled="disabled" onclick="frowShow('.info-section', 'hide'); frowShow('.npm-info', 'show'); frowShow('.install-tab', 'remove', 'disabled=disabled'); frowShow('#npm-tab', 'add', 'disabled=disabled');">npm</button>
-                        <button id="bower-tab" class="install-tab" onclick="frowShow('.info-section', 'hide'); frowShow('.bower-info', 'show'); frowShow('.install-tab', 'remove', 'disabled=disabled'); frowShow('#bower-tab', 'add', 'disabled=disabled');">Bower</button>
-                        <button id="download-tab" class="install-tab" onclick="frowShow('.info-section', 'hide'); frowShow('.download-info', 'show'); frowShow('.install-tab', 'remove', 'disabled=disabled'); frowShow('#download-tab', 'add', 'disabled=disabled');">Manual Download</button>
+                        <button id="npm-tab" class="install-tab" disabled="disabled" onclick="frowShow('.info-section', 'hide', true); frowShow('.npm-info', 'show', true); frowShow('.install-tab', 'remove', 'disabled=disabled', true); frowShow('#npm-tab', 'add', 'disabled=disabled', true);">npm</button>
+                        <button id="bower-tab" class="install-tab" onclick="frowShow('.info-section', 'hide', true); frowShow('.bower-info', 'show', true); frowShow('.install-tab', 'remove', 'disabled=disabled', true); frowShow('#bower-tab', 'add', 'disabled=disabled', true);">Bower</button>
+                        <button id="download-tab" class="install-tab" onclick="frowShow('.info-section', 'hide', true); frowShow('.download-info', 'show', true); frowShow('.install-tab', 'remove', 'disabled=disabled', true); frowShow('#download-tab', 'add', 'disabled=disabled', true);">Manual Download</button>
                     </div>
                     <div class="frow gutters">
                         <div class="col-md-1-1">
