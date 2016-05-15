@@ -84,11 +84,19 @@ var alterAttribute = function(element, styles, add, attribute, attributeIsClass,
             } else {
                 element.removeAttribute(attribute);
             }
+<<<<<<< HEAD
         }
         if (lastOne) {
             frowTicketsDone++;
             frowShowRunning = false;
         }
+=======
+        }
+        if (lastOne) {
+            frowTicketsDone++;
+            frowShowRunning = false;
+        }
+>>>>>>> js
     }
 };
 
@@ -246,7 +254,6 @@ var frowShow = function(target, command, attribute, claimedTicket) {
         frowTicketsOut++;
         claimedTicket = frowTicketsOut;
     }
-
     if (frowShowRunning && frowTicketsDone !== claimedTicket) {
         setTimeout(function () {
             frowShow(target, command, attribute, claimedTicket);
