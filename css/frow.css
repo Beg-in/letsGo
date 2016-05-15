@@ -746,32 +746,6 @@ svg {
   .col-lg-12-12 {
     width: 100%; } }
 
-.clearfix:after {
-  content: "";
-  display: table;
-  clear: both; }
-
-.clickable, *[ng-click] {
-  cursor: pointer !important; }
-
-.not-clickable {
-  cursor: default !important; }
-
-.height-100 {
-  height: 100%; }
-
-.min-100 {
-  min-height: 100%; }
-
-.frow-hide {
-  display: none !important; }
-
-.card-shadow {
-  box-shadow: 0px 1px 3px 0px #A0A0A0; }
-
-.dark-card-shadow {
-  box-shadow: 0px 1px 3px 0px #1B1B1B; }
-
 .visible-xs, .visible-sm, .visible-md, .visible-lg {
   display: none !important; }
 
@@ -820,3 +794,29 @@ svg {
     display: none !important; }
   .frow.hidden-lg {
     display: none !important; } }
+
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both; }
+
+.clickable, *[ng-click] {
+  cursor: pointer !important; }
+
+.not-clickable {
+  cursor: default !important; }
+
+.height-100 {
+  height: 100%; }
+
+.min-100 {
+  min-height: 100%; }
+
+.frow-hide {
+  display: none !important; }
+
+.card-shadow {
+  box-shadow: 0px 1px 3px 0px #A0A0A0; }
+
+.dark-card-shadow {
+  box-shadow: 0px 1px 3px 0px #1B1B1B; }
