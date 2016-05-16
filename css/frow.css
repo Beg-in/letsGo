@@ -803,7 +803,7 @@ li {
   .col-sm-12-12 {
     width: 100%; } }
 
-@media (min-width: 980px) {
+@media (min-width: 992px) {
   .col-md-1-1 {
     width: 100%; }
   .col-md-1-2 {
@@ -1158,7 +1158,7 @@ li {
   .frow.hidden-xs {
     display: none !important; } }
 
-@media (min-width: 768px) and (max-width: 979px) {
+@media (min-width: 768px) and (max-width: 991px) {
   .visible-sm {
     display: block !important; }
   .frow.visible-sm {
@@ -1168,7 +1168,7 @@ li {
   .frow.hidden-sm {
     display: none !important; } }
 
-@media (min-width: 980px) and (max-width: 1199px) {
+@media (min-width: 992px) and (max-width: 1199px) {
   .visible-md {
     display: block !important; }
   .frow.visible-md {
