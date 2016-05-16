@@ -13,7 +13,7 @@
 
 // Cursor pointer and improvement to AngularJS's ng-click
 // -------------------------
-.clickable, *[ng-click] {
+.clickable, *[onclick], *[ng-click] {
     cursor: pointer !important;
 }
 
