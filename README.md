@@ -1,4 +1,4 @@
 # letsGo
-Flex Row CSS Grid System
+JavaScript library for hiding, changing, and animating HTML elements http://useletsgo.com
 
 Information at: <http://useletsgo.com>
