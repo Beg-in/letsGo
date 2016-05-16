@@ -1,4 +1,4 @@
-# frow
+# letsGo
 Flex Row CSS Grid System
 
-Information at: <http://usefrow.com>
+Information at: <http://useletsgo.com>
