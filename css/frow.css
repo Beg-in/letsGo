@@ -758,7 +758,7 @@ li {
   display: table;
   clear: both; }
 
-.clickable, *[ng-click] {
+.clickable, *[onclick], *[ng-click] {
   cursor: pointer !important; }
 
 .not-clickable {
