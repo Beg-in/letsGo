@@ -86,6 +86,8 @@
                             Two simple classes to change which cursor appears on an element. Clickable's rule is also automatically applied to any elements with the attribute of onclick or <a href="https://angularjs.org/" target="_blank">Angular</a>'s ng-click.
                         </p>
                         <div class="fake-code" style="margin-bottom: 60px;">
+                            <span class="fake-comment"> // .clickable and .not-clickable</span><br>
+                            <br>
                             <span class="fake-comment"> // These would all make the cursor change to a pointer on hover</span><br>
                             <span class="clickable">&lt;div class="clickable"&gt;&lt;/div&gt;</span><br>
                             <span class="clickable">&lt;div onclick="function()"&gt;&lt;/div&gt;</span><br>
@@ -95,29 +97,53 @@
                             <span class="not-clickable" onclick="alert('Yay! You clicked despite your instincts and found this secret! :D')">&lt;a href="http://usefrow.com" class="not-clickable"&gt;&lt;/a&gt;</span><br>
                         </div>
                         <h5>
-                            Full height rules
+                            Full height rule
                         </h5>
                         <p>
-                            These two classes simply add a quick height:100% or min-height:100% rule to the elements. Comes in super handy in certain cases, especially when wanting to do full height webpages, where you have to make sure all elements are height:100% from &lt;html&gt; and &lt;body&gt; down.
+                            This class simply adds a quick height:100% rule to elements. Super handy in certain cases, especially when wanting to do full-height webpages, where you have to make sure all elements are height:100% from &lt;html&gt; and &lt;body&gt; downwards.
                         </p>
                         <div class="fake-code" style="margin-bottom: 60px;">
+                            <span class="fake-comment"> // .height-100</span><br>
+                            <br>
                             <span class="fake-comment"> // A full height div</span><br>
-                            &lt;html class="height-100"&gt;<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;body class="height-100"&gt;<br>
+                            &lt;html class="height-100"&gt;<span class="fake-comment"> // Without this class, the div wouldn't be full height</span><br>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;body class="height-100"&gt;<span class="fake-comment"> // Without this class, the div wouldn't be full height</span><br>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="height-100" style="background-color:#03A9F4;color:#fff;"&gt;<br>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cool!<br>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
                             &nbsp;&nbsp;&nbsp;&nbsp;&lt;/body&gt;<br>
                             &lt;/html&gt;<br>
+                        </div>
+                        <h5>
+                            Card Shadows
+                        </h5>
+                        <p>
+                            Make items pop off the page a little with these nice looking classes. The elements will look as though they are cards set upon the webpage.
+                        </p>
+                        <div class="fake-code">
+                            <span class="fake-comment"> // .card-shadow and .dark-card-shadow</span><br>
                             <br>
-                            <span class="fake-comment"> // Webpage that</span><br>
-                            &lt;html class="height-100"&gt;<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;body class="height-100"&gt;<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div class="frow centered"&gt;<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cool!<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/div&gt;<br>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&lt;/body&gt;<br>
-                            &lt;/html&gt;<br>
+                            <span class="fake-comment"> // For light-colored backgrounds</span><br>
+                            &lt;div class="card-shadow"&gt;&lt;/div&gt;<br>
+                            <br>
+                            <span class="fake-comment"> // For dark-colored backgrounds</span><br>
+                            &lt;div class="dark-card-shadow"&gt;&lt;/div&gt;<br>
+                        </div>
+                        <div class="card-shadow-demo" style="margin-bottom: 60px;">
+                            <div class="frow gutters">
+                                <div class="col-md-1-2">
+                                    <div class="frow centered">
+                                        <div class="card-shadow-demo-card card-shadow">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-1-2">
+                                    <div class="frow centered">
+                                        <div class="card-shadow-demo-card dark-card-shadow">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <h5>
                             Clearfix
@@ -126,6 +152,8 @@
                             As a Frow enthusiast, I strongly encourage you to figure out a way to do EVERYTHING with display:flex, but for those times when you absolutely have to use a CSS float, I've included a clearfix class.
                         </p>
                         <div class="fake-code">
+                            <span class="fake-comment"> // .clearfix</span><br>
+                            <br>
                             &lt;div style="float:right;"&gt;Eww.&lt;/div&gt;<br>
                             &lt;div class="clearfix"&gt;&lt;/div&gt;<span class="fake-comment"> // Just add this line</span><br>
                         </div>

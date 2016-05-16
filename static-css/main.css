@@ -426,6 +426,48 @@ a.next-page, a.next-page:hover {
     text-align: center;
 }
 
+.card-shadow-demo {
+    margin-top: 30px;
+}
+
+.card-shadow-demo p {
+    color: #03A9F4;
+}
+
+.card-shadow-demo>.frow>.col-md-1-2>.frow {
+    border-radius: 3px;
+    height: 400px;
+}
+
+.card-shadow-demo>.frow>.col-md-1-2:first-child>.frow {
+    background-color: #f3f3f3;
+}
+
+.card-shadow-demo>.frow>.col-md-1-2:last-child>.frow {
+    background-color: #888;
+}
+
+@media (max-width: 767px) {
+    .card-shadow-demo>.frow>.col-md-1-2:last-child>.frow {
+        margin-top: 20px;
+    }
+}
+
+.card-shadow-demo-card {
+    height: 70%;
+    width: 80%;
+    background-color: #fff;
+}
+
+
+
+
+
+
+
+
+
+
 /*Radio buttons*/
 .control {
     font-size: 18px;
