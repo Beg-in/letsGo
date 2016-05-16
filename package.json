@@ -1,6 +1,6 @@
 {
   "name": "frow",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "description": "Flex Row CSS Grid System http://usefrow.com",
   "main": "sass/_frow.scss",
   "scripts": {
