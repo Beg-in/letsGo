@@ -447,7 +447,7 @@ a.next-page, a.next-page:hover {
     background-color: #888;
 }
 
-@media (max-width: 767px) {
+@media (max-width: 991px) {
     .card-shadow-demo>.frow>.col-md-1-2:last-child>.frow {
         margin-top: 20px;
     }
