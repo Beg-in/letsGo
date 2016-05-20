@@ -1,12 +1,28 @@
+/*!
+ * letsGo
+ * http://useletsGo.com/
+ *
+ * By: Cody Sherman <cody@beg.in> (codysherman.com)
+ */
+
 'use strict';
 
 var letsGoRunning = false;
-var letsGoTicketsOut = 0;
-var letsGoTicketsDone = 0;
-
+var letsGoQueue = [];
 
 var letsGo = function(target, command, attribute, queue) {
     var queueMatters = false;
+
+    var nextInQueue = function(lastOne) {
+        if (queueMatters && lastOne) {
+            letsGoQueue.shift();
+            if (letsGoQueue.length > 0) {
+                router(letsGoQueue[0][0], letsGoQueue[0][1], letsGoQueue[0][3]);
+            } else {
+                letsGoRunning = false;
+            }
+        }
+    };
 
     var checkIfAttribute = function(element, attribute, attributeIsClass) {
         if (!attribute || attributeIsClass) {
@@ -45,10 +61,7 @@ var letsGo = function(target, command, attribute, queue) {
                 element.classList.remove(attribute + '-' + command);
                 element.classList.remove(attribute + '-' + command + '-active');
                 element.classList.remove('letsGo-animate');
-                if (queueMatters && lastOne) {
-                    letsGoTicketsDone++;
-                    letsGoRunning = false;
-                }
+                nextInQueue(lastOne);
             };
 
             element.classList.add('letsGo-animate');
@@ -89,10 +102,7 @@ var letsGo = function(target, command, attribute, queue) {
                     element.removeAttribute(attribute);
                 }
             }
-            if (queueMatters && lastOne) {
-                letsGoTicketsDone++;
-                letsGoRunning = false;
-            }
+            nextInQueue(lastOne);
         }
     };
 
@@ -253,18 +263,26 @@ var letsGo = function(target, command, attribute, queue) {
         }
     };
 
-    var queueControl = function(target, command, attribute, claimedTicket) {
-        if (!claimedTicket) {
-            claimedTicket = letsGoTicketsOut++;
-        }
-        if (letsGoRunning && letsGoTicketsDone !== claimedTicket) {
-            setTimeout(function () {
-                queueControl(target, command, attribute, claimedTicket);
-            }, 0);
-        } else {
-            letsGoRunning = true;
-            router(target, command, attribute);
-        }
+    var queueControl = function(target, command, attribute) {
+        // if (!claimedTicket) {
+        //     claimedTicket = ++letsGoTicketsOut;
+        // }
+        // if (letsGoRunning && letsGoTicketsDone !== claimedTicket) {
+        //     setTimeout(function () {
+        //         queueControl(target, command, attribute, claimedTicket);
+        //     }, 0);
+        // } else {
+        //     console.log('Doing', claimedTicket, target);
+        //     letsGoRunning = true;
+        //     router(target, command, attribute);
+        // }
+        setTimeout(function () {
+            letsGoQueue.push([target, command, attribute]);
+            if (!letsGoRunning) {
+                letsGoRunning = true;
+                router(letsGoQueue[0][0], letsGoQueue[0][1], letsGoQueue[0][3]);
+            }
+        }, 0);
     };
 
 
