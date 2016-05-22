@@ -1,16 +1,32 @@
+/*!
+ * letsGo
+ * http://useletsGo.com/
+ *
+ * By: Cody Sherman <cody@beg.in> (codysherman.com)
+ */
+
 'use strict';
 
-var frowShowRunning = false;
-var frowTicketsOut = 0;
-var frowTicketsDone = 0;
+var letsGoRunning = false;
+var letsGoQueue = [];
 
-
-var frowShow = function(target, command, attribute, queue) {
+var letsGo = function(target, command, attribute, queue) {
     var queueMatters = false;
+
+    var nextInQueue = function(lastOne) {
+        if (queueMatters && lastOne) {
+            letsGoQueue.shift();
+            if (letsGoQueue.length > 0) {
+                router(letsGoQueue[0][0], letsGoQueue[0][1], letsGoQueue[0][2]);
+            } else {
+                letsGoRunning = false;
+            }
+        }
+    };
 
     var checkIfAttribute = function(element, attribute, attributeIsClass) {
         if (!attribute || attributeIsClass) {
-            attribute = (attribute) ? attribute : 'frow-hide';
+            attribute = (attribute) ? attribute : 'letsGo-hide';
             return (' ' + element.className + ' ').indexOf(' ' + attribute + ' ') > -1;
         } else if (attribute.indexOf('=') > -1) {
             attribute = attribute.split('=');
@@ -44,14 +60,11 @@ var frowShow = function(target, command, attribute, queue) {
                 }
                 element.classList.remove(attribute + '-' + command);
                 element.classList.remove(attribute + '-' + command + '-active');
-                element.classList.remove('frow-animate');
-                if (queueMatters && lastOne) {
-                    frowTicketsDone++;
-                    frowShowRunning = false;
-                }
+                element.classList.remove('letsGo-animate');
+                nextInQueue(lastOne);
             };
 
-            element.classList.add('frow-animate');
+            element.classList.add('letsGo-animate');
             element.classList.add(attribute + '-' + command);
             if (!add) {
                 element.classList.remove(attribute);
@@ -89,10 +102,7 @@ var frowShow = function(target, command, attribute, queue) {
                     element.removeAttribute(attribute);
                 }
             }
-            if (queueMatters && lastOne) {
-                frowTicketsDone++;
-                frowShowRunning = false;
-            }
+            nextInQueue(lastOne);
         }
     };
 
@@ -112,12 +122,12 @@ var frowShow = function(target, command, attribute, queue) {
                             if (command === 'show' || command === 'hide') {
                                 if (!attribute) {
                                     if (command === 'show') {
-                                        alterAttribute(element, styles, false, 'frow-hide', true, true);
+                                        alterAttribute(element, styles, false, 'letsGo-hide', true, true);
                                     } else if (command === 'hide') {
-                                        alterAttribute(element, styles, true, 'frow-hide', true, true);
+                                        alterAttribute(element, styles, true, 'letsGo-hide', true, true);
                                     }
                                 } else {
-                                    console.log('frowShow: using \'show\' or \'hide\' command can not have an \'attribute\' parameter.');
+                                    console.log('letsGo: using \'show\' or \'hide\' command can not have an \'attribute\' parameter.');
                                 }
                             } else if ((command === 'add') || (command === 'remove')) {
                                 if (attribute) {
@@ -133,7 +143,7 @@ var frowShow = function(target, command, attribute, queue) {
                                         alterAttribute(element, styles, false, attribute, attributeIsClass, true);
                                     }
                                 } else {
-                                    console.log('frowShow: using \'add\' or \'remove\' command must also have an \'attribute\' parameter.');
+                                    console.log('letsGo: using \'add\' or \'remove\' command must also have an \'attribute\' parameter.');
                                 }
                             } else if (command === 'toggle') {
                                 if (attribute && attribute.charAt(0) === '.') {
@@ -143,7 +153,7 @@ var frowShow = function(target, command, attribute, queue) {
                                     attribute = 'id=' + attribute.substring(1);
                                 } else if (!attribute) {
                                     attributeIsClass = true;
-                                    attribute = 'frow-hide';
+                                    attribute = 'letsGo-hide';
                                 }
                                 if (checkIfAttribute(element, attribute, attributeIsClass)) {
                                     alterAttribute(element, styles, false, attribute, attributeIsClass, true);
@@ -151,10 +161,10 @@ var frowShow = function(target, command, attribute, queue) {
                                     alterAttribute(element, styles, true, attribute, attributeIsClass, true);
                                 }
                             } else {
-                                console.log('frowShow: \'command\' parameter is not the string \'show\', \'hide\', \'add\', \'remove\', or \'toggle\'.');
+                                console.log('letsGo: \'command\' parameter is not the string \'show\', \'hide\', \'add\', \'remove\', or \'toggle\'.');
                             }
                         } else {
-                            console.log('frowShow: no element of ' + targetType + ' \'' + target + '\' found on page.');
+                            console.log('letsGo: no element of ' + targetType + ' \'' + target + '\' found on page.');
                         }
                     } else {
                         var element = [];
@@ -175,7 +185,7 @@ var frowShow = function(target, command, attribute, queue) {
                                             if (i === (element.length - 1) ) {
                                                 lastOne = true;
                                             }
-                                            alterAttribute(element[i], styles, false, 'frow-hide', true, lastOne);
+                                            alterAttribute(element[i], styles, false, 'letsGo-hide', true, lastOne);
                                         }
                                     } else if (command === 'hide') {
                                         for (var i = 0; i < element.length; i++) {
@@ -183,11 +193,11 @@ var frowShow = function(target, command, attribute, queue) {
                                             if (i === (element.length - 1) ) {
                                                 lastOne = true;
                                             }
-                                            alterAttribute(element[i], styles, true, 'frow-hide', true, lastOne);
+                                            alterAttribute(element[i], styles, true, 'letsGo-hide', true, lastOne);
                                         }
                                     }
                                 } else {
-                                    console.log('frowShow: using \'show\' or \'hide\' command can not have an \'attribute\' parameter.');
+                                    console.log('letsGo: using \'show\' or \'hide\' command can not have an \'attribute\' parameter.');
                                 }
                             } else if ((command === 'add') || (command === 'remove')) {
                                 if (attribute) {
@@ -215,7 +225,7 @@ var frowShow = function(target, command, attribute, queue) {
                                         }
                                     }
                                 } else {
-                                    console.log('frowShow: using \'add\' or \'remove\' command must also have an \'attribute\' parameter.');
+                                    console.log('letsGo: using \'add\' or \'remove\' command must also have an \'attribute\' parameter.');
                                 }
                             } else if (command === 'toggle') {
                                 if (attribute && attribute.charAt(0) === '.') {
@@ -236,35 +246,43 @@ var frowShow = function(target, command, attribute, queue) {
                                     }
                                 }
                             } else {
-                                console.log('frowShow: \'command\' parameter is not the string \'show\', \'hide\', \'add\', \'remove\', or \'toggle\'.');
+                                console.log('letsGo: \'command\' parameter is not the string \'show\', \'hide\', \'add\', \'remove\', or \'toggle\'.');
                             }
                         } else {
-                            console.log('frowShow: no element of ' + targetType + ' \'' + target + '\' found on page.');
+                            console.log('letsGo: no element of ' + targetType + ' \'' + target + '\' found on page.');
                         }
                     }
                 } else {
-                    console.log('frowShow: \'target\' parameter is not a string type.');
+                    console.log('letsGo: \'target\' parameter is not a string type.');
                 }
             } else {
-                console.log('frowShow: missing \'command\' parameter.');
+                console.log('letsGo: missing \'command\' parameter.');
             }
         } else {
-            console.log('frowShow: missing \'target\' parameter.');
+            console.log('letsGo: missing \'target\' parameter.');
         }
     };
 
-    var queueControl = function(target, command, attribute, claimedTicket) {
-        if (!claimedTicket) {
-            claimedTicket = frowTicketsOut++;
-        }
-        if (frowShowRunning && frowTicketsDone !== claimedTicket) {
-            setTimeout(function () {
-                queueControl(target, command, attribute, claimedTicket);
-            }, 0);
-        } else {
-            frowShowRunning = true;
-            router(target, command, attribute);
-        }
+    var queueControl = function(target, command, attribute) {
+        // if (!claimedTicket) {
+        //     claimedTicket = ++letsGoTicketsOut;
+        // }
+        // if (letsGoRunning && letsGoTicketsDone !== claimedTicket) {
+        //     setTimeout(function () {
+        //         queueControl(target, command, attribute, claimedTicket);
+        //     }, 0);
+        // } else {
+        //     console.log('Doing', claimedTicket, target);
+        //     letsGoRunning = true;
+        //     router(target, command, attribute);
+        // }
+        setTimeout(function () {
+            letsGoQueue.push([target, command, attribute]);
+            if (!letsGoRunning) {
+                letsGoRunning = true;
+                router(letsGoQueue[0][0], letsGoQueue[0][1], letsGoQueue[0][2]);
+            }
+        }, 0);
     };
 
 
@@ -276,7 +294,7 @@ var frowShow = function(target, command, attribute, queue) {
             if (typeof queue === 'boolean') {
                 queueControl(target, command, attribute);
             } else {
-                console.log('frowShow: \'queue\' parameter is not a boolean');
+                console.log('letsGo: \'queue\' parameter is not a boolean');
             }
         }
     } else {
