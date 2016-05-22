@@ -1,0 +1,33 @@
+{
+  "name": "frow",
+  "homepage": "http://usefrow.com",
+  "authors": [
+    "Cody Sherman <cody@beg.in> (http://codysherman.com)"
+  ],
+  "description": "Flex Row CSS Grid System",
+  "main": "sass/_frow.scss",
+  "moduleType": [],
+  "keywords": [
+    "css",
+    "css grid",
+    "responsive css",
+    "responsive",
+    "flex",
+    "css flex",
+    "sass",
+    "mobile-first",
+    "front-end",
+    "front end",
+    "framework",
+    "web"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "gulpfile.js",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

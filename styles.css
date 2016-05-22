@@ -1,0 +1,53 @@
+/* Don't forget to vendor prefix */
+
+*:not(.letsGo-animate) {
+    transition: width 0.4s, height 0.4s, font-size 0.4s, font-weight 0.4s;
+}
+
+#header {
+    height: 50%;
+    width: 100%;
+    background-color: #09DC6E;
+}
+
+#header svg {
+    width: 100%;
+    max-width: 400px;
+    fill: #fff;
+    margin: 15px 0;
+}
+
+.greyed {
+    color: #bbb;
+}
+
+.example {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 25px;
+}
+
+.example-explanations {
+    margin-bottom: 50px;
+}
+
+.example-explanation {
+    margin-top: 50px;
+    font-size: 20px;
+}
+
+.example-keyword {
+    font-weight: 700;
+}
+
+.example-type {
+    font-style: italic;
+}
+
+.example-definition {
+    margin-left: 50px;
+}
+
+.example-examples {
+    margin-left: 50px;
+}

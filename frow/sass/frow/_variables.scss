@@ -1,0 +1,68 @@
+//
+// Variables
+// --------------------------------------------------
+
+
+//== Colors
+//
+//## Gray and colors for use across Flex.
+
+$gray-lighter: #d2d2d2 !default;
+$gray-light: #9E9E9E !default;
+$gray-dark: #888888 !default;
+$gray-darker: #4F4F51 !default;
+
+$near-white: #BBB !default;
+$near-black: #333333 !default;
+
+
+//== Scaffolding
+//
+//## Settings for some of the most global styles.
+
+//** Background color.
+$background-color:      #F6F6F6 !default;
+//** Global text color on `<body>`.
+$text-color:            $near-black !default;
+
+//** Global textual link color.
+$link-color:            $near-black !default;
+//** Link hover color set via `darken()` function.
+$link-hover-color:      darken($near-black, 15%) !default;
+//** Link hover decoration.
+$link-hover-decoration: underline !default;
+
+
+//== Media queries breakpoints
+//
+//## Define the breakpoints at which your layout will change, adapting to different screen sizes.
+
+// Small screen / tablet
+$sizes-mobile: (
+    xs: 0px,
+    sm: 768px
+) !default;
+
+// Desktops / laptops
+$sizes-desktop: (
+    md: 992px,
+    lg: 1200px
+) !default;
+
+//== Grid system
+//
+//## Define your custom responsive grid.
+
+//** Number of max columns in the grid.
+$grid-max-columns: 12 !default;
+//** Padding between columns. Gets divided in half for the left and right.
+$grid-gutter-width: 30px !default;
+
+//== Grid system
+//
+//## Define shadow for material style cards.
+
+//** Shadow design for light backgrounds.
+$card-shadow: 0px 1px 3px 0px #A0A0A0 !default;
+//** Shadow design for dark backgrounds.
+$dark-card-shadow: 0px 1px 3px 0px #1B1B1B !default;
