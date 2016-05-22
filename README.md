@@ -1,4 +1,4 @@
 # letsGo
-JavaScript library for hiding, changing, and animating HTML elements http://useletsgo.com
+JavaScript library for hiding, changing, and animating HTML elements
 
 Information at: <http://useletsgo.com>
