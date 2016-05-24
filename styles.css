@@ -1,13 +1,46 @@
 /* Don't forget to vendor prefix */
 
-*:not(.letsGo-animate) {
+/**:not(.letsGo-animate) {
     transition: width 0.4s, height 0.4s, font-size 0.4s, font-weight 0.4s;
+}*/
+
+.fake-code {
+    padding: 10px 10px;
+    display: block;
+    border-radius: 3px;
+    background-color: #4F4F51;
+    color: #E6E6E6;
+    font-family: 'Inconsolata', sans-serif;
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.fake-comment {
+    color: #AFAFAF;
+}
+
+.fake-comment a {
+    color: #AFAFAF;
+    text-decoration: underline;
+}
+
+.grid-example {
+    background-color: #eee;
+    margin-bottom: 60px;
+    border-radius: 3px;
+    padding: 15px 0;
+    overflow: hidden;
+}
+
+.grid-frow-code + .grid-example {
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
 }
 
 #header {
     height: 50%;
     width: 100%;
-    background-color: #09DC6E;
+    background-color: #4EF1C5;
 }
 
 #header svg {
@@ -15,6 +48,24 @@
     max-width: 400px;
     fill: #fff;
     margin: 15px 0;
+}
+
+.main-section.letsGo-hide-remove {
+    transition: opacity 0.3s ease-in;
+    opacity: 0;
+}
+
+.main-section.letsGo-hide-remove-active {
+    opacity: 1;
+}
+
+.main-section.letsGo-hide-add {
+    transition: opacity 0.3s ease-out;
+    opacity: 1;
+}
+
+.main-section.letsGo-hide-add-active {
+    opacity: 0;
 }
 
 .greyed {
@@ -25,10 +76,6 @@
     text-align: center;
     margin-top: 40px;
     font-size: 25px;
-}
-
-.example-explanations {
-    margin-bottom: 50px;
 }
 
 .example-explanation {
@@ -50,4 +97,10 @@
 
 .example-examples {
     margin-left: 50px;
+}
+
+.by-line {
+    margin-top: 60px;
+    text-align: center;
+    margin-bottom: 50px;
 }

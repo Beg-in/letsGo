@@ -1184,7 +1184,7 @@ li {
   .frow.hidden-lg {
     display: none !important; } }
 
-.clickable, *[onclick], *[ng-click] {
+.clickable:not([disabled]), *[onclick]:not([disabled]), *[ng-click]:not([disabled]) {
   cursor: pointer !important; }
 
 .not-clickable {
