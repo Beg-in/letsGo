@@ -1,6 +1,6 @@
 {
-  "name": "letsGo",
-  "version": "0.0.1",
+  "name": "letsgo",
+  "version": "0.2.1",
   "description": "JavaScript library for hiding, changing, and animating HTML elements http://useletsgo.com",
   "main": "letsgo.js",
   "scripts": {

@@ -1,6 +1,6 @@
 /*!
  * letsGo
- * http://useletsGo.com/
+ * http://useletsgo.com/
  *
  * By: Cody Sherman <cody@beg.in> (codysherman.com)
  */
