@@ -145,7 +145,6 @@
                     </div>
                     <div id="animations" class="main-section">
                         <h2>Animation Support</h2>
-                        <h4>Animations</h4>
                         <p>
                             With letsGo the animations themselves are handled completely by CSS. The animations can be done via a CSS Animation or CSS transition. By using letsGo, certain classes are added to the element being altered in a specific order, allowing you to do the CSS animation.
                         </p>
@@ -189,7 +188,7 @@
                                     }<br>
                                     <br>
                                     .blue-background-add, .blue-background-remove {<br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;transition: background-color 3s;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;transition: background-color 1s;<br>
                                     }<br>
                                     <br>
                                     .blue-background-add-active {<br>
@@ -215,10 +214,16 @@
                         <div class="frow gutters">
                             <div class="col-md-2-3">
                                 <div class="fake-code" style="margin-bottom: 0;">
-                                    @keyframes animation-example {<br>
+                                    @keyframes spin-clockwise {<br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;0% {transform: rotate(0deg); border-radius: 0;}<br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;50% {border-radius: 50%;}<br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;100% {transform: rotate(720deg); border-radius: 0;}<br>
+                                    }<br>
+                                    <br>
+                                    @keyframes spin-counterclockwise {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;0% {transform: rotate(0deg); border-radius: 0;}<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;50% {border-radius: 50%;}<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;100% {transform: rotate(-720deg); border-radius: 0;}<br>
                                     }<br>
                                     <br>
                                     .demo-animation-box {<br>
@@ -227,8 +232,13 @@
                                     &nbsp;&nbsp;&nbsp;&nbsp;background-color: LightSeaGreen;<br>
                                     }<br>
                                     <br>
-                                    .demo-twirl-add, .demo-twirl-remove {<br>
-                                    &nbsp;&nbsp;&nbsp;&nbsp;animation-name: animation-example;<br>
+                                    .demo-twirl-add {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;animation-name: spin-clockwise;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;animation-duration: 3s;<br>
+                                    }<br>
+                                    <br>
+                                    .demo-twirl-remove {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;animation-name: spin-counterclockwise;<br>
                                     &nbsp;&nbsp;&nbsp;&nbsp;animation-duration: 3s;<br>
                                     }<br>
                                 </div>

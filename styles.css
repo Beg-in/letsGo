@@ -189,7 +189,7 @@ p {
 }
 
 .blue-background-add, .blue-background-remove {
-    transition: background-color 3s;
+    transition: background-color 1s;
 }
 
 .blue-background-add-active {
@@ -200,10 +200,16 @@ p {
     background-color: LightSeaGreen;
 }
 
-@keyframes animation-example {
+@keyframes spin-clockwise {
     0% {transform: rotate(0deg); border-radius: 0;}
     50% {border-radius: 50%;}
     100% {transform: rotate(720deg); border-radius: 0;}
+}
+
+@keyframes spin-counterclockwise {
+    0% {transform: rotate(0); border-radius: 0;}
+    50% {border-radius: 50%;}
+    100% {transform: rotate(-720deg); border-radius: 0;}
 }
 
 .demo-animation-box {
@@ -213,7 +219,12 @@ p {
 
 }
 
-.demo-twirl-add, .demo-twirl-remove {
-    animation-name: animation-example;
+.demo-twirl-add {
+    animation-name: spin-clockwise;
+    animation-duration: 3s;
+}
+
+.demo-twirl-remove {
+    animation-name: spin-counterclockwise;
     animation-duration: 3s;
 }
