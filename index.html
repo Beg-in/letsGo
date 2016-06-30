@@ -72,7 +72,7 @@
                     <div class="warning">
                         <b>Warning:</b> letsGo is still pre-version 1.0.0. Please excuse this documentation as it evolves with the product.
                     </div>
-                    <div id="about" class="main-section">
+                    <div id="about" class="main-section letsGo-hide">
                         <h2>About</h2>
                         <p>
                             letsGo is a JavaScript library to make it easy to show, hide, and modify elements on a webpage, with support for creating CSS animations, similar to Angular's ngAnimate.
@@ -143,11 +143,105 @@
                             <p class="example-examples">Examples: true, false (default)</p>
                         </div>
                     </div>
-                    <div id="animations" class="main-section letsGo-hide">
+                    <div id="animations" class="main-section">
                         <h2>Animation Support</h2>
+                        <h4>Animations</h4>
                         <p>
-                            Animation documentation coming soon.
+                            With letsGo the animations themselves are handled completely by CSS. The animations can be done via a CSS Animation or CSS transition. By using letsGo, certain classes are added to the element being altered in a specific order, allowing you to do the CSS animation.
                         </p>
+                        <h5>Classes Added Order</h5>
+                            <p>
+                                Here is an example of the classes added when adding a class. For this example we are adding the class '.kitty-cat'.
+                            </p>
+                            <span class="animate-steps">
+                                <p>
+                                    class=" "
+                                </p>
+                                <p>
+                                    class="<b>letsGo-animate</b>"
+                                </p>
+                                <p>
+                                    class="letsGo-animate <b>kitty-cat-add</b>"
+                                </p>
+                                <p>
+                                    class="letsGo-animate kitty-cat-add <b>kitty-cat-add-active</b>"
+                                </p>
+                                <p>
+                                    class="letsGo-animate kitty-cat-add kitty-cat-add-active <b>kitty-cat</b>"
+                                </p>
+                                <p>
+                                    class="<b>kitty-cat</b>"
+                                </p>
+                            </span>
+                        <h5>Using a CSS Transition</h5>
+                        <button type="button" name="button" onclick="letsGo('.demo-box', 'toggle', '.blue-background');">Test</button>
+                        <div class="frow gutters">
+                            <div class="col-md-2-3">
+                                <div class="fake-code" style="margin-bottom: 0;">
+                                    .demo-box {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;width: 140px;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;height: 140px;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;background-color: LightSeaGreen;<br>
+                                    }<br>
+                                    <br>
+                                    .blue-background {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;background-color: RoyalBlue;<br>
+                                    }<br>
+                                    <br>
+                                    .blue-background-add, .blue-background-remove {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;transition: background-color 3s;<br>
+                                    }<br>
+                                    <br>
+                                    .blue-background-add-active {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;background-color: RoyalBlue;<br>
+                                    }<br>
+                                    <br>
+                                    .blue-background-add-remove {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;background-color: LightSeaGreen;<br>
+                                    }<br>
+                                </div>
+                            </div>
+                            <div class="col-md-1-3">
+                                 <div class="demo-box-container">
+                                     <div class="frow centered">
+                                         <div class="demo-box card-shadow">
+                                         </div>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h5>Using a CSS Animation</h5>
+                        <button type="button" name="button" onclick="letsGo('.demo-animation-box', 'toggle', '.demo-twirl');">Test</button>
+                        <div class="frow gutters">
+                            <div class="col-md-2-3">
+                                <div class="fake-code" style="margin-bottom: 0;">
+                                    @keyframes animation-example {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;0% {transform: rotate(0deg); border-radius: 0;}<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;50% {border-radius: 50%;}<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;100% {transform: rotate(720deg); border-radius: 0;}<br>
+                                    }<br>
+                                    <br>
+                                    .demo-animation-box {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;width: 140px;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;height: 140px;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;background-color: LightSeaGreen;<br>
+                                    }<br>
+                                    <br>
+                                    .demo-twirl-add, .demo-twirl-remove {<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;animation-name: animation-example;<br>
+                                    &nbsp;&nbsp;&nbsp;&nbsp;animation-duration: 3s;<br>
+                                    }<br>
+                                </div>
+                            </div>
+                            <div class="col-md-1-3">
+                                 <div class="demo-box-container">
+                                     <div class="frow centered">
+                                         <div class="demo-animation-box card-shadow">
+                                         </div>
+                                     </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
