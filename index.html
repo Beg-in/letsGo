@@ -39,40 +39,40 @@
                                 class="main-tab"
                                 disabled="disabled"
                                 onclick="letsGo('.main-tab', 'remove', 'disabled', true)
-                                      letsGo('#main-tab-about', 'add', 'disabled=disabled', true)
-                                      letsGo('.main-section', 'hide', true);
-                                      letsGo('#about', 'show', true);">
+                                         letsGo('#main-tab-about', 'add', 'disabled=disabled', true)
+                                         letsGo('.main-section', 'hide', true);
+                                         letsGo('#about', 'show', true);">
                             About
                         </button>
                         <button id="main-tab-setup"
                                 class="main-tab"
                                 onclick="letsGo('.main-tab', 'remove', 'disabled', true)
-                                      letsGo('#main-tab-setup', 'add', 'disabled=disabled', true)
-                                      letsGo('.main-section', 'hide', true);
-                                      letsGo('#setup', 'show', true);">
+                                         letsGo('#main-tab-setup', 'add', 'disabled=disabled', true)
+                                         letsGo('.main-section', 'hide', true);
+                                         letsGo('#setup', 'show', true);">
                             Setup
                         </button>
                         <button id="main-tab-commands"
                                 class="main-tab"
                                 onclick="letsGo('.main-tab', 'remove', 'disabled', true)
-                                      letsGo('#main-tab-commands', 'add', 'disabled=disabled', true)
-                                      letsGo('.main-section', 'hide', true);
-                                      letsGo('#commands', 'show', true);">
+                                         letsGo('#main-tab-commands', 'add', 'disabled=disabled', true)
+                                         letsGo('.main-section', 'hide', true);
+                                         letsGo('#commands', 'show', true);">
                             Commands
                         </button>
                         <button id="main-tab-animations"
                                 class="main-tab"
                                 onclick="letsGo('.main-tab', 'remove', 'disabled', true)
-                                      letsGo('#main-tab-animations', 'add', 'disabled=disabled', true)
-                                      letsGo('.main-section', 'hide', true);
-                                      letsGo('#animations', 'show', true);">
+                                         letsGo('#main-tab-animations', 'add', 'disabled=disabled', true)
+                                         letsGo('.main-section', 'hide', true);
+                                         letsGo('#animations', 'show', true);">
                             Animations
                         </button>
                     </div>
                     <div class="warning">
                         <b>Warning:</b> letsGo is still pre-version 1.0.0. Please excuse this documentation as it evolves with the product.
                     </div>
-                    <div id="about" class="main-section letsGo-hide">
+                    <div id="about" class="main-section">
                         <h2>About</h2>
                         <p>
                             letsGo is a JavaScript library to make it easy to show, hide, and modify elements on a webpage, with support for creating CSS animations, similar to Angular's ngAnimate.
@@ -143,7 +143,7 @@
                             <p class="example-examples">Examples: true, false (default)</p>
                         </div>
                     </div>
-                    <div id="animations" class="main-section">
+                    <div id="animations" class="main-section letsGo-hide">
                         <h2>Animation Support</h2>
                         <p>
                             With letsGo the animations themselves are handled completely by CSS. The animations can be done via a CSS Animation or CSS transition. By using letsGo, certain classes are added to the element being altered in a specific order, allowing you to do the CSS animation.
@@ -173,7 +173,6 @@
                                 </p>
                             </span>
                         <h5>Using a CSS Transition</h5>
-                        <button type="button" name="button" onclick="letsGo('.demo-box', 'toggle', '.blue-background');">Test</button>
                         <div class="frow gutters">
                             <div class="col-md-2-3">
                                 <div class="fake-code" style="margin-bottom: 0;">
@@ -202,15 +201,14 @@
                             </div>
                             <div class="col-md-1-3">
                                  <div class="demo-box-container">
-                                     <div class="frow centered">
-                                         <div class="demo-box card-shadow">
-                                         </div>
+                                     <div class="frow centered-column justify-around">
+                                         <div class="demo-box card-shadow"></div>
+                                         <button type="button" name="button" onclick="letsGo('.demo-box', 'toggle', '.blue-background');">Test</button>
                                      </div>
                                 </div>
                             </div>
                         </div>
                         <h5>Using a CSS Animation</h5>
-                        <button type="button" name="button" onclick="letsGo('.demo-animation-box', 'toggle', '.demo-twirl');">Test</button>
                         <div class="frow gutters">
                             <div class="col-md-2-3">
                                 <div class="fake-code" style="margin-bottom: 0;">
@@ -245,9 +243,9 @@
                             </div>
                             <div class="col-md-1-3">
                                  <div class="demo-box-container">
-                                     <div class="frow centered">
-                                         <div class="demo-animation-box card-shadow">
-                                         </div>
+                                     <div class="frow centered-column justify-around">
+                                         <div class="demo-animation-box card-shadow"></div>
+                                         <button type="button" name="button" onclick="letsGo('.demo-animation-box', 'toggle', '.demo-twirl');">Test</button>
                                      </div>
                                 </div>
                             </div>
