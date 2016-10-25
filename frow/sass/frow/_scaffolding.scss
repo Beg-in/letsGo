@@ -14,7 +14,8 @@ a {
     text-decoration: none;
 
     &:hover,
-    &:focus {
+    &:focus,
+    &:active {
         color: $link-hover-color;
         text-decoration: $link-hover-decoration;
     }
@@ -27,4 +28,137 @@ a {
 // SVGs
 svg {
     display: block;
+}
+
+// Unordered lists
+ul {
+    margin: 0;
+    padding: 0;
+}
+
+// List items
+li {
+    list-style-type: none;
+}
+
+// Buttons
+button:not(.#{$reset}), html [type="button"]:not(.#{$reset}), [type="reset"]:not(.#{$reset}), [type="submit"]:not(.#{$reset}) {
+    background: none;
+    background-color: $gray-darker;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    color: #fff;
+    line-height: 100%;
+    padding: 9px;
+    border-radius: 3px;
+    font-size: 16px;
+
+    &:hover, &:focus, &:active {
+        outline: none;
+    }
+
+    &:active {
+        transform: scale(0.96);
+    }
+
+    &:disabled {
+        opacity: 0.7;
+        cursor: default;
+    }
+}
+
+// Labels
+label:not(.#{$reset}) {
+    font-size: 14px;
+    padding: 4px 5px;
+    color: $gray-light;
+    display: block;
+}
+
+// Inputs
+input:not(.#{$reset}) {
+    border: none;
+    border-radius: 0;
+    border-bottom: 2px solid $gray-light;
+    padding: 4px 5px;
+    color: $near-black;
+    margin-bottom: $form-bottom-margin;
+    font-size: 15px;
+    background: transparent;
+    display: block;
+    width: 100%;
+
+    &:focus {
+        border-color: $gray-darker;
+        outline: none;
+    }
+
+    &:disabled {
+        border-bottom: 1px dotted $gray-light;
+    }
+
+    &[type=number] {
+        -moz-appearance:textfield;
+
+        &::-webkit-inner-spin-button,
+        &::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0
+        }
+    }
+}
+
+// Selects
+select:not(.#{$reset}) {
+    background: transparent;
+    border: none;
+    font-size: 15px;
+    height: 27px;
+    padding: 3px 24px 3px 5px;
+    color: $near-black;
+    font-size: 15px;
+    border-radius: 0;
+    // background-color: $gray-lighter;
+    border-bottom: 2px solid $gray-light;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    margin-bottom: $form-bottom-margin;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' version='1.1' xml:space='preserve' stroke-linejoin='round'><g transform='matrix(-0.613836,-7.51732e-17,7.51732e-17,-0.613836,19.9111,16.8669)'><path d='M12.9 2.9L22.7 12.9 3.1 12.9 12.9 2.9Z' fill='rgb(51,51,51)'/></g></svg>");
+    background-repeat: no-repeat;
+    background-position: right center;
+    display: block;
+    width: 100%;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:disabled {
+        border-bottom: 1px dotted $gray-light;
+    }
+}
+
+// Textareas
+textarea:not(.#{$reset}) {
+    border: none;
+    border-bottom: 2px solid $gray-light;
+    // background-color: $gray-lighter;
+    padding: 10px;
+    color: $near-black;
+    resize: vertical;
+    font-size: 15px;
+    min-height: 50px;
+    margin-bottom: $form-bottom-margin;
+    border-radius: 0;
+    display: block;
+    width: 100%;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:disabled {
+        border-bottom: 1px dotted $gray-light;
+    }
 }

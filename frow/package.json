@@ -1,7 +1,7 @@
 {
   "name": "frow",
-  "version": "0.9.4",
-  "description": "Flex Row CSS Grid System http://usefrow.com",
+  "version": "1.3.1",
+  "description": "Flex Row CSS Grid System http://frowcss.com",
   "main": "sass/_frow.scss",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -29,7 +29,7 @@
   "bugs": {
     "url": "https://github.com/Beg-in/frow/issues"
   },
-  "homepage": "https://beg-in.github.io/frow",
+  "homepage": "http://frowcss.com",
   "devDependencies": {
     "gulp-autoprefixer": "^3.1.0",
     "gulp-cssnano": "^2.1.1",

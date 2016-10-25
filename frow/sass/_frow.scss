@@ -7,10 +7,13 @@
 // Core variables
 @import 'frow/variables';
 
+// Reset and dependencies
+@import 'frow/normalize';
+
 // Core CSS
 @import 'frow/scaffolding';
 @import 'frow/grid';
 
 // Utility classes
-@import 'frow/utilities';
 @import 'frow/responsive-utilities';
+@import 'frow/utilities';

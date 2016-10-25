@@ -3,78 +3,93 @@
  * Copyright 2016 Cody Sherman
  * Licensed under MIT (https://github.com/Beg-in/frow/blob/master/LICENSE)
  */
-/*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */
+/*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Change the default font family in all browsers (opinionated).
- * 2. Prevent adjustments of font size after orientation changes in IE and iOS.
+ * 2. Correct the line height in all browsers.
+ * 3. Prevent adjustments of font size after orientation changes in
+ *    IE on Windows Phone and in iOS.
  */
+/* Document
+   ========================================================================== */
 html {
   font-family: sans-serif;
   /* 1 */
-  -ms-text-size-adjust: 100%;
+  line-height: 1.15;
   /* 2 */
+  -ms-text-size-adjust: 100%;
+  /* 3 */
   -webkit-text-size-adjust: 100%;
-  /* 2 */ }
+  /* 3 */ }
 
+/* Sections
+   ========================================================================== */
 /**
  * Remove the margin in all browsers (opinionated).
  */
 body {
   margin: 0; }
 
-/* HTML5 display definitions
-   ========================================================================== */
 /**
  * Add the correct display in IE 9-.
- * 1. Add the correct display in Edge, IE, and Firefox.
- * 2. Add the correct display in IE.
  */
 article,
 aside,
-details,
-figcaption,
-figure,
 footer,
 header,
-main,
-menu,
 nav,
-section,
-summary {
+section {
+  display: block; }
+
+/**
+ * Correct the font size and margin on `h1` elements within `section` and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+/* Grouping content
+   ========================================================================== */
+/**
+ * Add the correct display in IE 9-.
+ * 1. Add the correct display in IE.
+ */
+figcaption,
+figure,
+main {
   /* 1 */
   display: block; }
 
 /**
- * Add the correct display in IE 9-.
+ * Add the correct margin in IE 8.
  */
-audio,
-canvas,
-progress,
-video {
-  display: inline-block; }
+figure {
+  margin: 1em 40px; }
 
 /**
- * Add the correct display in iOS 4-7.
+ * 1. Add the correct box sizing in Firefox.
+ * 2. Show the overflow in Edge and IE.
  */
-audio:not([controls]) {
-  display: none;
-  height: 0; }
+hr {
+  box-sizing: content-box;
+  /* 1 */
+  height: 0;
+  /* 1 */
+  overflow: visible;
+  /* 2 */ }
 
 /**
- * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
  */
-progress {
-  vertical-align: baseline; }
+pre {
+  font-family: monospace, monospace;
+  /* 1 */
+  font-size: 1em;
+  /* 2 */ }
 
-/**
- * Add the correct display in IE 10-.
- * 1. Add the correct display in IE.
- */
-template,
-[hidden] {
-  display: none; }
-
-/* Links
+/* Text-level semantics
    ========================================================================== */
 /**
  * 1. Remove the gray background on active links in IE 10.
@@ -94,8 +109,6 @@ a:active,
 a:hover {
   outline-width: 0; }
 
-/* Text-level semantics
-   ========================================================================== */
 /**
  * 1. Remove the bottom border in Firefox 39-.
  * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
@@ -123,18 +136,22 @@ strong {
   font-weight: bolder; }
 
 /**
+ * 1. Correct the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+code,
+kbd,
+samp {
+  font-family: monospace, monospace;
+  /* 1 */
+  font-size: 1em;
+  /* 2 */ }
+
+/**
  * Add the correct font style in Android 4.3-.
  */
 dfn {
   font-style: italic; }
-
-/**
- * Correct the font size and margin on `h1` elements within `section` and
- * `article` contexts in Chrome, Firefox, and Safari.
- */
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0; }
 
 /**
  * Add the correct background and color in IE 9-.
@@ -169,6 +186,20 @@ sup {
 /* Embedded content
    ========================================================================== */
 /**
+ * Add the correct display in IE 9-.
+ */
+audio,
+video {
+  display: inline-block; }
+
+/**
+ * Add the correct display in iOS 4-7.
+ */
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
+/**
  * Remove the border on images inside links in IE 10-.
  */
 img {
@@ -180,59 +211,25 @@ img {
 svg:not(:root) {
   overflow: hidden; }
 
-/* Grouping content
-   ========================================================================== */
-/**
- * 1. Correct the inheritance and scaling of font size in all browsers.
- * 2. Correct the odd `em` font sizing in all browsers.
- */
-code,
-kbd,
-pre,
-samp {
-  font-family: monospace, monospace;
-  /* 1 */
-  font-size: 1em;
-  /* 2 */ }
-
-/**
- * Add the correct margin in IE 8.
- */
-figure {
-  margin: 1em 40px; }
-
-/**
- * 1. Add the correct box sizing in Firefox.
- * 2. Show the overflow in Edge and IE.
- */
-hr {
-  box-sizing: content-box;
-  /* 1 */
-  height: 0;
-  /* 1 */
-  overflow: visible;
-  /* 2 */ }
-
 /* Forms
    ========================================================================== */
 /**
- * 1. Change font properties to `inherit` in all browsers (opinionated).
+ * 1. Change the font styles in all browsers (opinionated).
  * 2. Remove the margin in Firefox and Safari.
  */
 button,
 input,
+optgroup,
 select,
 textarea {
-  font: inherit;
+  font-family: sans-serif;
+  /* 1 */
+  font-size: 100%;
+  /* 1 */
+  line-height: 1.15;
   /* 1 */
   margin: 0;
   /* 2 */ }
-
-/**
- * Restore the font weight unset by the previous rule.
- */
-optgroup {
-  font-weight: bold; }
 
 /**
  * Show the overflow in IE.
@@ -312,6 +309,16 @@ legend {
   /* 1 */ }
 
 /**
+ * 1. Add the correct display in IE 9-.
+ * 2. Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+progress {
+  display: inline-block;
+  /* 1 */
+  vertical-align: baseline;
+  /* 2 */ }
+
+/**
  * Remove the default vertical scrollbar in IE.
  */
 textarea {
@@ -346,18 +353,11 @@ textarea {
   /* 2 */ }
 
 /**
- * Remove the inner padding and cancel buttons in Chrome and Safari on OS X.
+ * Remove the inner padding and cancel buttons in Chrome and Safari on macOS.
  */
 [type="search"]::-webkit-search-cancel-button,
 [type="search"]::-webkit-search-decoration {
   -webkit-appearance: none; }
-
-/**
- * Correct the text style of placeholders in Chrome, Edge, and Safari.
- */
-::-webkit-input-placeholder {
-  color: inherit;
-  opacity: 0.54; }
 
 /**
  * 1. Correct the inability to style clickable types in iOS and Safari.
@@ -368,6 +368,44 @@ textarea {
   /* 1 */
   font: inherit;
   /* 2 */ }
+
+/* Interactive
+   ========================================================================== */
+/*
+ * Add the correct display in IE 9-.
+ * 1. Add the correct display in Edge, IE, and Firefox.
+ */
+details,
+menu {
+  display: block; }
+
+/*
+ * Add the correct display in all browsers.
+ */
+summary {
+  display: list-item; }
+
+/* Scripting
+   ========================================================================== */
+/**
+ * Add the correct display in IE 9-.
+ */
+canvas {
+  display: inline-block; }
+
+/**
+ * Add the correct display in IE.
+ */
+template {
+  display: none; }
+
+/* Hidden
+   ========================================================================== */
+/**
+ * Add the correct display in IE 10-.
+ */
+[hidden] {
+  display: none; }
 
 *, :after, :before {
   box-sizing: border-box; }
@@ -390,6 +428,93 @@ ul {
 
 li {
   list-style-type: none; }
+
+button:not(.reset), html [type="button"]:not(.reset), [type="reset"]:not(.reset), [type="submit"]:not(.reset) {
+  background: none;
+  background-color: #4F4F51;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  color: #fff;
+  line-height: 100%;
+  padding: 9px;
+  border-radius: 3px;
+  font-size: 16px; }
+  button:not(.reset):hover, button:not(.reset):focus, button:not(.reset):active, html [type="button"]:not(.reset):hover, html [type="button"]:not(.reset):focus, html [type="button"]:not(.reset):active, [type="reset"]:not(.reset):hover, [type="reset"]:not(.reset):focus, [type="reset"]:not(.reset):active, [type="submit"]:not(.reset):hover, [type="submit"]:not(.reset):focus, [type="submit"]:not(.reset):active {
+    outline: none; }
+  button:not(.reset):active, html [type="button"]:not(.reset):active, [type="reset"]:not(.reset):active, [type="submit"]:not(.reset):active {
+    transform: scale(0.96); }
+  button:not(.reset):disabled, html [type="button"]:not(.reset):disabled, [type="reset"]:not(.reset):disabled, [type="submit"]:not(.reset):disabled {
+    opacity: 0.7;
+    cursor: default; }
+
+label:not(.reset) {
+  font-size: 14px;
+  padding: 4px 5px;
+  color: #9E9E9E;
+  display: block; }
+
+input:not(.reset) {
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid #9E9E9E;
+  padding: 4px 5px;
+  color: #333333;
+  margin-bottom: 20px;
+  font-size: 15px;
+  background: transparent;
+  display: block;
+  width: 100%; }
+  input:not(.reset):focus {
+    border-color: #4F4F51;
+    outline: none; }
+  input:not(.reset):disabled {
+    border-bottom: 1px dotted #9E9E9E; }
+  input:not(.reset)[type=number] {
+    -moz-appearance: textfield; }
+    input:not(.reset)[type=number]::-webkit-inner-spin-button, input:not(.reset)[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0; }
+
+select:not(.reset) {
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  height: 27px;
+  padding: 3px 24px 3px 5px;
+  color: #333333;
+  font-size: 15px;
+  border-radius: 0;
+  border-bottom: 2px solid #9E9E9E;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  margin-bottom: 20px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' version='1.1' xml:space='preserve' stroke-linejoin='round'><g transform='matrix(-0.613836,-7.51732e-17,7.51732e-17,-0.613836,19.9111,16.8669)'><path d='M12.9 2.9L22.7 12.9 3.1 12.9 12.9 2.9Z' fill='rgb(51,51,51)'/></g></svg>");
+  background-repeat: no-repeat;
+  background-position: right center;
+  display: block;
+  width: 100%; }
+  select:not(.reset):focus {
+    outline: none; }
+  select:not(.reset):disabled {
+    border-bottom: 1px dotted #9E9E9E; }
+
+textarea:not(.reset) {
+  border: none;
+  border-bottom: 2px solid #9E9E9E;
+  padding: 10px;
+  color: #333333;
+  resize: vertical;
+  font-size: 15px;
+  min-height: 50px;
+  margin-bottom: 20px;
+  border-radius: 0;
+  display: block;
+  width: 100%; }
+  textarea:not(.reset):focus {
+    outline: none; }
+  textarea:not(.reset):disabled {
+    border-bottom: 1px dotted #9E9E9E; }
 
 .frow-container {
   margin-right: auto;
@@ -1187,11 +1312,14 @@ li {
 .clickable:not([disabled]), *[onclick]:not([disabled]), *[ng-click]:not([disabled]) {
   cursor: pointer !important; }
 
-.not-clickable {
+.not-clickable, .not-clickable[onclick], .not-clickable[ng-click], .not-clickable[ng-click] {
   cursor: default !important; }
 
 .height-100 {
   height: 100%; }
+
+.width-100 {
+  width: 100%; }
 
 .letsGo-hide {
   display: none !important; }
@@ -1206,3 +1334,6 @@ li {
   content: "";
   display: table;
   clear: both; }
+
+.letsGo-hide {
+  display: none !important; }
