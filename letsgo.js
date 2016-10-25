@@ -155,7 +155,6 @@ var letsGo = function(target, command, attribute, queue) {
                                     attributeIsClass = true;
                                     attribute = 'letsGo-hide';
                                 }
-                                console.log('atr', attribute);
                                 if (checkIfAttribute(element, attribute, attributeIsClass)) {
                                     alterAttribute(element, styles, false, attribute, attributeIsClass, true);
                                 } else {
