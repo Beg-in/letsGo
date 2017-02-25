@@ -55,6 +55,13 @@ p {
     margin: 10px 0 5px;
 }
 
+.why {
+    padding-top: 25px;
+}
+
+.why-paragraph {
+    padding-top: 10px;
+}
 .fake-code {
     padding: 10px 10px;
     display: block;
@@ -89,7 +96,7 @@ p {
 }
 
 #header {
-    height: 50%;
+    height: 30%;
     width: 100%;
     background-color: #4EF1C5;
 }
