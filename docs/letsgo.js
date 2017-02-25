@@ -70,11 +70,8 @@ var letsGo = function(target, command, attribute, queue) {
                 element.classList.remove(attribute);
             }
             setTimeout(function() {
-                if ((styles.transitionDuration !== '0s') || (styles.animationDuration !== '0s')) {
-                    element.classList.add(attribute + '-' + command + '-active');
-                    console.log(styles);
-                    var maxTransitionTime = findAnimateTime(styles.transitionDuration);
-                    var maxAnimationTime = findAnimateTime(styles.animationDuration);
+                if ((styles.transitionDuration !== '0s') || (styles.animationDuration !== '0s')) {                    var maxTransitionTime = findAnimateTime(styles.transitionDuration);
+                    var maxAnimationTime = findAnimateTime(styles.animationDuration) * styles.animationIterationCount;
                     var maxTime = Math.ceil(Math.max(maxTransitionTime, maxAnimationTime)*1000);
                     setTimeout(alterAttributeDone, maxTime);
                     if (styles.animationDuration !== '0s') {
