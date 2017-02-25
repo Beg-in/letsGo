@@ -37,7 +37,6 @@
                     <div class="frow">
                         <button id="main-tab-about"
                                 class="main-tab"
-                                disabled="disabled"
                                 onclick="letsGo('.main-tab', 'remove', 'disabled', true);
                                          letsGo('#main-tab-about', 'add', 'disabled=disabled', true);
                                          letsGo('.main-section', 'hide', true);
@@ -62,6 +61,7 @@
                         </button>
                         <button id="main-tab-animations"
                                 class="main-tab"
+                                disabled="disabled"
                                 onclick="letsGo('.main-tab', 'remove', 'disabled', true);
                                          letsGo('#main-tab-animations', 'add', 'disabled=disabled', true);
                                          letsGo('.main-section', 'hide', true);
@@ -72,7 +72,7 @@
                     <div class="warning">
                         <b>Warning:</b> letsGo is still pre-version 1.0.0. Please excuse this documentation as it evolves with the product.
                     </div>
-                    <div id="about" class="main-section">
+                    <div id="about" class="main-section letsGo-hide">
                         <h2>About</h2>
                         <p>
                             letsGo is a JavaScript library to make it easy to show, hide, and modify elements on a webpage, with support for creating CSS animations, similar to Angular's ngAnimate.
@@ -143,7 +143,7 @@
                             <p class="example-examples">Examples: true, false (default)</p>
                         </div>
                     </div>
-                    <div id="animations" class="main-section letsGo-hide">
+                    <div id="animations" class="main-section">
                         <h2>Animation Support</h2>
                         <p>
                             With letsGo the animations themselves are handled completely by CSS. The animations can be done via a CSS Animation or CSS transition. By using letsGo, certain classes are added to the element being altered in a specific order, allowing you to do the CSS animation.
