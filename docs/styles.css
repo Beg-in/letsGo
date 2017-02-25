@@ -55,6 +55,10 @@ p {
     margin: 10px 0 5px;
 }
 
+.nav-bar {
+    background-color: #eee;
+}
+
 /*Navigation styles*/
 .tab-parent{
 
@@ -79,11 +83,11 @@ button:not(.reset):disabled {
     box-shadow: inset 0px -2px 0px #3AC371
 }
 
-.why {
+.section-why {
     padding-top: 25px;
 }
 
-.why-paragraph {
+.section-why-paragraph {
     padding-top: 10px;
 }
 .fake-code {
