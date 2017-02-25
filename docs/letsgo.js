@@ -10,7 +10,7 @@
 var letsGoRunning = false;
 var letsGoQueue = [];
 
-var letsGo = function(target, command, attribute, queue) {
+var letsGo = function(target, command, attribute, noOrder) {
     var queueMatters = false;
 
     var nextInQueue = function(lastOne) {
@@ -177,6 +177,7 @@ var letsGo = function(target, command, attribute, queue) {
                         }
                         if (element.length > 0) {
                             if ((command === 'show') || (command === 'hide')) {
+                              console.log('1' , attribute);
                                 if (!attribute) {
                                     if (command === 'show') {
                                         for (var i = 0; i < element.length; i++) {
@@ -288,18 +289,26 @@ var letsGo = function(target, command, attribute, queue) {
     };
 
 
-    if (queue || attribute === true) {
-        queueMatters = true;
+
+
+      if (noOrder || attribute === true) {
+        console.log('this ran', target, command, attribute, noOrder);
         if (attribute === true) {
-            queueControl(target, command);
-        } else {
-            if (typeof queue === 'boolean') {
-                queueControl(target, command, attribute);
-            } else {
-                console.log('letsGo: \'queue\' parameter is not a boolean');
-            }
+          console.log('hi');
+            router(target, command);
         }
-    } else {
+        else {
+          console.log('bye');
+           if (typeof noOrder === 'boolean') {
+               router(target, command, attribute);
+           } else {
+               console.log('letsGo: \'noOrder\' parameter is not a boolean');
+           }
+       }
         router(target, command, attribute);
-    }
+      } else {
+        console.log('else ran');
+        queueMatters = true;
+        queueControl(target, command);
+      }
 };
