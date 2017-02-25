@@ -73,6 +73,7 @@ var letsGo = function(target, command, attribute, queue) {
                 if ((styles.transitionDuration !== '0s') || (styles.animationDuration !== '0s')) {
                     element.classList.add(attribute + '-' + command + '-active');
                     var maxTransitionTime = findAnimateTime(styles.transitionDuration);
+                    console.log(styles);
                     var maxAnimationTime = findAnimateTime(styles.animationDuration);
                     var maxTime = Math.ceil(Math.max(maxTransitionTime, maxAnimationTime)*1000);
                     setTimeout(alterAttributeDone, maxTime);
@@ -287,7 +288,6 @@ var letsGo = function(target, command, attribute, queue) {
             }
         }, 0);
     };
-
 
     if (queue || attribute === true) {
         queueMatters = true;
