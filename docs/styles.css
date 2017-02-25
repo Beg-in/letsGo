@@ -189,7 +189,7 @@ p {
 }
 
 .blue-background-add, .blue-background-remove {
-    transition: background-color 1s;
+    transition: background-color 20s;
 }
 
 .blue-background-add-active {

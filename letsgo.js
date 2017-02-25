@@ -10,7 +10,7 @@
 var letsGoRunning = false;
 var letsGoQueue = [];
 
-var letsGo = function(target, command, attribute, queue) {
+var letsGo = function(target, command, attribute, noOrder) {
     var queueMatters = false;
 
     var nextInQueue = function(lastOne) {
@@ -71,6 +71,7 @@ var letsGo = function(target, command, attribute, queue) {
             }
             setTimeout(function() {
                 if ((styles.transitionDuration !== '0s') || (styles.animationDuration !== '0s')) {
+                    element.classList.add(attribute + '-' + command + '-active');
                     var maxTransitionTime = findAnimateTime(styles.transitionDuration);
                     var maxAnimationTime = findAnimateTime(styles.animationDuration) * styles.animationIterationCount;
                     var maxTime = Math.ceil(Math.max(maxTransitionTime, maxAnimationTime)*1000);
@@ -266,18 +267,6 @@ var letsGo = function(target, command, attribute, queue) {
     };
 
     var queueControl = function(target, command, attribute) {
-        // if (!claimedTicket) {
-        //     claimedTicket = ++letsGoTicketsOut;
-        // }
-        // if (letsGoRunning && letsGoTicketsDone !== claimedTicket) {
-        //     setTimeout(function () {
-        //         queueControl(target, command, attribute, claimedTicket);
-        //     }, 0);
-        // } else {
-        //     console.log('Doing', claimedTicket, target);
-        //     letsGoRunning = true;
-        //     router(target, command, attribute);
-        // }
         setTimeout(function () {
             letsGoQueue.push([target, command, attribute]);
             if (!letsGoRunning) {
@@ -288,18 +277,21 @@ var letsGo = function(target, command, attribute, queue) {
     };
 
 
-    if (queue || attribute === true) {
-        queueMatters = true;
+
+
+    if (noOrder || attribute === true) {
         if (attribute === true) {
-            queueControl(target, command);
-        } else {
-            if (typeof queue === 'boolean') {
-                queueControl(target, command, attribute);
-            } else {
-                console.log('letsGo: \'queue\' parameter is not a boolean');
-            }
+            router(target, command);
         }
+        else {
+           if (typeof noOrder === 'boolean') {
+               router(target, command, attribute);
+           } else {
+               console.log('letsGo: \'noOrder\' parameter is not a boolean');
+           }
+       }
     } else {
-        router(target, command, attribute);
+        queueMatters = true;
+        queueControl(target, command, attribute);
     }
 };
