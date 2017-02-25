@@ -222,9 +222,11 @@ p {
 .demo-twirl-add {
     animation-name: spin-clockwise;
     animation-duration: 3s;
+    animation-iteration-count: 5;
 }
 
 .demo-twirl-remove {
     animation-name: spin-counterclockwise;
     animation-duration: 3s;
+    animation-iteration-count: 5;
 }
