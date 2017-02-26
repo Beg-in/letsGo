@@ -327,14 +327,14 @@
         if(classname) {
             return api(target, 'add', classname);
         }
-        return api(target, 'show');
+        return api(target, 'remove', '.letsGo-hide');
     };
     api.remove = function(target, classname) {
         if(classname) {
             return api(target, 'remove', classname);
         }
-        return api(target, 'hide');
+        return api(target, 'add', '.letsGo-hide');
     };
     api.then = api;
-    window.letsGo = api;
+    window.letsgo = api;
 })(window, document);
