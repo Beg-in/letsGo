@@ -290,7 +290,7 @@ div.panel {
 }
 
 .blue-background-add, .blue-background-remove {
-    transition: background-color 20s;
+    transition: background-color 1s;
 }
 
 .blue-background-add-active {
@@ -323,11 +323,11 @@ div.panel {
 .demo-twirl-add {
     animation-name: spin-clockwise;
     animation-duration: 3s;
-    animation-iteration-count: 5;
+    /*animation-iteration-count: 2;*/
 }
 
 .demo-twirl-remove {
     animation-name: spin-counterclockwise;
     animation-duration: 3s;
-    animation-iteration-count: 5;
+    /*animation-iteration-count: 2;*/
 }
