@@ -304,28 +304,4 @@ var letsGo = function(target, command, attribute, queue) {
         router(target, command, attribute);
     }
 
-
-    var accordion = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < accordion.length; i++) {
-        accordion[i].onclick = function(){
-            /* Highlight the button that controls the panel */
-            this.classList.toggle("active");
-
-            /* Toggle between hiding and showing the active panel */
-            var panel = this.nextElementSibling;
-            if (panel.style.display === "block") {
-                panel.style.display = "none";
-            } else {
-                panel.style.display = "block";
-            }
-            if (panel.style.maxHeight){
-              panel.style.maxHeight = null;
-            } else {
-              panel.style.maxHeight = panel.scrollHeight + "px";
-            }
-        }
-    }
-
 };
