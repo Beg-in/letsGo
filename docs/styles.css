@@ -84,6 +84,7 @@ button.accordion {
     color: black;
     cursor: pointer;
     padding: 8px;
+    margin-bottom: 1px;
     width: 100%;
     text-align: left;
     border: none;
@@ -91,47 +92,58 @@ button.accordion {
     transition: 0.4s;
 }
 
+.accordion h5 {
+    margin-top: 10px;
+    font-size: 20px;
+}
+
 button.accordion-, button.accordion:hover {
     background-color: #3a8fcc;
 }
 
 div.panel {
-    padding: 0 10px;
-    background-color: #bef4c7;
+    margin:10px;
+    /*background-color: #bef4c7;*/
     overflow: hidden;
-
 }
 
 #npm.letsGo-hide-remove, #bower.letsGo-hide-remove, #manual.letsGo-hide-remove {
-    transition: max-height 1s;
+    transition: max-height 1s, margin 1s;
     max-height: 0;
+    margin:0px;
 }
 
 #npm.letsGo-hide-remove-active, #bower.letsGo-hide-remove-active, #manual.letsGo-hide-remove-active {
     max-height:80px;
+    margin:10px;
 }
 
 #npm.letsGo-hide-add, #bower.letsGo-hide-add, #manual.letsGo-hide-add {
-    transition: max-height 1s;
+    transition: max-height 1s, margin 1s;
     max-height: 80px;
+    margin:10px;
 }
 
 #npm.letsGo-hide-add-active, #bower.letsGo-hide-add-active, #manual.letsGo-hide-add-active {
     max-height:0px;
+    margin:0px;
 }
 
 #cdn.letsGo-hide-remove{
-    transition: max-height 1s;
+    transition: max-height 1s, margin 1s;
     max-height: 0;
+    margin:0px;
 }
 
 #cdn.letsGo-hide-remove-active {
     max-height:300px;
+    margin:10px;
 }
 
 #cdn.letsGo-hide-add {
-    transition: max-height 1s;
+    transition: max-height 1s, margin 1s;
     max-height: 300px;
+    margin:10px;
 }
 
 #cdn.letsGo-hide-add-active {
