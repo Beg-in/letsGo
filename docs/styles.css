@@ -79,6 +79,30 @@ button:not(.reset):disabled {
     opacity: 1;
 }
 
+button.accordion {
+    background-color: #ddd;
+    color: black;
+    cursor: pointer;
+    padding: 8px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+button.accordion.active, button.accordion:hover {
+    background-color: #bef4c7;
+}
+
+div.panel {
+    padding: 0 10px;
+    background-color: #bef4c7;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
 .tab-child-clicked {
     box-shadow: inset 0px -2px 0px #3AC371
 }
