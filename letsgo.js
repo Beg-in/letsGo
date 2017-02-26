@@ -115,6 +115,7 @@
             if (!target) {
                 return error('letsGo: missing \'target\' parameter.');
             }
+<<<<<<< HEAD
             if (!command) {
                 return error('letsGo: missing \'command\' parameter.');
             }
@@ -133,6 +134,21 @@
                 let element = document.getElementById(target);
                 if (element === null) {
                     return error('letsGo: no element of ' + targetType + ' \'' + target + '\' found on page.');
+=======
+            setTimeout(function() {
+                if ((styles.transitionDuration !== '0s') || (styles.animationDuration !== '0s')) {
+                    element.classList.add(attribute + '-' + command + '-active');
+                    var maxTransitionTime = findAnimateTime(styles.transitionDuration);
+                    console.log(styles);
+                    var maxAnimationTime = findAnimateTime(styles.animationDuration);
+                    var maxTime = Math.ceil(Math.max(maxTransitionTime, maxAnimationTime)*1000);
+                    setTimeout(alterAttributeDone, maxTime);
+                    if (styles.animationDuration !== '0s') {
+                        element.addEventListener('animationend', alterAttributeDone, false);
+                    }
+                } else {
+                    alterAttributeDone();
+>>>>>>> styles
                 }
                 let styles = window.getComputedStyle(element, null);
                 if (command === 'show' || command === 'hide') {
@@ -308,6 +324,7 @@
         letsGo(target, 'toggle');
         return api;
     };
+<<<<<<< HEAD
     api.while = function(target, command, classname) {
         // (target, command, classname) -> sentence
         if(classname) {
@@ -318,6 +335,19 @@
         if(command) {
             letsGo(target, 'toggle' , command, true);
             return api;
+=======
+
+    if (queue || attribute === true) {
+        queueMatters = true;
+        if (attribute === true) {
+            queueControl(target, command);
+        } else {
+            if (typeof queue === 'boolean') {
+                queueControl(target, command, attribute);
+            } else {
+                console.log('letsGo: \'queue\' parameter is not a boolean');
+            }
+>>>>>>> styles
         }
         // (target) -> toggle show/hide
         letsGo(target, 'toggle', true);

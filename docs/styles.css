@@ -55,6 +55,100 @@ p {
     margin: 10px 0 5px;
 }
 
+.nav-bar {
+    background-color: #eee;
+}
+
+/*Navigation styles*/
+.tab-parent{
+
+}
+
+button.tab-child {
+    width: 100px;
+    background-color:#fff;
+    color: #000;
+    border-radius: 0px;
+    box-sizing: border-box;
+}
+
+button.tab-child:hover {
+    box-shadow: inset 0px -2px 0px #3AC371;
+}
+button:not(.reset):disabled {
+    opacity: 1;
+}
+
+button.accordion {
+    background-color: #ddd;
+    color: black;
+    cursor: pointer;
+    padding: 8px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.4s;
+}
+
+button.accordion-, button.accordion:hover {
+    background-color: #3a8fcc;
+}
+
+div.panel {
+    padding: 0 10px;
+    background-color: #bef4c7;
+    overflow: hidden;
+
+}
+
+#npm.letsGo-hide-remove, #bower.letsGo-hide-remove, #manual.letsGo-hide-remove {
+    transition: max-height 1s;
+    max-height: 0;
+}
+
+#npm.letsGo-hide-remove-active, #bower.letsGo-hide-remove-active, #manual.letsGo-hide-remove-active {
+    max-height:80px;
+}
+
+#npm.letsGo-hide-add, #bower.letsGo-hide-add, #manual.letsGo-hide-add {
+    transition: max-height 1s;
+    max-height: 80px;
+}
+
+#npm.letsGo-hide-add-active, #bower.letsGo-hide-add-active, #manual.letsGo-hide-add-active {
+    max-height:0px;
+}
+
+#cdn.letsGo-hide-remove{
+    transition: max-height 1s;
+    max-height: 0;
+}
+
+#cdn.letsGo-hide-remove-active {
+    max-height:300px;
+}
+
+#cdn.letsGo-hide-add {
+    transition: max-height 1s;
+    max-height: 300px;
+}
+
+#cdn.letsGo-hide-add-active {
+    max-height:0px;
+}
+
+.tab-child-clicked {
+    box-shadow: inset 0px -2px 0px #3AC371
+}
+
+.section-why {
+    padding-top: 25px;
+}
+
+.section-why-paragraph {
+    padding-top: 10px;
+}
 .fake-code {
     padding: 10px 10px;
     display: block;
@@ -89,9 +183,9 @@ p {
 }
 
 #header {
-    height: 50%;
+    height: 30%;
     width: 100%;
-    background-color: #4EF1C5;
+    background-color: #3ac371;
 }
 
 #header svg {
@@ -161,11 +255,6 @@ p {
     text-align: center;
     margin-bottom: 50px;
 }
-
-
-
-
-
 
 .animate-steps {
     font-size: 20px;
