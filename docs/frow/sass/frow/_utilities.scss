@@ -4,38 +4,52 @@
 
 // Cursor pointer classes
 // -------------------------
-.clickable:not([disabled]), *[onclick]:not([disabled]), *[ng-click]:not([disabled]) {
-    cursor: pointer !important;
+.clickable:not([disabled]), *[onclick]:not([disabled]) {
+  cursor: pointer !important;
 }
 
-.not-clickable, .not-clickable[onclick], .not-clickable[ng-click], .not-clickable[ng-click] {
-    cursor: default !important;
+.not-clickable, .not-clickable[onclick] {
+  cursor: default !important;
 }
 
 // Height and width rules
 // -------------------------
 .height-100 {
-    height: 100%;
+  height: 100%;
 }
 
 .width-100 {
-    width: 100%;
+  width: 100%;
 }
 
-// Hidden rule
+// Hidden rule for letsGo (letsgojs.com)
 // -------------------------
 .letsGo-hide {
-    display: none !important;
+  display: none !important;
 }
 
 // Card shadows
 // -------------------------
 .card-shadow {
-    box-shadow: $card-shadow;
+  box-shadow: $card-shadow;
 }
 
 .dark-card-shadow {
-    box-shadow: $dark-card-shadow;
+  box-shadow: $dark-card-shadow;
+}
+
+// Text transforms
+// -------------------------
+.uppercase {
+  text-transform: uppercase;
+}
+
+.lowercase {
+  text-transform: lowercase;
+}
+
+.capitalize {
+  text-transform: capitalize;
 }
 
 // Clearfix
@@ -44,10 +58,4 @@
   content: "";
   display: table;
   clear: both;
-}
-
-// Hide rule from letsGo
-// -------------------------
-.letsGo-hide {
-    display: none !important;
 }

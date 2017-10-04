@@ -3,17 +3,14 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <title>letsGo</title>
-        <link rel="alternate" type="application/rss+xml" href="https://github.com/Beg-in/letsGo/releases.atom">
+        <title>letsGo Tests</title>
         <link rel="stylesheet" href="docs/frow/css/frow.min.css">
-        <link rel="stylesheet" href="docs/styles.css">
-        <link href='https://fonts.googleapis.com/css?family=Inconsolata|Roboto:400,100,100italic,300,300italic,400italic,700,700italic' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="letsgo.js" async></script>
 
     </head>
     <body class="height-100">
         <div id="sidebar" class="dark-card-shadow letsGo-hide"></div>
-        <div id="click-cover" class="letsGo-hide" onclick="letsgo.hide('#sidebar').hide('#click-cover');"></div>
+        <div id="click-cover" class="letsGo-hide" onclick="letsgo.hide('#sidebar'); letsgo.hide('#click-cover');"></div>
         <div class="frow">
             <button onclick="letsgo.hide('#blue');">Hide #blue</button>
             <button onclick="letsgo.show('#blue');">Show #blue</button>
@@ -35,13 +32,11 @@
             <button onclick="letsgo.remove('#button', 'disabled');">Remove disabled</button>
             <button onclick="letsgo.toggle('#button', 'disabled');">Toggle disabled</button>
             
-            <button onclick="letsgo.show('#sidebar').show('#click-cover');">Toggle sidebar</button>
-            <button onclick="letsgo.show('#sidebar'); letsgo.show('#click-cover');">Toggle sidebar</button>
+            <button onclick="letsgo.show('#sidebar').show('#click-cover');">Toggle sidebar (Queue)</button>
+            <button onclick="letsgo.show('#sidebar'); letsgo.show('#click-cover');">Toggle sidebar (Parallel)</button>
             
-            <button style="position:fixed;right:0;z-index:3" onclick="letsgo.toggle('#sidebar'); letsgo.toggle('#click-cover');">Toggle sidebar</button>
-            <button style="position:fixed;right:0;top:40px;z-index:3" onclick="letsgo.toggle('#blue', '.yellow');">Toggle .yellow</button>
-            
-            <!--<button onclick="letsgo.show('#sidebar').while('#click-cover', 'remove', '.letsGo-hide');">Toggle sidebar</button>-->
+            <button style="position:fixed;bottom:40px;right:0;z-index:3" onclick="letsgo.toggle('#sidebar'); letsgo.toggle('#click-cover');">Toggle sidebar</button>
+            <button style="position:fixed;bottom:0;right:0;z-index:3" onclick="letsgo.toggle('#blue', '.yellow');">Toggle .yellow</button>
         </div>
     
        <div class="frow">
@@ -125,11 +120,11 @@
             height: 100%;
             z-index: 2;
             background-color: #000;
-            opacity: 0.5;
+            opacity: 0.65;
         }
         #click-cover.letsGo-hide-add {
             transition: opacity 2s;
-            opacity: 0.5;
+            opacity: 0.65;
         }
         #click-cover.letsGo-hide-add-active {
             opacity: 0;
@@ -139,7 +134,7 @@
             opacity: 0;
         }
         #click-cover.letsGo-hide-remove-active {
-            opacity: 0.5;
+            opacity: 0.65;
         }
     </style>
 </html>
