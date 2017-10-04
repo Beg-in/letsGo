@@ -12,19 +12,19 @@
         window.console.error.apply(window.console, arguments);
     };
 
-    let letsGoRunning = false;
-    let letsGoQueue = [];
+    let masterQueue = {};
+    let masterId = 0;
 
     let letsGo = function(target, command, modifier, newQueue) {
-        let queueMatters = false;
+        let activeId = null;
 
         let nextInQueue = function(lastOne) {
-            if (queueMatters && lastOne) {
-                letsGoQueue.shift();
-                if (letsGoQueue.length > 0) {
-                    router(letsGoQueue[0][0], letsGoQueue[0][1], letsGoQueue[0][2]);
+            if (lastOne) {
+                masterQueue[masterQueue.length - 1].queue.shift();
+                if (masterQueue[masterQueue.length - 1].queue.length > 0) {
+                    router(masterQueue[masterQueue.length - 1].queue[0][0], masterQueue[masterQueue.length - 1].queue[0][1], masterQueue[masterQueue.length - 1].queue[0][2]);
                 } else {
-                    letsGoRunning = false;
+                    masterQueue[masterQueue.length - 1].running = false;
                 }
             }
         };
@@ -111,19 +111,10 @@
             }
         };
 
-        let router = function(target, command, modifier) {
-            if (!target) {
-                return error('letsGo: missing \'target\' parameter.');
-            }
-            if (!command) {
-                return error('letsGo: missing \'command\' parameter.');
-            }
-            if (typeof target !== 'string') {
-                return error('letsGo: \'target\' parameter is not a string type.');
-            }
-            if (command !== 'show' && command !== 'hide' && command !== 'add' && command !== 'remove' && command !== 'toggle') {
-                return error('letsGo: \'command\' parameter is not the string \'show\', \'hide\', \'add\', \'remove\', or \'toggle\'.');
-            }
+        let router = function() {
+            let target = masterQueue[activeId].queue[0].target;
+            let command = masterQueue[activeId].queue[0].command;
+            let modifier = masterQueue[activeId].queue[0].modifier;
             let targetType = null;
             let attributeIsClass = null;
             let lastOne = false;
@@ -135,16 +126,7 @@
                     return error('letsGo: no element of ' + targetType + ' \'' + target + '\' found on page.');
                 }
                 let styles = window.getComputedStyle(element, null);
-                if (command === 'show' || command === 'hide') {
-                    if (modifier) {
-                        return error('letsGo: using \'show\' or \'hide\' command can not have an \'modifier\' parameter.');
-                    }
-                    if (command === 'show') {
-                        alterModifier(element, styles, false, 'letsGo-hide', true, true);
-                    } else if (command === 'hide') {
-                        alterModifier(element, styles, true, 'letsGo-hide', true, true);
-                    }
-                } else if ((command === 'add') || (command === 'remove')) {
+                if ((command === 'add') || (command === 'remove')) {
                     if (!modifier) {
                         error('letsGo: using \'add\' or \'remove\' command must also have an \'modifier\' parameter.');
                     }
@@ -160,14 +142,11 @@
                         alterModifier(element, styles, false, modifier, attributeIsClass, true);
                     }
                 } else if (command === 'toggle') {
-                    if (modifier && modifier.charAt(0) === '.') {
+                    if (modifier.charAt(0) === '.') {
                         attributeIsClass = true;
                         modifier = modifier.substring(1);
-                    } else if (modifier && modifier.charAt(0) === '#') {
+                    } else if (modifier.charAt(0) === '#') {
                         modifier = 'id=' + modifier.substring(1);
-                    } else if (!modifier) {
-                        attributeIsClass = true;
-                        modifier = 'letsGo-hide';
                     }
                     if (checkIfAttribute(element, modifier, attributeIsClass)) {
                         alterModifier(element, styles, false, modifier, attributeIsClass, true);
@@ -188,28 +167,7 @@
                 if (element.length < 1) {
                     return error('letsGo: no element of ' + targetType + ' \'' + target + '\' found on page.');
                 }
-                if ((command === 'show') || (command === 'hide')) {
-                    if (modifier) {
-                        return error('letsGo: using \'show\' or \'hide\' command can not have an \'modifier\' parameter.');
-                    }
-                    if (command === 'show') {
-                        for (let i = 0; i < element.length; i++) {
-                            let styles = window.getComputedStyle(element[i], null);
-                            if (i === (element.length - 1) ) {
-                                lastOne = true;
-                            }
-                            alterModifier(element[i], styles, false, 'letsGo-hide', true, lastOne);
-                        }
-                    } else if (command === 'hide') {
-                        for (let i = 0; i < element.length; i++) {
-                            let styles = window.getComputedStyle(element[i], null);
-                            if (i === (element.length - 1) ) {
-                                lastOne = true;
-                            }
-                            alterModifier(element[i], styles, true, 'letsGo-hide', true, lastOne);
-                        }
-                    }
-                } else if ((command === 'add') || (command === 'remove')) {
+                if ((command === 'add') || (command === 'remove')) {
                     if (!modifier) {
                         error('letsGo: using \'add\' or \'remove\' command must also have an \'modifier\' parameter.');
                     }
@@ -237,14 +195,11 @@
                         }
                     }
                 } else if (command === 'toggle') {
-                    if (modifier && modifier.charAt(0) === '.') {
+                    if (modifier.charAt(0) === '.') {
                         attributeIsClass = true;
                         modifier = modifier.substring(1);
-                    } else if (modifier && modifier.charAt(0) === '#') {
+                    } else if (modifier.charAt(0) === '#') {
                         modifier = 'id=' + modifier.substring(1);
-                    } else if (!modifier) {
-                        attributeIsClass = true;
-                        modifier = 'letsGo-hide';
                     }
                     for (let i = 0; i < element.length; i++) {
                         let styles = window.getComputedStyle(element[i], null);
@@ -261,62 +216,56 @@
             }
         };
 
-        let queueControl = function(target, command, modifier) {
-            setTimeout(function () {
-                letsGoQueue.push([target, command, modifier]);
-                if (!letsGoRunning) {
-                    letsGoRunning = true;
-                    router(letsGoQueue[0][0], letsGoQueue[0][1], letsGoQueue[0][2]);
-                }
-            }, 0);
-        };
-
-        if (!newQueue || modifier === true) {
-            if (modifier === true) {
-                router(target, command);
+        if (newQueue) {
+            activeId = ++masterId;
+            masterQueue[activeId] = {running: false};
+        }
+        // setTimeout(function() {
+            activeId = activeId || masterId;
+            masterQueue[activeId].queue = [{target, command, modifier}];
+            if (!masterQueue[activeId].running) {
+                masterQueue[activeId].running = true;
+                router();
             }
-            else {
-               router(target, command, modifier);
-           }
+        // }, 0);
+    };
+    
+    let validator = function(command, target, modifier) {
+        if (!target) {
+            error('letsGo: missing \'target\' parameter');
+            return {validated: false};
+        } else if (typeof target !== 'string') {
+            error('letsGo: \'target\' parameter is not a string type');
+            return {validated: false};
+        } else if ((command === 'add' || command === 'remove') && !modifier) {
+            error('letsGo: second argument \'modifier\' is required');
+            return {validated: false};
         } else {
-            queueMatters = true;
-            queueControl(target, command, modifier);
+            return {validated: true, command, target, modifier: modifier || '.letsGo-hide'};
         }
     };
 
-    let addToQueue = function(target, command, modifier, newQueue) {
-        console.log(newQueue);
-        // (target, command, modifier) -> sentence
-        if(modifier) {
-            letsGo(target, command, modifier, newQueue);
-            return addToQueue;
+    let addToQueue = function(input, newQueue) {
+        if (input.validated !== true) {
+            // TODO: skip code here
         }
-        // (target) -> toggle show/hide
-        letsGo(target, 'toggle', null, newQueue);
+        letsGo(input.target, input.command, input.modifier, newQueue);
         return addToQueue;
     };
     addToQueue.add = function(target, modifier, newQueue) {
-        if(modifier) {
-            return addToQueue(target, 'add', modifier, newQueue);
-        } else {
-            error('letsGo: second argument \'modifier\' is required'); 
-        }
+        return addToQueue(validator('add', target, modifier), newQueue);
     };
     addToQueue.remove = function(target, modifier, newQueue) {
-        if(modifier) {
-            return addToQueue(target, 'remove', modifier, newQueue);
-        } else {
-            error('letsGo: second argument \'modifier\' is required'); 
-        }
+        return addToQueue(validator('remove', target, modifier), newQueue);
+    };
+    addToQueue.toggle = function(target, modifier, newQueue) {
+        return addToQueue(validator('toggle', target, modifier), newQueue);
     };
     addToQueue.show = function(target) {
         return addToQueue.remove(target, '.letsGo-hide');
     };
     addToQueue.hide = function(target) {
         return addToQueue.add(target, '.letsGo-hide');
-    };
-    addToQueue.toggle = function(target, modifier, newQueue) {
-        return addToQueue(target, 'toggle', modifier, newQueue);
     };
     
     let api = {};
@@ -326,14 +275,14 @@
     api.remove = function(target, modifier) {
         return addToQueue.remove(target, modifier, true);
     };
+    api.toggle = function(target, modifier) {
+        return addToQueue(target, 'toggle', modifier, true);
+    };
     api.show = function(target) {
         return addToQueue.remove(target, '.letsGo-hide', true);
     };
     api.hide = function(target) {
         return addToQueue.add(target, '.letsGo-hide', true);
-    };
-    api.toggle = function(target, modifier) {
-        return addToQueue(target, 'toggle', modifier, true);
     };
     
     window.letsgo = api;
