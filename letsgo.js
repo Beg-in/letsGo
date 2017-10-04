@@ -15,7 +15,7 @@
     let letsGoRunning = false;
     let letsGoQueue = [];
 
-    let letsGo = function(target, command, attribute, noOrder) {
+    let letsGo = function(target, command, modifier, noOrder) {
         let queueMatters = false;
 
         let nextInQueue = function(lastOne) {
@@ -29,15 +29,15 @@
             }
         };
 
-        let checkIfAttribute = function(element, attribute, attributeIsClass) {
-            if (!attribute || attributeIsClass) {
-                attribute = (attribute) ? attribute : 'letsGo-hide';
-                return (' ' + element.className + ' ').indexOf(' ' + attribute + ' ') > -1;
-            } else if (attribute.indexOf('=') > -1) {
-                attribute = attribute.split('=');
-                return (element.hasAttribute(attribute[0])) && (element.getAttribute(attribute[0]) === attribute[1]);
+        let checkIfAttribute = function(element, modifier, attributeIsClass) {
+            if (!modifier || attributeIsClass) {
+                modifier = (modifier) ? modifier : 'letsGo-hide';
+                return (' ' + element.className + ' ').indexOf(' ' + modifier + ' ') > -1;
+            } else if (modifier.indexOf('=') > -1) {
+                modifier = modifier.split('=');
+                return (element.hasAttribute(modifier[0])) && (element.getAttribute(modifier[0]) === modifier[1]);
             } else {
-                return (element.hasAttribute(attribute) && (element.getAttribute(attribute) === ''));
+                return (element.hasAttribute(modifier) && (element.getAttribute(modifier) === ''));
             }
         }
 
@@ -54,29 +54,29 @@
             return times;
         };
 
-        let alterAttribute = function(element, styles, add, attribute, attributeIsClass, lastOne) {
+        let alterModifier = function(element, styles, add, modifier, attributeIsClass, lastOne) {
             let command = (add) ? 'add' : 'remove';
 
             if (attributeIsClass) {
                 let alterAttributeDone = function() {
                     element.removeEventListener('animationend', alterAttributeDone, false);
                     if (add) {
-                        element.classList.add(attribute);
+                        element.classList.add(modifier);
                     }
-                    element.classList.remove(attribute + '-' + command);
-                    element.classList.remove(attribute + '-' + command + '-active');
+                    element.classList.remove(modifier + '-' + command);
+                    element.classList.remove(modifier + '-' + command + '-active');
                     element.classList.remove('letsGo-animate');
                     nextInQueue(lastOne);
                 };
 
                 element.classList.add('letsGo-animate');
-                element.classList.add(attribute + '-' + command);
+                element.classList.add(modifier + '-' + command);
                 if (!add) {
-                    element.classList.remove(attribute);
+                    element.classList.remove(modifier);
                 }
                 setTimeout(function() {
                     if ((styles.transitionDuration !== '0s') || (styles.animationDuration !== '0s')) {
-                        element.classList.add(attribute + '-' + command + '-active');
+                        element.classList.add(modifier + '-' + command + '-active');
                         let maxTransitionTime = findAnimateTime(styles.transitionDuration);
                         let maxAnimationTime = findAnimateTime(styles.animationDuration) * styles.animationIterationCount;
                         let maxTime = Math.ceil(Math.max(maxTransitionTime, maxAnimationTime)*1000);
@@ -90,28 +90,28 @@
                 }, 0);
             } else {
                 // let setTheAttribute = function() {
-                //     element.setAttribute(attribute[0], attribute[1]);
+                //     element.setAttribute(modifier[0], modifier[1]);
                 // }
                 if (add) {
-                    if (attribute.indexOf('=') > -1) {
-                         attribute = attribute.split('=');
-                         element.setAttribute(attribute[0], attribute[1]);
+                    if (modifier.indexOf('=') > -1) {
+                         modifier = modifier.split('=');
+                         element.setAttribute(modifier[0], modifier[1]);
                     } else {
-                        element.setAttribute(attribute, '');
+                        element.setAttribute(modifier, '');
                     }
                 } else {
-                    if (attribute.indexOf('=') > -1) {
-                         attribute = attribute.split('=');
-                         element.removeAttribute(attribute[0]);
+                    if (modifier.indexOf('=') > -1) {
+                         modifier = modifier.split('=');
+                         element.removeAttribute(modifier[0]);
                     } else {
-                        element.removeAttribute(attribute);
+                        element.removeAttribute(modifier);
                     }
                 }
                 nextInQueue(lastOne);
             }
         };
 
-        let router = function(target, command, attribute) {
+        let router = function(target, command, modifier) {
             if (!target) {
                 return error('letsGo: missing \'target\' parameter.');
             }
@@ -136,43 +136,45 @@
                 }
                 let styles = window.getComputedStyle(element, null);
                 if (command === 'show' || command === 'hide') {
-                    if (attribute) {
-                        return error('letsGo: using \'show\' or \'hide\' command can not have an \'attribute\' parameter.');
+                    if (modifier) {
+                        return error('letsGo: using \'show\' or \'hide\' command can not have an \'modifier\' parameter.');
                     }
                     if (command === 'show') {
-                        alterAttribute(element, styles, false, 'letsGo-hide', true, true);
+                        alterModifier(element, styles, false, 'letsGo-hide', true, true);
                     } else if (command === 'hide') {
-                        alterAttribute(element, styles, true, 'letsGo-hide', true, true);
+                        alterModifier(element, styles, true, 'letsGo-hide', true, true);
                     }
                 } else if ((command === 'add') || (command === 'remove')) {
-                    if (!attribute) {
-                        error('letsGo: using \'add\' or \'remove\' command must also have an \'attribute\' parameter.');
+                    if (!modifier) {
+                        error('letsGo: using \'add\' or \'remove\' command must also have an \'modifier\' parameter.');
                     }
-                    if (attribute.charAt(0) === '.') {
+                    if (modifier.charAt(0) === '.') {
                         attributeIsClass = true;
-                        attribute = attribute.substring(1);
-                    } else if (attribute.charAt(0) === '#') {
-                        attribute = 'id=' + attribute.substring(1);
+                        modifier = modifier.substring(1);
+                    } else if (modifier.charAt(0) === '#') {
+                        modifier = 'id=' + modifier.substring(1);
                     }
                     if (command === 'add') {
-                        alterAttribute(element, styles, true, attribute, attributeIsClass, true);
+                        alterModifier(element, styles, true, modifier, attributeIsClass, true);
                     } else if (command === 'remove') {
-                        alterAttribute(element, styles, false, attribute, attributeIsClass, true);
+                        alterModifier(element, styles, false, modifier, attributeIsClass, true);
                     }
                 } else if (command === 'toggle') {
-                    if (attribute && attribute.charAt(0) === '.') {
+                    console.log('mod', modifier);
+                    if (modifier && modifier.charAt(0) === '.') {
                         attributeIsClass = true;
-                        attribute = attribute.substring(1);
-                    } else if (attribute && attribute.charAt(0) === '#') {
-                        attribute = 'id=' + attribute.substring(1);
-                    } else if (!attribute) {
+                        modifier = modifier.substring(1);
+                    } else if (modifier && modifier.charAt(0) === '#') {
+                        modifier = 'id=' + modifier.substring(1);
+                    } else if (!modifier) {
+                        console.log('ran');
                         attributeIsClass = true;
-                        attribute = 'letsGo-hide';
+                        modifier = 'letsGo-hide';
                     }
-                    if (checkIfAttribute(element, attribute, attributeIsClass)) {
-                        alterAttribute(element, styles, false, attribute, attributeIsClass, true);
+                    if (checkIfAttribute(element, modifier, attributeIsClass)) {
+                        alterModifier(element, styles, false, modifier, attributeIsClass, true);
                     } else {
-                        alterAttribute(element, styles, true, attribute, attributeIsClass, true);
+                        alterModifier(element, styles, true, modifier, attributeIsClass, true);
                     }
                 }
             } else {
@@ -189,8 +191,8 @@
                     return error('letsGo: no element of ' + targetType + ' \'' + target + '\' found on page.');
                 }
                 if ((command === 'show') || (command === 'hide')) {
-                    if (attribute) {
-                        return error('letsGo: using \'show\' or \'hide\' command can not have an \'attribute\' parameter.');
+                    if (modifier) {
+                        return error('letsGo: using \'show\' or \'hide\' command can not have an \'modifier\' parameter.');
                     }
                     if (command === 'show') {
                         for (let i = 0; i < element.length; i++) {
@@ -198,7 +200,7 @@
                             if (i === (element.length - 1) ) {
                                 lastOne = true;
                             }
-                            alterAttribute(element[i], styles, false, 'letsGo-hide', true, lastOne);
+                            alterModifier(element[i], styles, false, 'letsGo-hide', true, lastOne);
                         }
                     } else if (command === 'hide') {
                         for (let i = 0; i < element.length; i++) {
@@ -206,18 +208,18 @@
                             if (i === (element.length - 1) ) {
                                 lastOne = true;
                             }
-                            alterAttribute(element[i], styles, true, 'letsGo-hide', true, lastOne);
+                            alterModifier(element[i], styles, true, 'letsGo-hide', true, lastOne);
                         }
                     }
                 } else if ((command === 'add') || (command === 'remove')) {
-                    if (!attribute) {
-                        error('letsGo: using \'add\' or \'remove\' command must also have an \'attribute\' parameter.');
+                    if (!modifier) {
+                        error('letsGo: using \'add\' or \'remove\' command must also have an \'modifier\' parameter.');
                     }
-                    if (attribute.charAt(0) === '.') {
+                    if (modifier.charAt(0) === '.') {
                         attributeIsClass = true;
-                        attribute = attribute.substring(1);
-                    } else if (attribute.charAt(0) === '#') {
-                        attribute = 'id=' + attribute.substring(1);
+                        modifier = modifier.substring(1);
+                    } else if (modifier.charAt(0) === '#') {
+                        modifier = 'id=' + modifier.substring(1);
                     }
                     if (command === 'add') {
                         for (let i = 0; i < element.length; i++) {
@@ -225,7 +227,7 @@
                             if (i === (element.length - 1) ) {
                                 lastOne = true;
                             }
-                            alterAttribute(element[i], styles, true, attribute, attributeIsClass, lastOne);
+                            alterModifier(element[i], styles, true, modifier, attributeIsClass, lastOne);
                         }
                     } else if (command === 'remove') {
                         for (let i = 0; i < element.length; i++) {
@@ -233,37 +235,37 @@
                             if (i === (element.length - 1) ) {
                                 lastOne = true;
                             }
-                            alterAttribute(element[i], styles, false, attribute, attributeIsClass, lastOne);
+                            alterModifier(element[i], styles, false, modifier, attributeIsClass, lastOne);
                         }
                     }
                 } else if (command === 'toggle') {
-                    if (attribute && attribute.charAt(0) === '.') {
+                    if (modifier && modifier.charAt(0) === '.') {
                         attributeIsClass = true;
-                        attribute = attribute.substring(1);
-                    } else if (attribute && attribute.charAt(0) === '#') {
-                        attribute = 'id=' + attribute.substring(1);
-                    } else if (!attribute) {
+                        modifier = modifier.substring(1);
+                    } else if (modifier && modifier.charAt(0) === '#') {
+                        modifier = 'id=' + modifier.substring(1);
+                    } else if (!modifier) {
                         attributeIsClass = true;
-                        attribute = 'letsGo-hide';
+                        modifier = 'letsGo-hide';
                     }
                     for (let i = 0; i < element.length; i++) {
                         let styles = window.getComputedStyle(element[i], null);
                         if (i === (element.length - 1) ) {
                             lastOne = true;
                         }
-                        if (checkIfAttribute(element[i], attribute, attributeIsClass)) {
-                            alterAttribute(element[i], styles, false, attribute, attributeIsClass, lastOne);
+                        if (checkIfAttribute(element[i], modifier, attributeIsClass)) {
+                            alterModifier(element[i], styles, false, modifier, attributeIsClass, lastOne);
                         } else {
-                            alterAttribute(element[i], styles, true, attribute, attributeIsClass, lastOne);
+                            alterModifier(element[i], styles, true, modifier, attributeIsClass, lastOne);
                         }
                     }
                 }
             }
         };
 
-        let queueControl = function(target, command, attribute) {
+        let queueControl = function(target, command, modifier) {
             setTimeout(function () {
-                letsGoQueue.push([target, command, attribute]);
+                letsGoQueue.push([target, command, modifier]);
                 if (!letsGoRunning) {
                     letsGoRunning = true;
                     router(letsGoQueue[0][0], letsGoQueue[0][1], letsGoQueue[0][2]);
@@ -271,50 +273,50 @@
             }, 0);
         };
 
-        if (noOrder || attribute === true) {
-            if (attribute === true) {
+        if (noOrder || modifier === true) {
+            if (modifier === true) {
                 router(target, command);
             }
             else {
                if (typeof noOrder === 'boolean') {
-                   router(target, command, attribute);
+                   router(target, command, modifier);
                } else {
                    error('letsGo: \'noOrder\' parameter is not a boolean');
                }
            }
         } else {
             queueMatters = true;
-            queueControl(target, command, attribute);
+            queueControl(target, command, modifier);
         }
     };
 
-    let api = function(target, command, classname, queue) {
-        // (target, command, classname, queue) -> sentence with no queue
+    let api = function(target, command, modifier, queue) {
+        // (target, command, modifier, queue) -> sentence with no queue
         if(queue) {
-            letsGo(target, command, classname, queue);
+            letsGo(target, command, modifier, queue);
             return api;
         }
-        // (target, command, classname) -> sentence
-        if(classname) {
-            letsGo(target, command, classname);
+        // (target, command, modifier) -> sentence
+        if(modifier) {
+            letsGo(target, command, modifier);
             return api;
         }
-        // (target, classname) -> toggle class
+        // (target, modifier) -> toggle class
         if(command) {
-            letsGo(target, 'toggle' , command);
+            letsGo(target, command, modifier);
             return api;
         }
         // (target) -> toggle show/hide
         letsGo(target, 'toggle');
         return api;
     };
-    api.while = function(target, command, classname) {
-        // (target, command, classname) -> sentence
-        if(classname) {
-            letsGo(target, command, classname, true);
+    api.while = function(target, command, modifier) {
+        // (target, command, modifier) -> sentence
+        if(modifier) {
+            letsGo(target, command, modifier, true);
             return api;
         }
-        // (target, classname) -> toggle class
+        // (target, modifier) -> toggle class
         if(command) {
             letsGo(target, 'toggle' , command, true);
             return api;
@@ -323,18 +325,38 @@
         letsGo(target, 'toggle', true);
         return api;
     };
-    api.add = function(target, classname) {
-        if(classname) {
-            return api(target, 'add', classname);
+    api.add = function(target, modifier, queue) {
+        if(modifier) {
+            return api(target, 'add', modifier, queue);
+        } else {
+            error('letsGo: second argument \'modifier\' is required'); 
         }
-        return api(target, 'remove', '.letsGo-hide');
     };
-    api.remove = function(target, classname) {
-        if(classname) {
-            return api(target, 'remove', classname);
+    api.remove = function(target, modifier, queue) {
+        if(modifier) {
+            return api(target, 'remove', modifier, queue);
+        } else {
+            error('letsGo: second argument \'modifier\' is required'); 
         }
-        return api(target, 'add', '.letsGo-hide');
     };
+    api.show = function(target, queue) {
+        if(!queue || typeof(queue) === 'boolean') {
+            api.remove(target, '.letsGo-hide', queue);
+        } else {
+            error('letsGo: second argument should be \'queue\' of type boolean');
+        }
+    };
+    api.hide = function(target, queue) {
+        if(!queue || typeof(queue) === 'boolean') {
+            api.add(target, '.letsGo-hide', queue);
+        } else {
+            error('letsGo: second argument should be \'queue\' of type boolean');
+        }
+    };
+    api.toggle = function(target, modifier, queue) {
+        console.log('modifier', modifier);
+        return api(target, 'toggle', modifier, queue);
+    }
     api.then = api;
     window.letsgo = api;
 })(window, document);

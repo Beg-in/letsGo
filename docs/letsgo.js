@@ -288,18 +288,18 @@
         }
     };
 
-    let api = function(target, command, classname, queue) {
-        // (target, command, classname, queue) -> sentence with no queue
+    let api = function(target, command, modifier, queue) {
+        // (target, command, modifier, queue) -> sentence with no queue
         if(queue) {
-            letsGo(target, command, classname, queue);
+            letsGo(target, command, modifier, queue);
             return api;
         }
-        // (target, command, classname) -> sentence
-        if(classname) {
-            letsGo(target, command, classname);
+        // (target, command, modifier) -> sentence
+        if(modifier) {
+            letsGo(target, command, modifier);
             return api;
         }
-        // (target, classname) -> toggle class
+        // (target, modifier) -> toggle class
         if(command) {
             letsGo(target, 'toggle' , command);
             return api;
@@ -308,13 +308,13 @@
         letsGo(target, 'toggle');
         return api;
     };
-    api.while = function(target, command, classname) {
-        // (target, command, classname) -> sentence
-        if(classname) {
-            letsGo(target, command, classname, true);
+    api.while = function(target, command, modifier) {
+        // (target, command, modifier) -> sentence
+        if(modifier) {
+            letsGo(target, command, modifier, true);
             return api;
         }
-        // (target, classname) -> toggle class
+        // (target, modifier) -> toggle class
         if(command) {
             letsGo(target, 'toggle' , command, true);
             return api;
@@ -323,17 +323,37 @@
         letsGo(target, 'toggle', true);
         return api;
     };
-    api.add = function(target, classname) {
-        if(classname) {
-            return api(target, 'add', classname);
+    api.add = function(target, modifier) {
+        if(modifier) {
+            return api(target, 'add', modifier);
+        } else {
+            // TODO: Add error handle
         }
-        return api(target, 'remove', '.letsGo-hide');
     };
-    api.remove = function(target, classname) {
-        if(classname) {
-            return api(target, 'remove', classname);
+    api.remove = function(target, modifier) {
+        if(modifier) {
+            return api(target, 'remove', modifier);
+        } else {
+            // TODO: Handle error
         }
-        return api(target, 'add', '.letsGo-hide');
+    };
+    api.show = function(target, queue) {
+       if(queue === true) {
+         console.log('call with queue');  
+       } else if(queue === false || queue == undefined) {
+           api.add(target, 'remove', '.letsGo-hide');
+       } else {
+            error('letsGo: second argument should be \'queue\' of type boolean');
+       }
+    };
+    api.hide = function(target, queue) {
+        if(queue === true) {
+            console.log('call with queue');  
+        } else if(queue === false || queue == undefined) {
+            api.add(target, 'add', '.letsGo-hide');
+        } else {
+            error('letsGo: second argument should be \'queue\' of type boolean');
+        }
     };
     api.then = api;
     window.letsgo = api;
