@@ -160,14 +160,12 @@
                         alterModifier(element, styles, false, modifier, attributeIsClass, true);
                     }
                 } else if (command === 'toggle') {
-                    console.log('mod', modifier);
                     if (modifier && modifier.charAt(0) === '.') {
                         attributeIsClass = true;
                         modifier = modifier.substring(1);
                     } else if (modifier && modifier.charAt(0) === '#') {
                         modifier = 'id=' + modifier.substring(1);
                     } else if (!modifier) {
-                        console.log('ran');
                         attributeIsClass = true;
                         modifier = 'letsGo-hide';
                     }
@@ -341,20 +339,19 @@
     };
     api.show = function(target, queue) {
         if(!queue || typeof(queue) === 'boolean') {
-            api.remove(target, '.letsGo-hide', queue);
+            return api.remove(target, '.letsGo-hide', queue);
         } else {
             error('letsGo: second argument should be \'queue\' of type boolean');
         }
     };
     api.hide = function(target, queue) {
         if(!queue || typeof(queue) === 'boolean') {
-            api.add(target, '.letsGo-hide', queue);
+            return api.add(target, '.letsGo-hide', queue);
         } else {
             error('letsGo: second argument should be \'queue\' of type boolean');
         }
     };
     api.toggle = function(target, modifier, queue) {
-        console.log('modifier', modifier);
         return api(target, 'toggle', modifier, queue);
     }
     api.then = api;
