@@ -39,7 +39,7 @@
             } else {
                 return (element.hasAttribute(modifier) && (element.getAttribute(modifier) === ''));
             }
-        }
+        };
 
         let findAnimateTime = function(times) {
             if (times.indexOf(',') > -1) {
@@ -317,7 +317,8 @@
     };
     addToQueue.toggle = function(target, modifier, newQueue) {
         return addToQueue(target, 'toggle', modifier, newQueue);
-    }
+    };
+    
     let api = {};
     api.add = function(target, modifier) {
         return addToQueue.add(target, modifier, true);
@@ -333,6 +334,7 @@
     };
     api.toggle = function(target, modifier) {
         return addToQueue(target, 'toggle', modifier, true);
-    }
+    };
+    
     window.letsgo = api;
 })(window, document);
