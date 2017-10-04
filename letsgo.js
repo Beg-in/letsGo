@@ -15,7 +15,7 @@
     let letsGoRunning = false;
     let letsGoQueue = [];
 
-    let letsGo = function(target, command, modifier, noOrder) {
+    let letsGo = function(target, command, modifier, newQueue) {
         let queueMatters = false;
 
         let nextInQueue = function(lastOne) {
@@ -271,16 +271,12 @@
             }, 0);
         };
 
-        if (noOrder || modifier === true) {
+        if (!newQueue || modifier === true) {
             if (modifier === true) {
                 router(target, command);
             }
             else {
-               if (typeof noOrder === 'boolean') {
-                   router(target, command, modifier);
-               } else {
-                   error('letsGo: \'noOrder\' parameter is not a boolean');
-               }
+               router(target, command, modifier);
            }
         } else {
             queueMatters = true;
@@ -288,72 +284,55 @@
         }
     };
 
-    let api = function(target, command, modifier, queue) {
-        // (target, command, modifier, queue) -> sentence with no queue
-        if(queue) {
-            letsGo(target, command, modifier, queue);
-            return api;
-        }
+    let addToQueue = function(target, command, modifier, newQueue) {
+        console.log(newQueue);
         // (target, command, modifier) -> sentence
         if(modifier) {
-            letsGo(target, command, modifier);
-            return api;
-        }
-        // (target, modifier) -> toggle class
-        if(command) {
-            letsGo(target, command, modifier);
-            return api;
+            letsGo(target, command, modifier, newQueue);
+            return addToQueue;
         }
         // (target) -> toggle show/hide
-        letsGo(target, 'toggle');
-        return api;
+        letsGo(target, 'toggle', null, newQueue);
+        return addToQueue;
     };
-    api.while = function(target, command, modifier) {
-        // (target, command, modifier) -> sentence
+    addToQueue.add = function(target, modifier, newQueue) {
         if(modifier) {
-            letsGo(target, command, modifier, true);
-            return api;
-        }
-        // (target, modifier) -> toggle class
-        if(command) {
-            letsGo(target, 'toggle' , command, true);
-            return api;
-        }
-        // (target) -> toggle show/hide
-        letsGo(target, 'toggle', true);
-        return api;
-    };
-    api.add = function(target, modifier, queue) {
-        if(modifier) {
-            return api(target, 'add', modifier, queue);
+            return addToQueue(target, 'add', modifier, newQueue);
         } else {
             error('letsGo: second argument \'modifier\' is required'); 
         }
     };
-    api.remove = function(target, modifier, queue) {
+    addToQueue.remove = function(target, modifier, newQueue) {
         if(modifier) {
-            return api(target, 'remove', modifier, queue);
+            return addToQueue(target, 'remove', modifier, newQueue);
         } else {
             error('letsGo: second argument \'modifier\' is required'); 
         }
     };
-    api.show = function(target, queue) {
-        if(!queue || typeof(queue) === 'boolean') {
-            return api.remove(target, '.letsGo-hide', queue);
-        } else {
-            error('letsGo: second argument should be \'queue\' of type boolean');
-        }
+    addToQueue.show = function(target) {
+        return addToQueue.remove(target, '.letsGo-hide');
     };
-    api.hide = function(target, queue) {
-        if(!queue || typeof(queue) === 'boolean') {
-            return api.add(target, '.letsGo-hide', queue);
-        } else {
-            error('letsGo: second argument should be \'queue\' of type boolean');
-        }
+    addToQueue.hide = function(target) {
+        return addToQueue.add(target, '.letsGo-hide');
     };
-    api.toggle = function(target, modifier, queue) {
-        return api(target, 'toggle', modifier, queue);
+    addToQueue.toggle = function(target, modifier, newQueue) {
+        return addToQueue(target, 'toggle', modifier, newQueue);
     }
-    api.then = api;
+    let api = {};
+    api.add = function(target, modifier) {
+        return addToQueue.add(target, modifier, true);
+    };
+    api.remove = function(target, modifier) {
+        return addToQueue.remove(target, modifier, true);
+    };
+    api.show = function(target) {
+        return addToQueue.remove(target, '.letsGo-hide', true);
+    };
+    api.hide = function(target) {
+        return addToQueue.add(target, '.letsGo-hide', true);
+    };
+    api.toggle = function(target, modifier) {
+        return addToQueue(target, 'toggle', modifier, true);
+    }
     window.letsgo = api;
 })(window, document);

@@ -38,6 +38,8 @@
             <button onclick="letsgo.show('#sidebar').show('#click-cover');">Toggle sidebar</button>
             <button onclick="letsgo.show('#sidebar'); letsgo.show('#click-cover');">Toggle sidebar</button>
             
+            <button style="position:fixed;right:0;z-index:3" onclick="letsgo.toggle('#sidebar').toggle('#click-cover');">Toggle sidebar</button>
+            <button style="position:fixed;right:0;top:40px;z-index:3" onclick="letsgo.toggle('#blue', '.yellow');">Toggle .yellow</button>
             
             <!--<button onclick="letsgo.show('#sidebar').while('#click-cover', 'remove', '.letsGo-hide');">Toggle sidebar</button>-->
         </div>
@@ -82,6 +84,20 @@
         }
         .yellow {
             border: 5px solid yellow;
+        }
+        .yellow-add {
+            transition: border-width 4s;
+        }
+        .yellow-add-active {
+            border: 5px solid yellow;
+        }
+        .yellow-remove {
+            transition: border-width 4s;
+            border: 5px solid yellow;
+        }
+        .yellow-remove-active {
+            transform: translateX(0%);
+            border: 0px solid yellow;
         }
         #sidebar {
             width: 300px;
