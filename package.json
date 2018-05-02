@@ -1,7 +1,7 @@
 {
   "name": "letsgo",
   "version": "0.2.3",
-  "description": "JavaScript library for hiding, changing, and animating HTML elements http://letsgojs.com",
+  "description": "JavaScript library for hiding, changing, and animating HTML elements https://letsgojs.com",
   "main": "letsgo.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -24,7 +24,7 @@
     "framework",
     "web"
   ],
-  "author": "Cody Sherman <cody@beg.in> (http://codysherman.com)",
+  "author": "Cody Sherman <cody@beg.in> (https://codysherman.com)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Beg-in/letsGo/issues"
