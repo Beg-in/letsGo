@@ -5,8 +5,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>letsGo Tests</title>
-    <link rel="stylesheet" href="../docs/frow/css/frow.min.css">
-    <script type="text/javascript" src="../docs/letsgo.js" async></script>
+    <link rel="stylesheet" href="../docs/styles/frow.min.css">
+    <script type="text/javascript" src="../dist/letsgo.min.js" async></script>
   </head>
   <body class="height-100">
     <div id="sidebar" class="dark-card-shadow letsGo-hide"></div>
@@ -32,10 +32,8 @@
       <button onclick="letsgo.remove('#button', 'disabled');">Remove disabled</button>
       <button onclick="letsgo.toggle('#button', 'disabled');">Toggle disabled</button>
       
-      <button onclick="letsgo.show('#sidebar').show('#click-cover');">Toggle sidebar (Queue)</button>
-      <button onclick="letsgo.show('#sidebar'); letsgo.show('#click-cover');">Toggle sidebar (Parallel)</button>
-      
-      <button style="position:fixed;bottom:40px;right:0;z-index:3" onclick="letsgo.toggle('#sidebar'); letsgo.toggle('#click-cover');">Toggle sidebar</button>
+      <button style="position:fixed;bottom:80px;right:0;z-index:3" onclick="letsgo.toggle('#sidebar'); letsgo.toggle('#click-cover');">Toggle sidebar (Parallel)</button>
+      <button style="position:fixed;bottom:40px;right:0;z-index:3" onclick="letsgo.toggle('#sidebar').toggle('#click-cover');">Toggle sidebar (Queue)</button>
       <button style="position:fixed;bottom:0;right:0;z-index:3" onclick="letsgo.toggle('#blue', '.yellow');">Toggle .yellow</button>
     </div>
   

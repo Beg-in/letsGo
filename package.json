@@ -5,12 +5,14 @@
   "scripts": {
     "autoprefixer": "postcss --no-map -u autoprefixer -r docs/styles/*.css",
     "frowcopy": "cp -t docs/styles node_modules/frow/dist/frow.min.css",
-    "uglify": "uglifyjs letsgo.js -m -c -o letsgo.min.js",
-    "jscopy": "LETSGO=`echo \"/* This code is not minified for example purposes only, remember to minify your code! */\" | cat - letsgo.js` && echo \"$LETSGO\" > docs/scripts/letsgo.js",
+    "uglify:beautify": "uglifyjs src/letsgo.js --comments '/^\/*!/' -b -m -o dist/letsgo.js",
+    "uglify:minify": "uglifyjs src/letsgo.js --comments '/^\/*!/' -m -c -o dist/letsgo.min.js",
+    "uglify": "run-s uglify:*",
+    "jscopy": "LETSGO=`echo \"/* This code is not minified for example purposes only, remember to minify your code! */\" | cat - src/letsgo.js` && echo \"$LETSGO\" > docs/scripts/letsgo.js",
     "build:css": "run-s autoprefixer frowcopy",
     "build:js": "run-s uglify jscopy",
     "build": "run-s build:*",
-    "watch:src": "onchange \"letsgo.js\" -- run-s build:js",
+    "watch:src": "onchange \"src/letsgo.js\" -- run-s build:js",
     "watch": "run-p watch:*",
     "server": "browser-sync start --f \"docs/**/*\" --server \"docs\" --port 8080 --ui-port 8081",
     "running": "run-p watch server",
@@ -47,6 +49,6 @@
     "npm-run-all": "^4.1.2",
     "onchange": "^3.3.0",
     "postcss-cli": "^5.0.0",
-    "uglify-js": "^3.3.23"
+    "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony"
   }
 }

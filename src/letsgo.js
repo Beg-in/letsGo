@@ -3,7 +3,7 @@
  *
  * By: Cody Sherman <cody@beg.in> (codysherman.com)
  */
-/*! letsGo | https://letsgojs.com/ */
+/*! letsGo | https://letsgojs.com */
 (function(window, document) {
   'use strict';
 
