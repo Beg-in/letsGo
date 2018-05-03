@@ -3,7 +3,7 @@
 }*/
 
 html {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Assistant', sans-serif;
 }
 
 h1 {
@@ -14,7 +14,7 @@ h1 {
 
 h2 {
   font-size: 35px;
-  font-weight: 100;
+  font-weight: 300;
 }
 
 h3 {
@@ -70,7 +70,7 @@ header {
 }
 
 header svg {
-  width: 100%;
+  width: 70%;
   max-width: 400px;
   fill: #3ac371;
   margin: 0 auto;
@@ -95,6 +95,17 @@ header svg {
   box-shadow: 0px 0px 3px -1px #888888;
 }
 
+/* XS */
+@media (max-width: 767px) {
+  .tab-child {
+    width: 78px;
+    height: 45px;
+    font-size: 13px;
+    margin: 0 1px;
+    padding: 10px 3px 7px;
+  }
+}
+
 .tab-child:hover, .tab-child:active, .tab-child:focus {
   background-color: #fff;
   color: #333;
@@ -107,6 +118,7 @@ header svg {
   color: #3ac371;
   padding: 10px 7px 7px;
   box-shadow: 0px 0px 12px -1px #888888, inset 0px 3px 0px #3AC371;
+  font-weight: 700;
   border: none;
   z-index: 2;
   transition: border-bottom 0;
