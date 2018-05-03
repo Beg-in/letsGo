@@ -115,29 +115,29 @@
             <button onclick="letsgo.toggle('#cdn')" class="accordion" class="accordion"><h5>CDN<h5></button>
               <div id ="cdn" class="panel lg-hide">
                 <p>You will need to pick out the version of letsGo you would like to use, most likely the latest. A list of all releases is available on <a href="https://github.com/Beg-in/letsGo/releases" title="letsGo Releases" target="_blank">GitHub</a>.</p>
-                <div class="fake-code" style="margin-bottom: 0px;">
-                  &lt;!DOCTYPE html&gt;<br>
-                  &lt;html&gt;<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&lt;head&gt;<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;letsGo Project&lt;/title&gt;<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;script type="text/javascript" src="https://cdn.rawgit.com/Beg-in/letsGo/[X.Y.Z]/dist/letsgo.min.js" async&gt;&lt;/script&gt;<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;...<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;&lt;/head&gt;<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;...<br>
-                  &lt;/html&gt;<br>
-                </div>
+                <pre class="fake-code mb-0">
+<!--           -->&lt;!DOCTYPE html&gt;
+<!--           -->&lt;html&gt;
+<!--           -->  &lt;head&gt;
+<!--           -->    &lt;title&gt;letsGo Project&lt;/title&gt;
+<!--           -->    &lt;script type="text/javascript" src="https://cdn.rawgit.com/Beg-in/letsGo/[X.Y.Z]/dist/letsgo.min.js" async&gt;&lt;/script&gt;
+<!--           -->    ...
+<!--           -->  &lt;/head&gt;
+<!--           -->  ...
+<!--           -->&lt;/html&gt;
+<!--         --></pre>
               </div>
             <h5>
               One last thing...
             </h5>
             <p>Paste this class into your css. If you're already using <a href="https://frowcss.com">Frow CSS</a> skip this step.</p>
-            <div class="fake-code" style="margin-bottom: 0px;">
-              &lt;style&gt;<br>
-              &nbsp;&nbsp;.lg-hide {<br>
-              &nbsp;&nbsp;&nbsp;&nbsp; display:none !important;<br>
-              &nbsp;&nbsp;} <br>
-              &lt;/style&gt;
-            </div>
+            <pre class="fake-code mb-0">
+<!--       -->&lt;style&gt;
+<!--       -->  .lg-hide {
+<!--       -->     display:none !important;
+<!--       -->  } 
+<!--       -->&lt;/style&gt;
+<!--     --></pre>
           </div>
           <div id="commands" class="main-section lg-hide">
             <h2>Commands</h2>
@@ -170,12 +170,12 @@
             <h3 class="example-explanation">
               Examples:
             </h3>
-            <div class="fake-code" style="margin-bottom: 0px;">
-              // insert comment for specific example
-              <br>&lt;div onclick="letsgo.add('.info-box-div', '.blue-background')"&gt;&lt;/div&gt;<br>
-              // Insert comment for specific example
-              <br>&lt;div onclick="letsgo.hide('#side-bar-menu')"&gt;&lt;/div&gt;
-            </div>
+            <pre class="fake-code mb-0">
+<!--       -->// insert comment for specific example
+<!--       -->&lt;div onclick="letsgo.add('.info-box-div', '.blue-background')"&gt;&lt;/div&gt;
+<!--       -->// Insert comment for specific example
+<!--       -->&lt;div onclick="letsgo.hide('#side-bar-menu')"&gt;&lt;/div&gt;
+<!--     --></pre>
           </div>
           <div id="animations" class="main-section lg-hide">
             <h2>Animation Support</h2>
@@ -209,29 +209,29 @@
             <h5>Using a CSS Transition</h5>
             <div class="frow gutters">
               <div class="col-md-2-3">
-                <div class="fake-code" style="margin-bottom: 0;">
-                  .demo-box {<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;width: 140px;<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;height: 140px;<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;background-color: LightSeaGreen;<br>
-                  }<br>
-                  <br>
-                  .blue-background {<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;background-color: RoyalBlue;<br>
-                  }<br>
-                  <br>
-                  .blue-background-add, .blue-background-remove {<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;transition: background-color 1s;<br>
-                  }<br>
-                  <br>
-                  .blue-background-add-active {<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;background-color: RoyalBlue;<br>
-                  }<br>
-                  <br>
-                  .blue-background-add-remove {<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;background-color: LightSeaGreen;<br>
-                  }<br>
-                </div>
+                <pre class="fake-code mb-0">
+<!--           -->.demo-box {
+<!--           -->  width: 140px;
+<!--           -->  height: 140px;
+<!--           -->  background-color: LightSeaGreen;
+<!--           -->}
+<!--           -->
+<!--           -->.blue-background {
+<!--           -->  background-color: RoyalBlue;
+<!--           -->}
+<!--           -->
+<!--           -->.blue-background-add, .blue-background-remove {
+<!--           -->  transition: background-color 1s;
+<!--           -->}
+<!--           -->
+<!--           -->.blue-background-add-active {
+<!--           -->  background-color: RoyalBlue;
+<!--           -->}
+<!--           -->
+<!--           -->.blue-background-add-remove {
+<!--           -->  background-color: LightSeaGreen;
+<!--           -->}
+<!--         --></pre>
               </div>
               <div class="col-md-1-3">
                  <div class="demo-box-container">
@@ -245,37 +245,35 @@
             <h5>Using a CSS Animation</h5>
             <div class="frow gutters">
               <div class="col-md-2-3">
-                <div class="fake-code" style="margin-bottom: 0;">
-                  @keyframes spin-clockwise {<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;0% {transform: rotate(0deg); border-radius: 0;}<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;50% {border-radius: 50%;}<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;100% {transform: rotate(720deg); border-radius: 0;}<br>
-                  }<br>
-                  <br>
-                  @keyframes spin-counterclockwise {<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;0% {transform: rotate(0deg); border-radius: 0;}<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;50% {border-radius: 50%;}<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;100% {transform: rotate(-720deg); border-radius: 0;}<br>
-                  }<br>
-                  <br>
-                  .demo-animation-box {<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;width: 140px;<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;height: 140px;<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;background-color: LightSeaGreen;<br>
-                  }<br>
-                  <br>
-                  .demo-twirl-add {<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;animation-name: spin-clockwise;<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;animation-duration: 3s;<br>
-                  <!-- &nbsp;&nbsp;&nbsp;&nbsp;animation-iteration-count: 2;<br> -->
-                  }<br>
-                  <br>
-                  .demo-twirl-remove {<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;animation-name: spin-counterclockwise;<br>
-                  &nbsp;&nbsp;&nbsp;&nbsp;animation-duration: 3s;<br>
-                  <!-- &nbsp;&nbsp;&nbsp;&nbsp;animation-iteration-count: 2;<br> -->
-                  }<br>
-                </div>
+                <pre class="fake-code mb-0">
+<!--           -->@keyframes spin-clockwise {
+<!--           -->  0% {transform: rotate(0deg); border-radius: 0;}
+<!--           -->  50% {border-radius: 50%;}
+<!--           -->  100% {transform: rotate(720deg); border-radius: 0;}
+<!--           -->}
+<!--           -->
+<!--           -->@keyframes spin-counterclockwise {
+<!--           -->  0% {transform: rotate(0deg); border-radius: 0;}
+<!--           -->  50% {border-radius: 50%;}
+<!--           -->  100% {transform: rotate(-720deg); border-radius: 0;}
+<!--           -->}
+<!--           -->
+<!--           -->.demo-animation-box {
+<!--           -->  width: 140px;
+<!--           -->  height: 140px;
+<!--           -->  background-color: LightSeaGreen;
+<!--           -->}
+<!--           -->
+<!--           -->.demo-twirl-add {
+<!--           -->  animation-name: spin-clockwise;
+<!--           -->  animation-duration: 3s;
+<!--           -->}
+<!--           -->
+<!--           -->.demo-twirl-remove {
+<!--           -->  animation-name: spin-counterclockwise;
+<!--           -->  animation-duration: 3s;
+<!--           -->}
+<!--         --></pre>
               </div>
               <div class="col-md-1-3">
                  <div class="demo-box-container">
