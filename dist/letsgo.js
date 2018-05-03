@@ -6,7 +6,7 @@
     };
     let n = {};
     let r = 0;
-    let l = function(l, s, u, a) {
+    let l = function(l, u, s, a) {
         let o = null;
         let f = function(e) {
             if (e) {
@@ -20,7 +20,7 @@
         };
         let d = function(e, t, i) {
             if (!t || i) {
-                t = t ? t : "letsGo-hide";
+                t = t ? t : "lg-hide";
                 return (" " + e.className + " ").indexOf(" " + t + " ") > -1;
             } else if (t.indexOf("=") > -1) {
                 t = t.split("=");
@@ -29,7 +29,7 @@
                 return e.hasAttribute(t) && e.getAttribute(t) === "";
             }
         };
-        let m = function(e) {
+        let g = function(e) {
             if (e.indexOf(",") > -1) {
                 e = e.split(",");
                 for (let t = 0; t < e.length; t++) {
@@ -41,31 +41,31 @@
             }
             return e;
         };
-        let g = function(e, t, i, n, r, l) {
-            let s = i ? "add" : "remove";
+        let m = function(e, t, i, n, r, l) {
+            let u = i ? "add" : "remove";
             if (r) {
                 let r = function() {
                     e.removeEventListener("animationend", r, false);
                     if (i) {
                         e.classList.add(n);
                     }
-                    e.classList.remove(n + "-" + s);
-                    e.classList.remove(n + "-" + s + "-active");
-                    e.classList.remove("letsGo-animate");
+                    e.classList.remove(n + "-" + u);
+                    e.classList.remove(n + "-" + u + "-active");
+                    e.classList.remove("lg-animate");
                     f(l);
                 };
-                e.classList.add("letsGo-animate");
-                e.classList.add(n + "-" + s);
+                e.classList.add("lg-animate");
+                e.classList.add(n + "-" + u);
                 if (!i) {
                     e.classList.remove(n);
                 }
                 setTimeout(function() {
                     if (t.transitionDuration !== "0s" || t.animationDuration !== "0s") {
-                        e.classList.add(n + "-" + s + "-active");
-                        let i = m(t.transitionDuration);
-                        let l = m(t.animationDuration) * t.animationIterationCount;
-                        let u = Math.ceil(Math.max(i, l) * 1e3);
-                        setTimeout(r, u);
+                        e.classList.add(n + "-" + u + "-active");
+                        let i = g(t.transitionDuration);
+                        let l = g(t.animationDuration) * t.animationIterationCount;
+                        let s = Math.ceil(Math.max(i, l) * 1e3);
+                        setTimeout(r, s);
                         if (t.animationDuration !== "0s") {
                             e.addEventListener("animationend", r, false);
                         }
@@ -95,62 +95,62 @@
         let c = function() {
             let r = n[o].queue[0].target;
             let l = n[o].queue[0].command;
-            let s = n[o].queue[0].modifier;
-            let u = null;
+            let u = n[o].queue[0].modifier;
+            let s = null;
             let a = null;
             let f = false;
             if (r.charAt(0) === "#") {
-                u = "id";
+                s = "id";
                 r = r.substring(1);
                 let n = t.getElementById(r);
                 if (n === null) {
-                    return i("letsGo: no element of " + u + " '" + r + "' found on page.");
+                    return i("letsGo: no element of " + s + " '" + r + "' found on page.");
                 }
                 let o = e.getComputedStyle(n, null);
                 if (l === "add" || l === "remove") {
-                    if (s.charAt(0) === ".") {
+                    if (u.charAt(0) === ".") {
                         a = true;
-                        s = s.substring(1);
-                    } else if (s.charAt(0) === "#") {
-                        s = "id=" + s.substring(1);
+                        u = u.substring(1);
+                    } else if (u.charAt(0) === "#") {
+                        u = "id=" + u.substring(1);
                     }
                     if (l === "add") {
-                        g(n, o, true, s, a, true);
+                        m(n, o, true, u, a, true);
                     } else if (l === "remove") {
-                        g(n, o, false, s, a, true);
+                        m(n, o, false, u, a, true);
                     }
                 } else if (l === "toggle") {
-                    if (s.charAt(0) === ".") {
+                    if (u.charAt(0) === ".") {
                         a = true;
-                        s = s.substring(1);
-                    } else if (s.charAt(0) === "#") {
-                        s = "id=" + s.substring(1);
+                        u = u.substring(1);
+                    } else if (u.charAt(0) === "#") {
+                        u = "id=" + u.substring(1);
                     }
-                    if (d(n, s, a)) {
-                        g(n, o, false, s, a, true);
+                    if (d(n, u, a)) {
+                        m(n, o, false, u, a, true);
                     } else {
-                        g(n, o, true, s, a, true);
+                        m(n, o, true, u, a, true);
                     }
                 }
             } else {
                 let n = [];
                 if (r.charAt(0) === ".") {
-                    u = "class";
+                    s = "class";
                     r = r.substring(1);
                     n = t.getElementsByClassName(r);
                 } else {
-                    u = "tag";
+                    s = "tag";
                     n = t.getElementsByTagName(r);
                 }
                 if (n.length < 1) {
-                    return i("letsGo: no element of " + u + " '" + r + "' found on page.");
+                    return i("letsGo: no element of " + s + " '" + r + "' found on page.");
                 }
                 if (l === "add" || l === "remove") {
-                    if (s.charAt(0) === ".") {
+                    if (u.charAt(0) === ".") {
                         a = true;
-                        s = s.substring(1);
-                    } else if (s.charAt(0) === "#") {
-                        s = "id=" + s.substring(1);
+                        u = u.substring(1);
+                    } else if (u.charAt(0) === "#") {
+                        u = "id=" + u.substring(1);
                     }
                     if (l === "add") {
                         for (let t = 0; t < n.length; t++) {
@@ -158,7 +158,7 @@
                             if (t === n.length - 1) {
                                 f = true;
                             }
-                            g(n[t], i, true, s, a, f);
+                            m(n[t], i, true, u, a, f);
                         }
                     } else if (l === "remove") {
                         for (let t = 0; t < n.length; t++) {
@@ -166,25 +166,25 @@
                             if (t === n.length - 1) {
                                 f = true;
                             }
-                            g(n[t], i, false, s, a, f);
+                            m(n[t], i, false, u, a, f);
                         }
                     }
                 } else if (l === "toggle") {
-                    if (s.charAt(0) === ".") {
+                    if (u.charAt(0) === ".") {
                         a = true;
-                        s = s.substring(1);
-                    } else if (s.charAt(0) === "#") {
-                        s = "id=" + s.substring(1);
+                        u = u.substring(1);
+                    } else if (u.charAt(0) === "#") {
+                        u = "id=" + u.substring(1);
                     }
                     for (let t = 0; t < n.length; t++) {
                         let i = e.getComputedStyle(n[t], null);
                         if (t === n.length - 1) {
                             f = true;
                         }
-                        if (d(n[t], s, a)) {
-                            g(n[t], i, false, s, a, f);
+                        if (d(n[t], u, a)) {
+                            m(n[t], i, false, u, a, f);
                         } else {
-                            g(n[t], i, true, s, a, f);
+                            m(n[t], i, true, u, a, f);
                         }
                     }
                 }
@@ -200,15 +200,15 @@
         o = o || r;
         n[o].queue.push({
             target: l,
-            command: s,
-            modifier: u
+            command: u,
+            modifier: s
         });
         if (!n[o].running) {
             n[o].running = true;
             c();
         }
     };
-    let s = function(e, t, n) {
+    let u = function(e, t, n) {
         if (!t) {
             i("letsGo: missing 'target' parameter");
             return {
@@ -229,45 +229,45 @@
                 validated: true,
                 command: e,
                 target: t,
-                modifier: n || ".letsGo-hide"
+                modifier: n || ".lg-hide"
             };
         }
     };
-    let u = function(e, t) {
+    let s = function(e, t) {
         if (e.validated !== true) {}
         l(e.target, e.command, e.modifier, t);
-        return u;
+        return s;
     };
-    u.add = function(e, t, i) {
-        return u(s("add", e, t), i);
+    s.add = function(e, t, i) {
+        return s(u("add", e, t), i);
     };
-    u.remove = function(e, t, i) {
-        return u(s("remove", e, t), i);
+    s.remove = function(e, t, i) {
+        return s(u("remove", e, t), i);
     };
-    u.toggle = function(e, t, i) {
-        return u(s("toggle", e, t), i);
+    s.toggle = function(e, t, i) {
+        return s(u("toggle", e, t), i);
     };
-    u.show = function(e) {
-        return u.remove(e, ".letsGo-hide");
+    s.show = function(e) {
+        return s.remove(e, ".lg-hide");
     };
-    u.hide = function(e) {
-        return u.add(e, ".letsGo-hide");
+    s.hide = function(e) {
+        return s.add(e, ".lg-hide");
     };
     let a = {};
     a.add = function(e, t) {
-        return u.add(e, t, true);
+        return s.add(e, t, true);
     };
     a.remove = function(e, t) {
-        return u.remove(e, t, true);
+        return s.remove(e, t, true);
     };
     a.toggle = function(e, t) {
-        return u.toggle(e, t, true);
+        return s.toggle(e, t, true);
     };
     a.show = function(e) {
-        return u.remove(e, ".letsGo-hide", true);
+        return s.remove(e, ".lg-hide", true);
     };
     a.hide = function(e) {
-        return u.add(e, ".letsGo-hide", true);
+        return s.add(e, ".lg-hide", true);
     };
     e.letsgo = a;
 })(window, document);

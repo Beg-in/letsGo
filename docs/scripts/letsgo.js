@@ -32,7 +32,7 @@
 
     let checkIfAttribute = function(element, modifier, attributeIsClass) {
       if (!modifier || attributeIsClass) {
-        modifier = (modifier) ? modifier : 'letsGo-hide';
+        modifier = (modifier) ? modifier : 'lg-hide';
         return (' ' + element.className + ' ').indexOf(' ' + modifier + ' ') > -1;
       } else if (modifier.indexOf('=') > -1) {
         modifier = modifier.split('=');
@@ -66,11 +66,11 @@
           }
           element.classList.remove(modifier + '-' + command);
           element.classList.remove(modifier + '-' + command + '-active');
-          element.classList.remove('letsGo-animate');
+          element.classList.remove('lg-animate');
           nextInQueue(lastOne);
         };
 
-        element.classList.add('letsGo-animate');
+        element.classList.add('lg-animate');
         element.classList.add(modifier + '-' + command);
         if (!add) {
           element.classList.remove(modifier);
@@ -236,7 +236,7 @@
       error('letsGo: using \'add\' or \'remove\' commands must also have a \'modifier\' parameter');
       return {validated: false};
     } else {
-      return {validated: true, command, target, modifier: modifier || '.letsGo-hide'};
+      return {validated: true, command, target, modifier: modifier || '.lg-hide'};
     }
   };
 
@@ -257,10 +257,10 @@
     return addToQueue(validator('toggle', target, modifier), newQueue);
   };
   addToQueue.show = function(target) {
-    return addToQueue.remove(target, '.letsGo-hide');
+    return addToQueue.remove(target, '.lg-hide');
   };
   addToQueue.hide = function(target) {
-    return addToQueue.add(target, '.letsGo-hide');
+    return addToQueue.add(target, '.lg-hide');
   };
   
   let api = {};
@@ -274,10 +274,10 @@
     return addToQueue.toggle(target, modifier, true);
   };
   api.show = function(target) {
-    return addToQueue.remove(target, '.letsGo-hide', true);
+    return addToQueue.remove(target, '.lg-hide', true);
   };
   api.hide = function(target) {
-    return addToQueue.add(target, '.letsGo-hide', true);
+    return addToQueue.add(target, '.lg-hide', true);
   };
   
   window.letsgo = api;

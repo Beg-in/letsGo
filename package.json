@@ -45,7 +45,7 @@
   "devDependencies": {
     "autoprefixer": "^8.4.1",
     "browser-sync": "^2.24.1",
-    "frow": "^3.0.4",
+    "frow": "git+https://github.com/Beg-in/frow.git#letsgo",
     "npm-run-all": "^4.1.2",
     "onchange": "^3.3.0",
     "postcss-cli": "^5.0.0",
