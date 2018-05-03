@@ -42,14 +42,6 @@ p {
   margin: 10px 0 5px;
 }
 
-.nav-bar {
-  background-color: #eee;
-}
-
-.tab-child-clicked {
-  box-shadow: inset 0px -2px 0px #3AC371
-}
-
 .fake-code {
   padding: 10px 10px;
   display: block;
@@ -70,23 +62,58 @@ p {
   text-decoration: underline;
 }
 
-#header {
+header {
   height: 30%;
   width: 100%;
-  background-color: #3ac371;
+  background-color: #eee;
+  padding-top: 40px;
 }
 
-#header svg {
+header svg {
   width: 100%;
   max-width: 400px;
-  fill: #fff;
-  margin: 15px 0;
+  fill: #3ac371;
+  margin: 0 auto;
+}
+
+.tab-parent{
+  margin-top: 40px;
+}
+
+.tab-child {
+  width: 100px;
+  height: 60px;
+  background-color: #fff;
+  color: #333;
+  border: none;
+  border-radius: 0px;
+  margin: 0 2px;
+  position: relative;
+  z-index: 1;
+}
+
+.tab-child:hover, .tab-child:active, .tab-child:focus {
+  background-color: #fff;
+  color: #333;
+}
+
+.tab-child:disabled, .tab-child:hover:disabled, .tab-child:active:disabled, .tab-child:focus:disabled {
+  background: #fff;
+  color: #3ac371;
+  box-shadow: 0px 0px 12px -1px #888888, inset 0px 3px 0px #3AC371;
+  border: none;
+  z-index: 2;
 }
 
 .warning {
   font-size: 15px;
   color: #EF5252;
   margin: 15px 0;
+}
+
+main {
+  position: relative;
+  z-index: 3;
 }
 
 .main-section.lg-hide-remove {
@@ -113,25 +140,6 @@ p {
 
 .section-why-paragraph {
   padding-top: 10px;
-}
-
-.tab-parent{
-  margin-top: 10px;
-}
-
-button.tab-child {
-  width: 100px;
-  background-color:#fff;
-  color: #000;
-  border-radius: 0px;
-  box-sizing: border-box;
-}
-
-button.tab-child:hover {
-  box-shadow: inset 0px -2px 0px #3AC371;
-}
-button:not(.reset):disabled {
-  opacity: 1;
 }
 
 button.accordion {
