@@ -6,25 +6,15 @@ html {
   font-family: 'Roboto', sans-serif;
 }
 
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-  margin: 0;
-  padding: 0;
-}
-
 h1 {
   font-size: 50px;
   font-weight: 300;
   height: 52px;
-  /*text-transform: uppercase;*/
-  /*font-style: italic;*/
 }
 
 h2 {
   font-size: 35px;
   font-weight: 100;
-  /*color: #fff;*/
-  /*text-transform: uppercase;*/
-  /*font-style: italic;*/
 }
 
 h3 {
@@ -32,16 +22,12 @@ h3 {
   margin-bottom: 40px;
   font-size: 40px;
   font-weight: 700;
-  /*text-transform: uppercase;*/
-  /*font-style: italic;*/
 }
 
 h4 {
   margin-top: 10px;
   font-size: 30px;
   font-weight: 300;
-  /*text-transform: uppercase;*/
-  /*font-style: italic;*/
 }
 
 h5 {
@@ -49,7 +35,6 @@ h5 {
   margin-bottom: 3px;
   font-size: 25px;
   font-weight: 300;
-  /*text-transform: uppercase;*/
   font-style: italic;
 }
 
@@ -61,9 +46,77 @@ p {
   background-color: #eee;
 }
 
-/*Navigation styles*/
-.tab-parent{
+.tab-child-clicked {
+  box-shadow: inset 0px -2px 0px #3AC371
+}
 
+.fake-code {
+  padding: 10px 10px;
+  display: block;
+  border-radius: 3px;
+  background-color: #4F4F51;
+  color: #E6E6E6;
+  font-family: 'Inconsolata', sans-serif;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.fake-comment {
+  color: #AFAFAF;
+}
+
+.fake-comment a {
+  color: #AFAFAF;
+  text-decoration: underline;
+}
+
+#header {
+  height: 30%;
+  width: 100%;
+  background-color: #3ac371;
+}
+
+#header svg {
+  width: 100%;
+  max-width: 400px;
+  fill: #fff;
+  margin: 15px 0;
+}
+
+.warning {
+  font-size: 15px;
+  color: #EF5252;
+  margin: 15px 0;
+}
+
+.main-section.lg-hide-remove {
+  transition: opacity 0.3s ease-in;
+  opacity: 0;
+}
+
+.main-section.lg-hide-remove-active {
+  opacity: 1;
+}
+
+.main-section.lg-hide-add {
+  transition: opacity 0.3s ease-out;
+  opacity: 1;
+}
+
+.main-section.lg-hide-add-active {
+  opacity: 0;
+}
+
+.section-why {
+  padding-top: 25px;
+}
+
+.section-why-paragraph {
+  padding-top: 10px;
+}
+
+.tab-parent{
+  margin-top: 10px;
 }
 
 button.tab-child {
@@ -105,132 +158,50 @@ button.accordion-, button.accordion:hover {
 
 div.panel {
   margin:10px;
-  /*background-color: #bef4c7;*/
   overflow: hidden;
 }
 
 #npm.lg-hide-remove, #bower.lg-hide-remove, #manual.lg-hide-remove {
   transition: max-height 1s, margin 1s;
   max-height: 0;
-  margin:0px;
+  margin: 0px;
 }
 
 #npm.lg-hide-remove-active, #bower.lg-hide-remove-active, #manual.lg-hide-remove-active {
   max-height:80px;
-  margin:10px;
+  margin: 10px;
 }
 
 #npm.lg-hide-add, #bower.lg-hide-add, #manual.lg-hide-add {
   transition: max-height 1s, margin 1s;
   max-height: 80px;
-  margin:10px;
+  margin: 10px;
 }
 
 #npm.lg-hide-add-active, #bower.lg-hide-add-active, #manual.lg-hide-add-active {
   max-height:0px;
-  margin:0px;
+  margin: 0px;
 }
 
 #cdn.lg-hide-remove{
   transition: max-height 1s, margin 1s;
   max-height: 0;
-  margin:0px;
+  margin: 0px;
 }
 
 #cdn.lg-hide-remove-active {
   max-height:300px;
-  margin:10px;
+  margin: 10px;
 }
 
 #cdn.lg-hide-add {
   transition: max-height 1s, margin 1s;
   max-height: 300px;
-  margin:10px;
+  margin: 10px;
 }
 
 #cdn.lg-hide-add-active {
-  max-height:0px;
-}
-
-.tab-child-clicked {
-  box-shadow: inset 0px -2px 0px #3AC371
-}
-
-.section-why {
-  padding-top: 25px;
-}
-
-.section-why-paragraph {
-  padding-top: 10px;
-}
-.fake-code {
-  padding: 10px 10px;
-  display: block;
-  border-radius: 3px;
-  background-color: #4F4F51;
-  color: #E6E6E6;
-  font-family: 'Inconsolata', sans-serif;
-  font-size: 16px;
-  margin-bottom: 20px;
-}
-
-.fake-comment {
-  color: #AFAFAF;
-}
-
-.fake-comment a {
-  color: #AFAFAF;
-  text-decoration: underline;
-}
-
-.grid-example {
-  background-color: #eee;
-  margin-bottom: 60px;
-  border-radius: 3px;
-  padding: 15px 0;
-  overflow: hidden;
-}
-
-.grid-frow-code + .grid-example {
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
-}
-
-#header {
-  height: 30%;
-  width: 100%;
-  background-color: #3ac371;
-}
-
-#header svg {
-  width: 100%;
-  max-width: 400px;
-  fill: #fff;
-  margin: 15px 0;
-}
-
-.warning {
-  font-size: 15px;
-  color: #EF5252;
-  margin: 15px 0;
-}
-
-.main-section.lg-hide-remove {
-  transition: opacity 0.3s ease-in;
-  opacity: 0;
-}
-
-.main-section.lg-hide-remove-active {
-  opacity: 1;
-}
-
-.main-section.lg-hide-add {
-  transition: opacity 0.3s ease-out;
-  opacity: 1;
-}
-
-.main-section.lg-hide-add-active {
-  opacity: 0;
+  max-height: 0px;
 }
 
 .greyed {
