@@ -1,0 +1,8 @@
+{
+  "comments": false,
+  "presets": ["stage-3", ["env", {
+    "modules": false,
+    "useBuiltIns": true
+  }]],
+  "plugins": ["external-helpers"]
+}
