@@ -272,5 +272,5 @@
   api.show = target => addToQueue.remove(target, '.lg-hide', true);
   api.hide = target => addToQueue.add(target, '.lg-hide', true);
 
-  window.letsgo = api;
+  window.letsGo = api;
 }))(window, document);
