@@ -236,35 +236,33 @@
     }
   };
 
-  class addToQueue {
-    constructor(input, newQueue) {
+  let addToQueue = (input, newQueue) => {
       if (input.validated !== true) {
         // TODO: skip code here
       }
       letsGo(input.target, input.command, input.modifier, newQueue);
       return addToQueue;
-    }
+  };
 
-    static add(target, modifier, newQueue) {
+    addToQueue.add = (target, modifier, newQueue) => {
       return addToQueue(validator('add', target, modifier), newQueue);
     }
 
-    static remove(target, modifier, newQueue) {
+    addToQueue.remove = (target, modifier, newQueue) => {
       return addToQueue(validator('remove', target, modifier), newQueue);
     }
 
-    static toggle(target, modifier, newQueue) {
+    addToQueue.toggle = (target, modifier, newQueue) => {
       return addToQueue(validator('toggle', target, modifier), newQueue);
     }
 
-    static show(target) {
+    addToQueue.show = (target) => {
       return addToQueue.remove(target, '.lg-hide');
     }
 
-    static hide(target) {
+    addToQueue.hide= (target) => {
       return addToQueue.add(target, '.lg-hide');
     }
-  }
 
   let api = {};
   api.add = (target, modifier) => addToQueue.add(target, modifier, true);
