@@ -3,7 +3,6 @@
  *
  * By: Cody Sherman <cody@beg.in> (codysherman.com)
  */
-/*! letsGo | https://letsgojs.com */
 (((window, document) => {
   let error = function() {
     window.console.error(...arguments);
