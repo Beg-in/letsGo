@@ -1,10 +1,22 @@
 {
   "name": "letsgo",
   "version": "0.2.3",
-  "description": "JavaScript library for hiding, changing, and animating HTML elements http://letsgojs.com",
-  "main": "letsgo.js",
+  "description": "JavaScript library for hiding, changing, and animating HTML elements https://letsgojs.com",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "autoprefixer": "postcss --no-map -u autoprefixer -r docs/styles/*.css",
+    "frowcopy": "cp -t docs/styles node_modules/frow/dist/frow.min.css",
+    "uglify:beautify": "uglifyjs src/letsgo.js --comments '/^\/*!/' -b -m -o dist/letsgo.js",
+    "uglify:minify": "uglifyjs src/letsgo.js --comments '/^\/*!/' -m -c -o dist/letsgo.min.js",
+    "uglify": "run-s uglify:*",
+    "jscopy": "LETSGO=`echo \"/* This code is not minified for example purposes only, remember to minify your code! */\" | cat - src/letsgo.js` && echo \"$LETSGO\" > docs/scripts/letsgo.js",
+    "build:css": "run-s autoprefixer frowcopy",
+    "build:js": "run-s uglify jscopy",
+    "build": "run-s build:*",
+    "watch:src": "onchange \"src/letsgo.js\" -- run-s build:js",
+    "watch": "run-p watch:*",
+    "server": "browser-sync start --f \"docs/**/*\" --server \"docs\" --port 8080 --ui-port 8081",
+    "running": "run-p watch server",
+    "start": "run-s build running"
   },
   "repository": {
     "type": "git",
@@ -24,10 +36,19 @@
     "framework",
     "web"
   ],
-  "author": "Cody Sherman <cody@beg.in> (http://codysherman.com)",
+  "author": "Cody Sherman <cody@beg.in> (https://codysherman.com)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Beg-in/letsGo/issues"
   },
-  "homepage": "https://letsgojs.com"
+  "homepage": "https://letsgojs.com",
+  "devDependencies": {
+    "autoprefixer": "^8.4.1",
+    "browser-sync": "^2.24.1",
+    "frow": "git+https://github.com/Beg-in/frow.git#letsgo",
+    "npm-run-all": "^4.1.2",
+    "onchange": "^3.3.0",
+    "postcss-cli": "^5.0.0",
+    "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git#harmony"
+  }
 }
