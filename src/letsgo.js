@@ -4,20 +4,18 @@
  * By: Cody Sherman <cody@beg.in> (codysherman.com)
  */
 /*! letsGo | https://letsgojs.com */
-(function(window, document) {
-  'use strict';
-
+(((window, document) => {
   let error = function() {
-    window.console.error.apply(window.console, arguments);
+    window.console.error(...arguments);
   };
 
   let masterQueue = {};
   let masterId = 0;
 
-  let letsGo = function(target, command, modifier, newQueue) {
+  let letsGo = (target, command, modifier, newQueue) => {
     let activeId = null;
 
-    let nextInQueue = function(lastOne) {
+    let nextInQueue = lastOne => {
       if (lastOne) {
         masterQueue[activeId].queue.shift();
         if (masterQueue[activeId].queue.length > 0) {
@@ -29,11 +27,11 @@
       }
     };
 
-    let checkIfAttribute = function(element, modifier, attributeIsClass) {
+    let checkIfAttribute = (element, modifier, attributeIsClass) => {
       if (!modifier || attributeIsClass) {
         modifier = (modifier) ? modifier : 'lg-hide';
-        return (' ' + element.className + ' ').indexOf(' ' + modifier + ' ') > -1;
-      } else if (modifier.indexOf('=') > -1) {
+        return ` ${element.className} `.includes(` ${modifier} `);
+      } else if (modifier.includes('=')) {
         modifier = modifier.split('=');
         return (element.hasAttribute(modifier[0])) && (element.getAttribute(modifier[0]) === modifier[1]);
       } else {
@@ -41,8 +39,8 @@
       }
     };
 
-    let findAnimateTime = function(times) {
-      if (times.indexOf(',') > -1) {
+    let findAnimateTime = times => {
+      if (times.includes(',')) {
         times = times.split(',');
         for (let i = 0; i < times.length; i++) {
           times[i] = Number(times[i].slice(0, -1));
@@ -54,29 +52,29 @@
       return times;
     };
 
-    let alterModifier = function(element, styles, add, modifier, attributeIsClass, lastOne) {
+    let alterModifier = (element, styles, add, modifier, attributeIsClass, lastOne) => {
       let command = (add) ? 'add' : 'remove';
 
       if (attributeIsClass) {
-        let alterAttributeDone = function() {
+        let alterAttributeDone = () => {
           element.removeEventListener('animationend', alterAttributeDone, false);
           if (add) {
             element.classList.add(modifier);
           }
-          element.classList.remove(modifier + '-' + command);
-          element.classList.remove(modifier + '-' + command + '-active');
+          element.classList.remove(`${modifier}-${command}`);
+          element.classList.remove(`${modifier}-${command}-active`);
           element.classList.remove('lg-animate');
           nextInQueue(lastOne);
         };
 
         element.classList.add('lg-animate');
-        element.classList.add(modifier + '-' + command);
+        element.classList.add(`${modifier}-${command}`);
         if (!add) {
           element.classList.remove(modifier);
         }
-        setTimeout(function() {
+        setTimeout(() => {
           if ((styles.transitionDuration !== '0s') || (styles.animationDuration !== '0s')) {
-            element.classList.add(modifier + '-' + command + '-active');
+            element.classList.add(`${modifier}-${command}-active`);
             let maxTransitionTime = findAnimateTime(styles.transitionDuration);
             let maxAnimationTime = findAnimateTime(styles.animationDuration) * styles.animationIterationCount;
             let maxTime = Math.ceil(Math.max(maxTransitionTime, maxAnimationTime)*1000);
@@ -93,14 +91,14 @@
         //   element.setAttribute(modifier[0], modifier[1]);
         // }
         if (add) {
-          if (modifier.indexOf('=') > -1) {
+          if (modifier.includes('=')) {
              modifier = modifier.split('=');
              element.setAttribute(modifier[0], modifier[1]);
           } else {
             element.setAttribute(modifier, '');
           }
         } else {
-          if (modifier.indexOf('=') > -1) {
+          if (modifier.includes('=')) {
              modifier = modifier.split('=');
              element.removeAttribute(modifier[0]);
           } else {
@@ -111,7 +109,7 @@
       }
     };
 
-    let router = function() {
+    let router = () => {
       let target = masterQueue[activeId].queue[0].target;
       let command = masterQueue[activeId].queue[0].command;
       let modifier = masterQueue[activeId].queue[0].modifier;
@@ -123,7 +121,7 @@
         target = target.substring(1);
         let element = document.getElementById(target);
         if (element === null) {
-          return error('letsGo: no element of ' + targetType + ' \'' + target + '\' found on page.');
+          return error(`letsGo: no element of ${targetType} '${target}' found on page.`);
         }
         let styles = window.getComputedStyle(element, null);
         if ((command === 'add') || (command === 'remove')) {
@@ -131,7 +129,7 @@
             attributeIsClass = true;
             modifier = modifier.substring(1);
           } else if (modifier.charAt(0) === '#') {
-            modifier = 'id=' + modifier.substring(1);
+            modifier = `id=${modifier.substring(1)}`;
           }
           if (command === 'add') {
             alterModifier(element, styles, true, modifier, attributeIsClass, true);
@@ -143,7 +141,7 @@
             attributeIsClass = true;
             modifier = modifier.substring(1);
           } else if (modifier.charAt(0) === '#') {
-            modifier = 'id=' + modifier.substring(1);
+            modifier = `id=${modifier.substring(1)}`;
           }
           if (checkIfAttribute(element, modifier, attributeIsClass)) {
             alterModifier(element, styles, false, modifier, attributeIsClass, true);
@@ -162,14 +160,14 @@
           element = document.getElementsByTagName(target);
         }
         if (element.length < 1) {
-          return error('letsGo: no element of ' + targetType + ' \'' + target + '\' found on page.');
+          return error(`letsGo: no element of ${targetType} '${target}' found on page.`);
         }
         if ((command === 'add') || (command === 'remove')) {
           if (modifier.charAt(0) === '.') {
             attributeIsClass = true;
             modifier = modifier.substring(1);
           } else if (modifier.charAt(0) === '#') {
-            modifier = 'id=' + modifier.substring(1);
+            modifier = `id=${modifier.substring(1)}`;
           }
           if (command === 'add') {
             for (let i = 0; i < element.length; i++) {
@@ -193,7 +191,7 @@
             attributeIsClass = true;
             modifier = modifier.substring(1);
           } else if (modifier.charAt(0) === '#') {
-            modifier = 'id=' + modifier.substring(1);
+            modifier = `id=${modifier.substring(1)}`;
           }
           for (let i = 0; i < element.length; i++) {
             let styles = window.getComputedStyle(element[i], null);
@@ -223,8 +221,8 @@
       }
     // }, 0);
   };
-  
-  let validator = function(command, target, modifier) {
+
+  let validator = (command, target, modifier) => {
     if (!target) {
       error('letsGo: missing \'target\' parameter');
       return {validated: false};
@@ -239,45 +237,42 @@
     }
   };
 
-  let addToQueue = function(input, newQueue) {
-    if (input.validated !== true) {
-      // TODO: skip code here
+  class addToQueue {
+    constructor(input, newQueue) {
+      if (input.validated !== true) {
+        // TODO: skip code here
+      }
+      letsGo(input.target, input.command, input.modifier, newQueue);
+      return addToQueue;
     }
-    letsGo(input.target, input.command, input.modifier, newQueue);
-    return addToQueue;
-  };
-  addToQueue.add = function(target, modifier, newQueue) {
-    return addToQueue(validator('add', target, modifier), newQueue);
-  };
-  addToQueue.remove = function(target, modifier, newQueue) {
-    return addToQueue(validator('remove', target, modifier), newQueue);
-  };
-  addToQueue.toggle = function(target, modifier, newQueue) {
-    return addToQueue(validator('toggle', target, modifier), newQueue);
-  };
-  addToQueue.show = function(target) {
-    return addToQueue.remove(target, '.lg-hide');
-  };
-  addToQueue.hide = function(target) {
-    return addToQueue.add(target, '.lg-hide');
-  };
-  
+
+    static add(target, modifier, newQueue) {
+      return addToQueue(validator('add', target, modifier), newQueue);
+    }
+
+    static remove(target, modifier, newQueue) {
+      return addToQueue(validator('remove', target, modifier), newQueue);
+    }
+
+    static toggle(target, modifier, newQueue) {
+      return addToQueue(validator('toggle', target, modifier), newQueue);
+    }
+
+    static show(target) {
+      return addToQueue.remove(target, '.lg-hide');
+    }
+
+    static hide(target) {
+      return addToQueue.add(target, '.lg-hide');
+    }
+  }
+
   let api = {};
-  api.add = function(target, modifier) {
-    return addToQueue.add(target, modifier, true);
-  };
-  api.remove = function(target, modifier) {
-    return addToQueue.remove(target, modifier, true);
-  };
-  api.toggle = function(target, modifier) {
-    return addToQueue.toggle(target, modifier, true);
-  };
-  api.show = function(target) {
-    return addToQueue.remove(target, '.lg-hide', true);
-  };
-  api.hide = function(target) {
-    return addToQueue.add(target, '.lg-hide', true);
-  };
-  
+  api.add = (target, modifier) => addToQueue.add(target, modifier, true);
+  api.remove = (target, modifier) => addToQueue.remove(target, modifier, true);
+  api.toggle = (target, modifier) => addToQueue.toggle(target, modifier, true);
+  api.show = target => addToQueue.remove(target, '.lg-hide', true);
+  api.hide = target => addToQueue.add(target, '.lg-hide', true);
+
   window.letsgo = api;
-})(window, document);
+}))(window, document);
