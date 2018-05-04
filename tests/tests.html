@@ -5,35 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>letsGo Tests</title>
     <link rel="stylesheet" href="../docs/styles/frow.min.css">
-    <script type="text/javascript" src="../dist/letsgo.min.js" async></script>
+    <script type="text/javascript" src="../src/letsgo.js" async></script>
   </head>
   <body class="height-100">
     <div id="sidebar" class="dark-card-shadow lg-hide"></div>
-    <div id="click-cover" class="lg-hide" onclick="letsgo.hide('#sidebar'); letsgo.hide('#click-cover');"></div>
+    <div id="click-cover" class="lg-hide" onclick="letsGo.hide('#sidebar'); letsGo.hide('#click-cover')"></div>
     <div class="frow">
-      <button onclick="letsgo.hide('#blue');">Hide #blue</button>
-      <button onclick="letsgo.show('#blue');">Show #blue</button>
-      <button onclick="letsgo.toggle('#blue');">Toggle #blue</button>
+      <button onclick="letsGo.hide('#blue')">Hide #blue</button>
+      <button onclick="letsGo.show('#blue')">Show #blue</button>
+      <button onclick="letsGo.toggle('#blue')">Toggle #blue</button>
       
-      <button onclick="letsgo.toggle('.blue');">Toggle .blue</button>
-      <button onclick="letsgo.hide('.blue');">Hide .blue</button>
-      <button onclick="letsgo.show('.blue');">Show .blue</button>
+      <button onclick="letsGo.toggle('.blue')">Toggle .blue</button>
+      <button onclick="letsGo.hide('.blue')">Hide .blue</button>
+      <button onclick="letsGo.show('.blue')">Show .blue</button>
       
-      <button onclick="letsgo.hide('span');">Hide span</button>
-      <button onclick="letsgo.show('span');">Show span</button>
-      <button onclick="letsgo.toggle('span');">Toggle span</button>  
+      <button onclick="letsGo.hide('span')">Hide span</button>
+      <button onclick="letsGo.show('span')">Show span</button>
+      <button onclick="letsGo.toggle('span')">Toggle span</button>  
       
-      <button onclick="letsgo.add('#blue', '.yellow');">Add .yellow</button>
-      <button onclick="letsgo.remove('#blue', '.yellow');">Remove .yellow</button>
-      <button onclick="letsgo.toggle('#blue', '.yellow');">Toggle .yellow</button>
+      <button onclick="letsGo.add('#blue', '.yellow')">Add .yellow</button>
+      <button onclick="letsGo.remove('#blue', '.yellow')">Remove .yellow</button>
+      <button onclick="letsGo.toggle('#blue', '.yellow')">Toggle .yellow</button>
       
-      <button onclick="letsgo.add('#button', 'disabled');">Add disabled</button>
-      <button onclick="letsgo.remove('#button', 'disabled');">Remove disabled</button>
-      <button onclick="letsgo.toggle('#button', 'disabled');">Toggle disabled</button>
+      <button onclick="letsGo.add('#button', 'disabled')">Add disabled</button>
+      <button onclick="letsGo.remove('#button', 'disabled')">Remove disabled</button>
+      <button onclick="letsGo.toggle('#button', 'disabled')">Toggle disabled</button>
       
-      <button style="position:fixed;bottom:80px;right:0;z-index:3" onclick="letsgo.toggle('#sidebar'); letsgo.toggle('#click-cover');">Toggle sidebar (Parallel)</button>
-      <button style="position:fixed;bottom:40px;right:0;z-index:3" onclick="letsgo.toggle('#sidebar').toggle('#click-cover');">Toggle sidebar (Queue)</button>
-      <button style="position:fixed;bottom:0;right:0;z-index:3" onclick="letsgo.toggle('#blue', '.yellow');">Toggle .yellow</button>
+      <button style="position:fixed;bottom:80px;right:0;z-index:3" onclick="letsGo.toggle('#sidebar'); letsGo.toggle('#click-cover')">Toggle sidebar (Parallel)</button>
+      <button style="position:fixed;bottom:40px;right:0;z-index:3" onclick="letsGo.toggle('#sidebar').toggle('#click-cover')">Toggle sidebar (Queue)</button>
+      <button style="position:fixed;bottom:0;right:0;z-index:3" onclick="letsGo.toggle('#blue', '.yellow')">Toggle .yellow</button>
     </div>
   
      <div class="frow">

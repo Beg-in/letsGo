@@ -3,7 +3,6 @@
  *
  * By: Cody Sherman <cody@beg.in> (codysherman.com)
  */
-/*! letsGo | https://letsgojs.com */
 (((window, document) => {
   let error = function() {
     window.console.error(...arguments);
@@ -272,5 +271,5 @@
   api.show = target => addToQueue.remove(target, '.lg-hide', true);
   api.hide = target => addToQueue.add(target, '.lg-hide', true);
 
-  window.letsgo = api;
+  window.letsGo = api;
 }))(window, document);
