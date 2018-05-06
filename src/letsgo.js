@@ -50,7 +50,7 @@
       return times;
     };
 
-    let alterModifier = (element, styles, add, attribute, lastOne) => {
+    let alterAttribute = (element, styles, add, attribute, lastOne) => {
       let command = (add) ? 'add' : 'remove';
 
       if (attribute.charAt(0) === '.') {
@@ -126,8 +126,8 @@
         if (i === (element.length - 1) ) {
           lastOne = true;
         }
-        let commandBoolean = checkIfAlreadyAttribute(element[i], attribute);
-        alterModifier(element[i], styles, commandBoolean, attribute, lastOne);
+        let commandBoolean = command === 'add' || (command === 'toggle' && checkIfAlreadyAttribute(element[i], attribute));
+        alterAttribute(element[i], styles, commandBoolean, attribute, lastOne);
       }
     };
 
