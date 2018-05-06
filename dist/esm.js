@@ -48,49 +48,53 @@
     };
 
     var alterAttribute = function alterAttribute(element, command, attribute, lastOne) {
+      var isClass = false;
       if (attribute.charAt(0) === '.') {
-        attribute = attribute.substring(1);
-
-        var alterAttributeDone = function alterAttributeDone() {
-          element.removeEventListener('animationend', alterAttributeDone, false);
-          if (command === 'add') {
-            element.classList.add(attribute);
-          }
-          element.classList.remove(attribute + '-' + command);
-          element.classList.remove(attribute + '-' + command + '-active');
-          element.classList.remove('lg-animate');
-          nextInQueue(lastOne);
-        };
-
-        element.classList.add('lg-animate');
-        element.classList.add(attribute + '-' + command);
-        if (command === 'remove') {
-          element.classList.remove(attribute);
-        }
-        setTimeout(function () {
-          var styles = window.getComputedStyle(element, null);
-          if (styles.transitionDuration !== '0s' || styles.animationDuration !== '0s') {
-            element.classList.add(attribute + '-' + command + '-active');
-            var maxTransitionTime = findAnimateTime(styles.transitionDuration);
-            var maxAnimationTime = findAnimateTime(styles.animationDuration) * styles.animationIterationCount;
-            var maxTime = Math.ceil(Math.max(maxTransitionTime, maxAnimationTime) * 1000);
-            setTimeout(alterAttributeDone, maxTime);
-            if (styles.animationDuration !== '0s') {
-              element.addEventListener('animationend', alterAttributeDone, false);
-            }
-          } else {
-            alterAttributeDone();
-          }
-        }, 0);
+        isClass = true;
+        attribute = [attribute.substring(1)];
       } else {
         attribute = attribute.split('=');
+      }
+
+      var alterAttributeDone = function alterAttributeDone() {
+        element.removeEventListener('animationend', alterAttributeDone, false);
         if (command === 'add') {
-          element.setAttribute(attribute[0], attribute[1]);
+          if (isClass) {
+            element.classList.add(attribute[0]);
+          } else {
+            element.setAttribute(attribute[0], attribute[1]);
+          }
+        }
+        element.classList.remove(attribute[0] + '-' + command);
+        element.classList.remove(attribute[0] + '-' + command + '-active');
+        element.classList.remove('lg-animate');
+        nextInQueue(lastOne);
+      };
+
+      element.classList.add('lg-animate');
+      element.classList.add(attribute[0] + '-' + command);
+      if (command === 'remove') {
+        if (isClass) {
+          element.classList.remove(attribute[0]);
         } else {
           element.removeAttribute(attribute[0]);
         }
-        nextInQueue(lastOne);
       }
+      setTimeout(function () {
+        var styles = window.getComputedStyle(element, null);
+        if (styles.transitionDuration !== '0s' || styles.animationDuration !== '0s') {
+          element.classList.add(attribute[0] + '-' + command + '-active');
+          var maxTransitionTime = findAnimateTime(styles.transitionDuration);
+          var maxAnimationTime = findAnimateTime(styles.animationDuration) * styles.animationIterationCount;
+          var maxTime = Math.ceil(Math.max(maxTransitionTime, maxAnimationTime) * 1000);
+          setTimeout(alterAttributeDone, maxTime);
+          if (styles.animationDuration !== '0s') {
+            element.addEventListener('animationend', alterAttributeDone, false);
+          }
+        } else {
+          alterAttributeDone();
+        }
+      }, 0);
     };
 
     var router = function router() {

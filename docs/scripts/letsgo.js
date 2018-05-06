@@ -11,7 +11,7 @@
   let masterQueue = {};
   let masterId = 0;
 
-  let letsGo = (target, command, modifier, newQueue) => {
+  let letsGo = (target, command, attribute, newQueue) => {
     let activeId = null;
 
     let nextInQueue = lastOne => {
@@ -26,15 +26,14 @@
       }
     };
 
-    let checkIfAttribute = (element, modifier, attributeIsClass) => {
-      if (!modifier || attributeIsClass) {
-        modifier = (modifier) ? modifier : 'lg-hide';
-        return ` ${element.className} `.includes(` ${modifier} `);
-      } else if (modifier.includes('=')) {
-        modifier = modifier.split('=');
-        return (element.hasAttribute(modifier[0])) && (element.getAttribute(modifier[0]) === modifier[1]);
+    let determineToggle = (element, attribute) => {
+      if (attribute.charAt(0) === '.') {
+        return ` ${element.className} `.includes(` ${attribute.substring(1)} `);
+      } else if (attribute.includes('=')) {
+        attribute = attribute.split('=');
+        return (element.hasAttribute(attribute[0])) && (element.getAttribute(attribute[0]) === attribute[1]);
       } else {
-        return (element.hasAttribute(modifier) && (element.getAttribute(modifier) === ''));
+        return (element.hasAttribute(attribute));
       }
     };
 
@@ -51,159 +50,77 @@
       return times;
     };
 
-    let alterModifier = (element, styles, add, modifier, attributeIsClass, lastOne) => {
-      let command = (add) ? 'add' : 'remove';
-
-      if (attributeIsClass) {
-        let alterAttributeDone = () => {
-          element.removeEventListener('animationend', alterAttributeDone, false);
-          if (add) {
-            element.classList.add(modifier);
-          }
-          element.classList.remove(`${modifier}-${command}`);
-          element.classList.remove(`${modifier}-${command}-active`);
-          element.classList.remove('lg-animate');
-          nextInQueue(lastOne);
-        };
-
-        element.classList.add('lg-animate');
-        element.classList.add(`${modifier}-${command}`);
-        if (!add) {
-          element.classList.remove(modifier);
-        }
-        setTimeout(() => {
-          if ((styles.transitionDuration !== '0s') || (styles.animationDuration !== '0s')) {
-            element.classList.add(`${modifier}-${command}-active`);
-            let maxTransitionTime = findAnimateTime(styles.transitionDuration);
-            let maxAnimationTime = findAnimateTime(styles.animationDuration) * styles.animationIterationCount;
-            let maxTime = Math.ceil(Math.max(maxTransitionTime, maxAnimationTime)*1000);
-            setTimeout(alterAttributeDone, maxTime);
-            if (styles.animationDuration !== '0s') {
-              element.addEventListener('animationend', alterAttributeDone, false);
-            }
-          } else {
-            alterAttributeDone();
-          }
-        }, 0);
+    let alterAttribute = (element, command, attribute, lastOne) => {
+      let isClass = false;
+      if (attribute.charAt(0) === '.') {
+        isClass = true;
+        attribute = [attribute.substring(1)];
       } else {
-        // let setTheAttribute = function() {
-        //   element.setAttribute(modifier[0], modifier[1]);
-        // }
-        if (add) {
-          if (modifier.includes('=')) {
-             modifier = modifier.split('=');
-             element.setAttribute(modifier[0], modifier[1]);
+        attribute = attribute.split('=');
+      }
+      
+      let alterAttributeDone = () => {
+        element.removeEventListener('animationend', alterAttributeDone, false);
+        if (command === 'add') {
+          if (isClass) {
+            element.classList.add(attribute[0]);
           } else {
-            element.setAttribute(modifier, '');
+            element.setAttribute(attribute[0], attribute[1]);
+          }
+        }
+        element.classList.remove(`${attribute[0]}-${command}`);
+        element.classList.remove(`${attribute[0]}-${command}-active`);
+        element.classList.remove('lg-animate');
+        nextInQueue(lastOne);
+      };
+
+      element.classList.add('lg-animate');
+      element.classList.add(`${attribute[0]}-${command}`);
+      if (command === 'remove') {
+        if (isClass) {
+            element.classList.remove(attribute[0]);
+          } else {
+            element.removeAttribute(attribute[0]);
+          }
+      }
+      setTimeout(() => {
+        let styles = window.getComputedStyle(element, null);
+        if ((styles.transitionDuration !== '0s') || (styles.animationDuration !== '0s')) {
+          element.classList.add(`${attribute[0]}-${command}-active`);
+          let maxTransitionTime = findAnimateTime(styles.transitionDuration);
+          let maxAnimationTime = findAnimateTime(styles.animationDuration) * styles.animationIterationCount;
+          let maxTime = Math.ceil(Math.max(maxTransitionTime, maxAnimationTime)*1000);
+          setTimeout(alterAttributeDone, maxTime);
+          if (styles.animationDuration !== '0s') {
+            element.addEventListener('animationend', alterAttributeDone, false);
           }
         } else {
-          if (modifier.includes('=')) {
-             modifier = modifier.split('=');
-             element.removeAttribute(modifier[0]);
-          } else {
-            element.removeAttribute(modifier);
-          }
+          alterAttributeDone();
         }
-        nextInQueue(lastOne);
-      }
+      }, 0);
     };
-
+    
     let router = () => {
       let target = masterQueue[activeId].queue[0].target;
       let command = masterQueue[activeId].queue[0].command;
-      let modifier = masterQueue[activeId].queue[0].modifier;
-      let targetType = null;
-      let attributeIsClass = null;
+      let attribute = masterQueue[activeId].queue[0].attribute;
       let lastOne = false;
-      if (target.charAt(0) === '#') {
-        targetType = 'id';
-        target = target.substring(1);
-        let element = document.getElementById(target);
-        if (element === null) {
-          return error(`letsGo: no element of ${targetType} '${target}' found on page.`);
+      let element = [];
+      element = document.querySelectorAll(target);
+      if (element.length < 1) {
+        return error(`letsGo: no element of '${target}' found on page.`);
+      }
+      if (attribute.charAt(0) === '#') {
+        attribute = `id=${attribute.substring(1)}`;
+      }
+      for (let i = 0; i < element.length; i++) {
+        if (i === (element.length - 1) ) {
+          lastOne = true;
         }
-        let styles = window.getComputedStyle(element, null);
-        if ((command === 'add') || (command === 'remove')) {
-          if (modifier.charAt(0) === '.') {
-            attributeIsClass = true;
-            modifier = modifier.substring(1);
-          } else if (modifier.charAt(0) === '#') {
-            modifier = `id=${modifier.substring(1)}`;
-          }
-          if (command === 'add') {
-            alterModifier(element, styles, true, modifier, attributeIsClass, true);
-          } else if (command === 'remove') {
-            alterModifier(element, styles, false, modifier, attributeIsClass, true);
-          }
-        } else if (command === 'toggle') {
-          if (modifier.charAt(0) === '.') {
-            attributeIsClass = true;
-            modifier = modifier.substring(1);
-          } else if (modifier.charAt(0) === '#') {
-            modifier = `id=${modifier.substring(1)}`;
-          }
-          if (checkIfAttribute(element, modifier, attributeIsClass)) {
-            alterModifier(element, styles, false, modifier, attributeIsClass, true);
-          } else {
-            alterModifier(element, styles, true, modifier, attributeIsClass, true);
-          }
+        if (command === 'toggle') {
+          command = determineToggle(element[i], attribute) ? 'remove' : 'add';
         }
-      } else {
-        let element = [];
-        if (target.charAt(0) === '.') {
-          targetType = 'class';
-          target = target.substring(1);
-          element = document.getElementsByClassName(target);
-        } else {
-          targetType = 'tag';
-          element = document.getElementsByTagName(target);
-        }
-        if (element.length < 1) {
-          return error(`letsGo: no element of ${targetType} '${target}' found on page.`);
-        }
-        if ((command === 'add') || (command === 'remove')) {
-          if (modifier.charAt(0) === '.') {
-            attributeIsClass = true;
-            modifier = modifier.substring(1);
-          } else if (modifier.charAt(0) === '#') {
-            modifier = `id=${modifier.substring(1)}`;
-          }
-          if (command === 'add') {
-            for (let i = 0; i < element.length; i++) {
-              let styles = window.getComputedStyle(element[i], null);
-              if (i === (element.length - 1) ) {
-                lastOne = true;
-              }
-              alterModifier(element[i], styles, true, modifier, attributeIsClass, lastOne);
-            }
-          } else if (command === 'remove') {
-            for (let i = 0; i < element.length; i++) {
-              let styles = window.getComputedStyle(element[i], null);
-              if (i === (element.length - 1) ) {
-                lastOne = true;
-              }
-              alterModifier(element[i], styles, false, modifier, attributeIsClass, lastOne);
-            }
-          }
-        } else if (command === 'toggle') {
-          if (modifier.charAt(0) === '.') {
-            attributeIsClass = true;
-            modifier = modifier.substring(1);
-          } else if (modifier.charAt(0) === '#') {
-            modifier = `id=${modifier.substring(1)}`;
-          }
-          for (let i = 0; i < element.length; i++) {
-            let styles = window.getComputedStyle(element[i], null);
-            if (i === (element.length - 1) ) {
-              lastOne = true;
-            }
-            if (checkIfAttribute(element[i], modifier, attributeIsClass)) {
-              alterModifier(element[i], styles, false, modifier, attributeIsClass, lastOne);
-            } else {
-              alterModifier(element[i], styles, true, modifier, attributeIsClass, lastOne);
-            }
-          }
-        }
+        alterAttribute(element[i], command, attribute, lastOne);
       }
     };
 
@@ -213,7 +130,7 @@
     }
     // setTimeout(function() {
       activeId = activeId || masterId;
-      masterQueue[activeId].queue.push({target, command, modifier});
+      masterQueue[activeId].queue.push({target, command, attribute});
       if (!masterQueue[activeId].running) {
         masterQueue[activeId].running = true;
         router();
@@ -221,39 +138,40 @@
     // }, 0);
   };
 
-  let validator = (command, target, modifier) => {
+  let validator = (command, target, attribute) => {
     if (!target) {
       error('letsGo: missing \'target\' parameter');
       return {validated: false};
     } else if (typeof target !== 'string') {
       error('letsGo: \'target\' parameter is not a string type');
       return {validated: false};
-    } else if ((command === 'add' || command === 'remove') && !modifier) {
-      error('letsGo: using \'add\' or \'remove\' commands must also have a \'modifier\' parameter');
+    } else if ((command === 'add' || command === 'remove') && !attribute) {
+      error('letsGo: using \'add\' or \'remove\' commands must also have a \'attribute\' parameter');
       return {validated: false};
     } else {
-      return {validated: true, command, target, modifier: modifier || '.lg-hide'};
+      return {validated: true, command, target, attribute: attribute || '.lg-hide'};
     }
   };
 
   let addToQueue = (input, newQueue) => {
       if (input.validated !== true) {
         // TODO: skip code here
+      } else {
+        letsGo(input.target, input.command, input.attribute, newQueue);
       }
-      letsGo(input.target, input.command, input.modifier, newQueue);
       return addToQueue;
   };
 
-    addToQueue.add = (target, modifier, newQueue) => {
-      return addToQueue(validator('add', target, modifier), newQueue);
+    addToQueue.add = (target, attribute, newQueue) => {
+      return addToQueue(validator('add', target, attribute), newQueue);
     }
 
-    addToQueue.remove = (target, modifier, newQueue) => {
-      return addToQueue(validator('remove', target, modifier), newQueue);
+    addToQueue.remove = (target, attribute, newQueue) => {
+      return addToQueue(validator('remove', target, attribute), newQueue);
     }
 
-    addToQueue.toggle = (target, modifier, newQueue) => {
-      return addToQueue(validator('toggle', target, modifier), newQueue);
+    addToQueue.toggle = (target, attribute, newQueue) => {
+      return addToQueue(validator('toggle', target, attribute), newQueue);
     }
 
     addToQueue.show = (target) => {
@@ -265,9 +183,9 @@
     }
 
   let api = {};
-  api.add = (target, modifier) => addToQueue.add(target, modifier, true);
-  api.remove = (target, modifier) => addToQueue.remove(target, modifier, true);
-  api.toggle = (target, modifier) => addToQueue.toggle(target, modifier, true);
+  api.add = (target, attribute) => addToQueue.add(target, attribute, true);
+  api.remove = (target, attribute) => addToQueue.remove(target, attribute, true);
+  api.toggle = (target, attribute) => addToQueue.toggle(target, attribute, true);
   api.show = target => addToQueue.remove(target, '.lg-hide', true);
   api.hide = target => addToQueue.add(target, '.lg-hide', true);
 

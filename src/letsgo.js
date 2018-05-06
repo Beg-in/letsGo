@@ -51,49 +51,53 @@
     };
 
     let alterAttribute = (element, command, attribute, lastOne) => {
+      let isClass = false;
       if (attribute.charAt(0) === '.') {
-        attribute = attribute.substring(1);
-        
-        let alterAttributeDone = () => {
-          element.removeEventListener('animationend', alterAttributeDone, false);
-          if (command === 'add') {
-            element.classList.add(attribute);
-          }
-          element.classList.remove(`${attribute}-${command}`);
-          element.classList.remove(`${attribute}-${command}-active`);
-          element.classList.remove('lg-animate');
-          nextInQueue(lastOne);
-        };
-
-        element.classList.add('lg-animate');
-        element.classList.add(`${attribute}-${command}`);
-        if (command === 'remove') {
-          element.classList.remove(attribute);
-        }
-        setTimeout(() => {
-          let styles = window.getComputedStyle(element, null);
-          if ((styles.transitionDuration !== '0s') || (styles.animationDuration !== '0s')) {
-            element.classList.add(`${attribute}-${command}-active`);
-            let maxTransitionTime = findAnimateTime(styles.transitionDuration);
-            let maxAnimationTime = findAnimateTime(styles.animationDuration) * styles.animationIterationCount;
-            let maxTime = Math.ceil(Math.max(maxTransitionTime, maxAnimationTime)*1000);
-            setTimeout(alterAttributeDone, maxTime);
-            if (styles.animationDuration !== '0s') {
-              element.addEventListener('animationend', alterAttributeDone, false);
-            }
-          } else {
-            alterAttributeDone();
-          }
-        }, 0);
+        isClass = true;
+        attribute = [attribute.substring(1)];
       } else {
         attribute = attribute.split('=');
-        if (command === 'add') {
-          element.setAttribute(attribute[0], attribute[1]);
-        } else {
-          element.removeAttribute(attribute[0]);
-        }
-        nextInQueue(lastOne);
       }
+      
+      let alterAttributeDone = () => {
+        element.removeEventListener('animationend', alterAttributeDone, false);
+        if (command === 'add') {
+          if (isClass) {
+            element.classList.add(attribute[0]);
+          } else {
+            element.setAttribute(attribute[0], attribute[1]);
+          }
+        }
+        element.classList.remove(`${attribute[0]}-${command}`);
+        element.classList.remove(`${attribute[0]}-${command}-active`);
+        element.classList.remove('lg-animate');
+        nextInQueue(lastOne);
+      };
+
+      element.classList.add('lg-animate');
+      element.classList.add(`${attribute[0]}-${command}`);
+      if (command === 'remove') {
+        if (isClass) {
+            element.classList.remove(attribute[0]);
+          } else {
+            element.removeAttribute(attribute[0]);
+          }
+      }
+      setTimeout(() => {
+        let styles = window.getComputedStyle(element, null);
+        if ((styles.transitionDuration !== '0s') || (styles.animationDuration !== '0s')) {
+          element.classList.add(`${attribute[0]}-${command}-active`);
+          let maxTransitionTime = findAnimateTime(styles.transitionDuration);
+          let maxAnimationTime = findAnimateTime(styles.animationDuration) * styles.animationIterationCount;
+          let maxTime = Math.ceil(Math.max(maxTransitionTime, maxAnimationTime)*1000);
+          setTimeout(alterAttributeDone, maxTime);
+          if (styles.animationDuration !== '0s') {
+            element.addEventListener('animationend', alterAttributeDone, false);
+          }
+        } else {
+          alterAttributeDone();
+        }
+      }, 0);
     };
     
     let router = () => {
