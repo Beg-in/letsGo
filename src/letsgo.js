@@ -163,8 +163,9 @@
   let addToQueue = (input, newQueue) => {
       if (input.validated !== true) {
         // TODO: skip code here
+      } else {
+        letsGo(input.target, input.command, input.attribute, newQueue);
       }
-      letsGo(input.target, input.command, input.attribute, newQueue);
       return addToQueue;
   };
 
