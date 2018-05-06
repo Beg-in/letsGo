@@ -23,8 +23,8 @@
       }
     };
 
-    var checkIfAttribute = function checkIfAttribute(element, attribute, attributeIsClass) {
-      if (!attribute || attributeIsClass) {
+    var checkIfAlreadyAttribute = function checkIfAlreadyAttribute(element, attribute, attributeIsClass) {
+      if (attributeIsClass) {
         attribute = attribute ? attribute : 'lg-hide';
         return (' ' + element.className + ' ').includes(' ' + attribute + ' ');
       } else if (attribute.includes('=')) {
@@ -125,8 +125,7 @@
         if (i === element.length - 1) {
           lastOne = true;
         }
-        console.log(!checkIfAttribute(element[i], attribute, attributeIsClass));
-        var commandBoolean = command === 'add' || command === 'toggle' && !checkIfAttribute(element[i], attribute, attributeIsClass) ? true : false;
+        var commandBoolean = command === 'add' || command === 'toggle' && !checkIfAlreadyAttribute(element[i], attribute, attributeIsClass) ? true : false;
         alterModifier(element[i], styles, commandBoolean, attribute, attributeIsClass, lastOne);
       }
     };

@@ -26,15 +26,14 @@
       }
     };
 
-    let checkIfAttribute = (element, attribute, attributeIsClass) => {
-      if (!attribute || attributeIsClass) {
-        attribute = (attribute) ? attribute : 'lg-hide';
-        return ` ${element.className} `.includes(` ${attribute} `);
+    let checkIfAlreadyAttribute = (element, attribute) => {
+      if (attribute.charAt(0) === '.') {
+        return !` ${element.className} `.includes(` ${attribute.substring(1)} `);
       } else if (attribute.includes('=')) {
         attribute = attribute.split('=');
-        return (element.hasAttribute(attribute[0])) && (element.getAttribute(attribute[0]) === attribute[1]);
+        return !(element.hasAttribute(attribute[0])) && (element.getAttribute(attribute[0]) === attribute[1]);
       } else {
-        return (element.hasAttribute(attribute) && (element.getAttribute(attribute) === ''));
+        return !(element.hasAttribute(attribute) && (element.getAttribute(attribute) === ''));
       }
     };
 
@@ -51,10 +50,11 @@
       return times;
     };
 
-    let alterModifier = (element, styles, add, attribute, attributeIsClass, lastOne) => {
+    let alterModifier = (element, styles, add, attribute, lastOne) => {
       let command = (add) ? 'add' : 'remove';
 
-      if (attributeIsClass) {
+      if (attribute.charAt(0) === '.') {
+        attribute = attribute.substring(1);
         let alterAttributeDone = () => {
           element.removeEventListener('animationend', alterAttributeDone, false);
           if (add) {
@@ -112,16 +112,11 @@
       let target = masterQueue[activeId].queue[0].target;
       let command = masterQueue[activeId].queue[0].command;
       let attribute = masterQueue[activeId].queue[0].attribute;
-      let attributeIsClass = null;
       let lastOne = false;
       let element = [];
       element = document.querySelectorAll(target);
       if (element.length < 1) {
         return error(`letsGo: no element of '${target}' found on page.`);
-      }
-      if (attribute.charAt(0) === '.') {
-        attributeIsClass = true;
-        attribute = attribute.substring(1);
       }
       if (attribute.charAt(0) === '#') {
         attribute = `id=${attribute.substring(1)}`;
@@ -131,9 +126,8 @@
         if (i === (element.length - 1) ) {
           lastOne = true;
         }
-        console.log(!checkIfAttribute(element[i], attribute, attributeIsClass));
-        let commandBoolean = command === 'add' || (command === 'toggle' && !checkIfAttribute(element[i], attribute, attributeIsClass)) ? true : false;
-        alterModifier(element[i], styles, commandBoolean, attribute, attributeIsClass, lastOne);
+        let commandBoolean = checkIfAlreadyAttribute(element[i], attribute);
+        alterModifier(element[i], styles, commandBoolean, attribute, lastOne);
       }
     };
 
