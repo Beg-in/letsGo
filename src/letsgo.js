@@ -33,7 +33,7 @@
         attribute = attribute.split('=');
         return (element.hasAttribute(attribute[0])) && (element.getAttribute(attribute[0]) === attribute[1]);
       } else {
-        return (element.hasAttribute(attribute) && (element.getAttribute(attribute) === ''));
+        return (element.hasAttribute(attribute));
       }
     };
 
@@ -90,19 +90,11 @@
         //   element.setAttribute(attribute[0], attribute[1]);
         // }
         if (command === 'add') {
-          if (attribute.includes('=')) {
-             attribute = attribute.split('=');
-             element.setAttribute(attribute[0], attribute[1]);
-          } else {
-            element.setAttribute(attribute, '');
-          }
+          attribute = attribute.split('=');
+          element.setAttribute(attribute[0], attribute[1]);
         } else {
-          if (attribute.includes('=')) {
-             attribute = attribute.split('=');
-             element.removeAttribute(attribute[0]);
-          } else {
-            element.removeAttribute(attribute);
-          }
+          attribute = attribute.split('=');
+          element.removeAttribute(attribute[0]);
         }
         nextInQueue(lastOne);
       }
