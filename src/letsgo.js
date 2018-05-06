@@ -28,12 +28,12 @@
 
     let checkIfAlreadyAttribute = (element, attribute) => {
       if (attribute.charAt(0) === '.') {
-        return !` ${element.className} `.includes(` ${attribute.substring(1)} `);
+        return ` ${element.className} `.includes(` ${attribute.substring(1)} `);
       } else if (attribute.includes('=')) {
         attribute = attribute.split('=');
-        return !(element.hasAttribute(attribute[0])) && (element.getAttribute(attribute[0]) === attribute[1]);
+        return (element.hasAttribute(attribute[0])) && (element.getAttribute(attribute[0]) === attribute[1]);
       } else {
-        return !(element.hasAttribute(attribute) && (element.getAttribute(attribute) === ''));
+        return (element.hasAttribute(attribute) && (element.getAttribute(attribute) === ''));
       }
     };
 
@@ -50,14 +50,13 @@
       return times;
     };
 
-    let alterAttribute = (element, styles, add, attribute, lastOne) => {
-      let command = (add) ? 'add' : 'remove';
-
+    let alterAttribute = (element, styles, command, attribute, lastOne) => {
       if (attribute.charAt(0) === '.') {
         attribute = attribute.substring(1);
+        
         let alterAttributeDone = () => {
           element.removeEventListener('animationend', alterAttributeDone, false);
-          if (add) {
+          if (command === 'add') {
             element.classList.add(attribute);
           }
           element.classList.remove(`${attribute}-${command}`);
@@ -68,7 +67,7 @@
 
         element.classList.add('lg-animate');
         element.classList.add(`${attribute}-${command}`);
-        if (!add) {
+        if (command === 'remove') {
           element.classList.remove(attribute);
         }
         setTimeout(() => {
@@ -89,7 +88,7 @@
         // let setTheAttribute = function() {
         //   element.setAttribute(attribute[0], attribute[1]);
         // }
-        if (add) {
+        if (command === 'add') {
           if (attribute.includes('=')) {
              attribute = attribute.split('=');
              element.setAttribute(attribute[0], attribute[1]);
@@ -126,8 +125,10 @@
         if (i === (element.length - 1) ) {
           lastOne = true;
         }
-        let commandBoolean = command === 'add' || (command === 'toggle' && checkIfAlreadyAttribute(element[i], attribute));
-        alterAttribute(element[i], styles, commandBoolean, attribute, lastOne);
+        if (command === 'toggle') {
+          command = checkIfAlreadyAttribute(element[i], attribute) ? 'remove' : 'add';
+        }
+        alterAttribute(element[i], styles, command, attribute, lastOne);
       }
     };
 
