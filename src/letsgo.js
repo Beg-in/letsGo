@@ -162,25 +162,17 @@
       return addToQueue;
   };
 
-    addToQueue.add = (target, attribute, newQueue) => {
-      return addToQueue(validator('add', target, attribute), newQueue);
-    }
+  addToQueue.add = (target, attribute, newQueue) => {
+    return addToQueue(validator('add', target, attribute), newQueue);
+  };
 
-    addToQueue.remove = (target, attribute, newQueue) => {
-      return addToQueue(validator('remove', target, attribute), newQueue);
-    }
+  addToQueue.remove = (target, attribute, newQueue) => {
+    return addToQueue(validator('remove', target, attribute), newQueue);
+  };
 
-    addToQueue.toggle = (target, attribute, newQueue) => {
-      return addToQueue(validator('toggle', target, attribute), newQueue);
-    }
-
-    addToQueue.show = (target) => {
-      return addToQueue.remove(target, '.lg-hide');
-    }
-
-    addToQueue.hide= (target) => {
-      return addToQueue.add(target, '.lg-hide');
-    }
+  addToQueue.toggle = (target, attribute, newQueue) => {
+    return addToQueue(validator('toggle', target, attribute), newQueue);
+  };
 
   let api = {};
   api.add = (target, attribute) => addToQueue.add(target, attribute, true);

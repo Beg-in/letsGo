@@ -170,14 +170,6 @@
     return addToQueue(validator('toggle', target, attribute), newQueue);
   };
 
-  addToQueue.show = function (target) {
-    return addToQueue.remove(target, '.lg-hide');
-  };
-
-  addToQueue.hide = function (target) {
-    return addToQueue.add(target, '.lg-hide');
-  };
-
   var api = {};
   api.add = function (target, attribute) {
     return addToQueue.add(target, attribute, true);
