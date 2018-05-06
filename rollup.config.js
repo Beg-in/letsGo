@@ -24,7 +24,7 @@ export default [{
     banner,
     format: 'umd',
     name: 'letsgo',
-    file: 'dist/umd.min.js',
+    file: 'dist/letsgo.min.js',
   },
   plugins: [...plugins, uglify({ output: { comments: 'all' }})],
 }];
