@@ -35,14 +35,14 @@
       <button onclick="letsGo.remove('#button', 'disabled')">Remove disabled</button>
       <button onclick="letsGo.toggle('#button', 'disabled')">Toggle disabled</button>
     </div>
+    
+    <button id="button" type="button">Button 1</button>
 
     <div id="blue" class="blue box">DIV</div>
     <div id="green" class="green box">DIV</div>
     <span id="red" class="red box">SPAN</span>
     <span id="purple" class="purple box">SPAN</span>
 
-    <button id="button" type="button">Button 1</button>
-    
     <div class="frow column-end" style="position:fixed;bottom:0;right:0;z-index:3">
       <button onclick="letsGo.toggle('#sidebar'); letsGo.toggle('#click-cover')">Toggle sidebar (Parallel)</button>
       <button onclick="letsGo.toggle('#sidebar').toggle('#click-cover')">Toggle sidebar (Queue)</button>
