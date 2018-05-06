@@ -86,14 +86,10 @@
           }
         }, 0);
       } else {
-        // let setTheAttribute = function() {
-        //   element.setAttribute(attribute[0], attribute[1]);
-        // }
+        attribute = attribute.split('=');
         if (command === 'add') {
-          attribute = attribute.split('=');
           element.setAttribute(attribute[0], attribute[1]);
         } else {
-          attribute = attribute.split('=');
           element.removeAttribute(attribute[0]);
         }
         nextInQueue(lastOne);
