@@ -25,15 +25,14 @@
       }
     };
 
-    var checkIfAlreadyAttribute = function checkIfAlreadyAttribute(element, attribute, attributeIsClass) {
-      if (attributeIsClass) {
-        attribute = attribute ? attribute : 'lg-hide';
-        return (' ' + element.className + ' ').includes(' ' + attribute + ' ');
+    var checkIfAlreadyAttribute = function checkIfAlreadyAttribute(element, attribute) {
+      if (attribute.charAt(0) === '.') {
+        return !(' ' + element.className + ' ').includes(' ' + attribute.substring(1) + ' ');
       } else if (attribute.includes('=')) {
         attribute = attribute.split('=');
-        return element.hasAttribute(attribute[0]) && element.getAttribute(attribute[0]) === attribute[1];
+        return !element.hasAttribute(attribute[0]) && element.getAttribute(attribute[0]) === attribute[1];
       } else {
-        return element.hasAttribute(attribute) && element.getAttribute(attribute) === '';
+        return !(element.hasAttribute(attribute) && element.getAttribute(attribute) === '');
       }
     };
 
@@ -50,10 +49,11 @@
       return times;
     };
 
-    var alterModifier = function alterModifier(element, styles, add, attribute, attributeIsClass, lastOne) {
+    var alterAttribute = function alterAttribute(element, styles, add, attribute, lastOne) {
       var command = add ? 'add' : 'remove';
 
-      if (attributeIsClass) {
+      if (attribute.charAt(0) === '.') {
+        attribute = attribute.substring(1);
         var alterAttributeDone = function alterAttributeDone() {
           element.removeEventListener('animationend', alterAttributeDone, false);
           if (add) {
@@ -108,16 +108,11 @@
       var target = masterQueue[activeId].queue[0].target;
       var command = masterQueue[activeId].queue[0].command;
       var attribute = masterQueue[activeId].queue[0].attribute;
-      var attributeIsClass = null;
       var lastOne = false;
       var element = [];
       element = document.querySelectorAll(target);
       if (element.length < 1) {
         return error('letsGo: no element of \'' + target + '\' found on page.');
-      }
-      if (attribute.charAt(0) === '.') {
-        attributeIsClass = true;
-        attribute = attribute.substring(1);
       }
       if (attribute.charAt(0) === '#') {
         attribute = 'id=' + attribute.substring(1);
@@ -127,8 +122,8 @@
         if (i === element.length - 1) {
           lastOne = true;
         }
-        var commandBoolean = command === 'add' || command === 'toggle' && !checkIfAlreadyAttribute(element[i], attribute, attributeIsClass) ? true : false;
-        alterModifier(element[i], styles, commandBoolean, attribute, attributeIsClass, lastOne);
+        var commandBoolean = command === 'add' || command === 'toggle' && checkIfAlreadyAttribute(element[i], attribute);
+        alterAttribute(element[i], styles, commandBoolean, attribute, lastOne);
       }
     };
 
@@ -161,8 +156,9 @@
   };
 
   var addToQueue = function addToQueue(input, newQueue) {
-    if (input.validated !== true) ;
-    letsGo(input.target, input.command, input.attribute, newQueue);
+    if (input.validated !== true) ; else {
+      letsGo(input.target, input.command, input.attribute, newQueue);
+    }
     return addToQueue;
   };
 
