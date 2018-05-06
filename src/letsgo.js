@@ -7,7 +7,9 @@
   let error = function() {
     window.console.error(...arguments);
   };
-
+  
+  let hidden = 'hidden';
+  
   let masterQueue = {};
   let masterId = 0;
 
@@ -65,7 +67,7 @@
           if (isClass) {
             element.classList.add(attribute[0]);
           } else {
-            element.setAttribute(attribute[0], attribute[1]);
+            element.setAttribute(attribute[0], attribute[1] ? attribute[1] : '');
           }
         }
         element.classList.remove(`${attribute[0]}-${command}`);
@@ -146,10 +148,10 @@
       error('letsGo: \'target\' parameter is not a string type');
       return {validated: false};
     } else if ((command === 'add' || command === 'remove') && !attribute) {
-      error('letsGo: using \'add\' or \'remove\' commands must also have a \'attribute\' parameter');
+      error('letsGo: using \'add\' or \'remove\' commands must also have an \'attribute\' parameter');
       return {validated: false};
     } else {
-      return {validated: true, command, target, attribute: attribute || '.lg-hide'};
+      return {validated: true, command, target, attribute: attribute || hidden};
     }
   };
 
@@ -178,8 +180,8 @@
   api.add = (target, attribute) => addToQueue.add(target, attribute, true);
   api.remove = (target, attribute) => addToQueue.remove(target, attribute, true);
   api.toggle = (target, attribute) => addToQueue.toggle(target, attribute, true);
-  api.show = target => addToQueue.remove(target, '.lg-hide', true);
-  api.hide = target => addToQueue.add(target, '.lg-hide', true);
+  api.show = target => addToQueue.remove(target, hidden, true);
+  api.hide = target => addToQueue.add(target, hidden, true);
 
   window.letsGo = api;
 }))(window, document);

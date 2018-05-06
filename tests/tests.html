@@ -8,8 +8,8 @@
     <script type="text/javascript" src="../src/letsgo.js" async></script>
   </head>
   <body class="height-100">
-    <div id="sidebar" class="dark-card-shadow lg-hide"></div>
-    <div id="click-cover" class="lg-hide" onclick="letsGo.hide('#sidebar'); letsGo.hide('#click-cover')"></div>
+    <div id="sidebar" class="dark-card-shadow" hidden></div>
+    <div id="click-cover" onclick="letsGo.hide('#sidebar'); letsGo.hide('#click-cover')" hidden></div>
     <div class="frow">
       <button onclick="letsGo.show('#blue')">Show #blue</button>
       <button onclick="letsGo.hide('#blue')">Hide #blue</button>
@@ -104,18 +104,19 @@
       position: fixed;
       background-color: #fff;
       z-index: 3;
+      display: block;
     }
-    #sidebar.lg-hide-add {
+    #sidebar.hidden-add {
       transition: transform 2s;
     }
-    #sidebar.lg-hide-add-active {
+    #sidebar.hidden-add-active {
       transform: translateX(-100%);
     }
-    #sidebar.lg-hide-remove {
+    #sidebar.hidden-remove {
       transition: transform 2s;
       transform: translateX(-100%);
     }
-    #sidebar.lg-hide-remove-active {
+    #sidebar.hidden-remove-active {
       transform: translateX(0%);
     }
     #click-cover {
@@ -126,18 +127,18 @@
       background-color: #000;
       opacity: 0.65;
     }
-    #click-cover.lg-hide-add {
+    #click-cover.hidden-add {
       transition: opacity 2s;
       opacity: 0.65;
     }
-    #click-cover.lg-hide-add-active {
+    #click-cover.hidden-add-active {
       opacity: 0;
     }
-    #click-cover.lg-hide-remove {
+    #click-cover.hidden-remove {
       transition: opacity 2s;
       opacity: 0;
     }
-    #click-cover.lg-hide-remove-active {
+    #click-cover.hidden-remove-active {
       opacity: 0.65;
     }
   </style>

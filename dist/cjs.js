@@ -8,6 +8,8 @@
     (_window$console = window.console).error.apply(_window$console, arguments);
   };
 
+  var hidden = 'hidden';
+
   var masterQueue = {};
   var masterId = 0;
 
@@ -64,7 +66,7 @@
           if (isClass) {
             element.classList.add(attribute[0]);
           } else {
-            element.setAttribute(attribute[0], attribute[1]);
+            element.setAttribute(attribute[0], attribute[1] ? attribute[1] : '');
           }
         }
         element.classList.remove(attribute[0] + '-' + command);
@@ -144,10 +146,10 @@
       error('letsGo: \'target\' parameter is not a string type');
       return { validated: false };
     } else if ((command === 'add' || command === 'remove') && !attribute) {
-      error('letsGo: using \'add\' or \'remove\' commands must also have a \'attribute\' parameter');
+      error('letsGo: using \'add\' or \'remove\' commands must also have an \'attribute\' parameter');
       return { validated: false };
     } else {
-      return { validated: true, command: command, target: target, attribute: attribute || '.lg-hide' };
+      return { validated: true, command: command, target: target, attribute: attribute || hidden };
     }
   };
 
@@ -181,10 +183,10 @@
     return addToQueue.toggle(target, attribute, true);
   };
   api.show = function (target) {
-    return addToQueue.remove(target, '.lg-hide', true);
+    return addToQueue.remove(target, hidden, true);
   };
   api.hide = function (target) {
-    return addToQueue.add(target, '.lg-hide', true);
+    return addToQueue.add(target, hidden, true);
   };
 
   window.letsGo = api;
