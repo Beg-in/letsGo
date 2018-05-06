@@ -26,7 +26,7 @@
       }
     };
 
-    let checkIfAlreadyAttribute = (element, attribute) => {
+    let determineToggle = (element, attribute) => {
       if (attribute.charAt(0) === '.') {
         return ` ${element.className} `.includes(` ${attribute.substring(1)} `);
       } else if (attribute.includes('=')) {
@@ -50,7 +50,7 @@
       return times;
     };
 
-    let alterAttribute = (element, styles, command, attribute, lastOne) => {
+    let alterAttribute = (element, command, attribute, lastOne) => {
       if (attribute.charAt(0) === '.') {
         attribute = attribute.substring(1);
         
@@ -71,6 +71,7 @@
           element.classList.remove(attribute);
         }
         setTimeout(() => {
+          let styles = window.getComputedStyle(element, null);
           if ((styles.transitionDuration !== '0s') || (styles.animationDuration !== '0s')) {
             element.classList.add(`${attribute}-${command}-active`);
             let maxTransitionTime = findAnimateTime(styles.transitionDuration);
@@ -121,14 +122,13 @@
         attribute = `id=${attribute.substring(1)}`;
       }
       for (let i = 0; i < element.length; i++) {
-        let styles = window.getComputedStyle(element[i], null);
         if (i === (element.length - 1) ) {
           lastOne = true;
         }
         if (command === 'toggle') {
-          command = checkIfAlreadyAttribute(element[i], attribute) ? 'remove' : 'add';
+          command = determineToggle(element[i], attribute) ? 'remove' : 'add';
         }
-        alterAttribute(element[i], styles, command, attribute, lastOne);
+        alterAttribute(element[i], command, attribute, lastOne);
       }
     };
 
