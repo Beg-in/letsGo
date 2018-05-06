@@ -1,10 +1,8 @@
-/* This code is not minified for example purposes only, remember to minify your code! */
 /* letsGo
  * https://letsgojs.com/
  *
  * By: Cody Sherman <cody@beg.in> (codysherman.com)
  */
-/*! letsGo | https://letsgojs.com */
 (((window, document) => {
   let error = function() {
     window.console.error(...arguments);
