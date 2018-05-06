@@ -80,7 +80,7 @@ header svg {
   margin-top: 40px;
 }
 
-.tab-child {
+.main-tab {
   width: 100px;
   height: 55px;
   background-color: #fff;
@@ -97,7 +97,7 @@ header svg {
 
 /* XS */
 @media (max-width: 767px) {
-  .tab-child {
+  .main-tab {
     width: 78px;
     height: 45px;
     font-size: 13px;
@@ -106,14 +106,20 @@ header svg {
   }
 }
 
-.tab-child:hover, .tab-child:active, .tab-child:focus {
+.main-tab:hover, .main-tab:active, .main-tab:focus {
   background-color: #fff;
   color: #333;
   border-bottom: 1px solid #eee;
   box-shadow: 0px 0px 7px -1px #888888;
+  -webkit-transform: none;
+          transform: none;
 }
 
-.tab-child:disabled, .tab-child:hover:disabled, .tab-child:active:disabled, .tab-child:focus:disabled {
+.main-tab.disabled-remove {
+  transition: none;
+}
+
+.main-tab.disabled-add, .main-tab:disabled, .main-tab:hover:disabled, .main-tab:active:disabled, .main-tab:focus:disabled {
   background: #fff;
   color: #3ac371;
   padding: 9px 7px 7px;
@@ -121,7 +127,6 @@ header svg {
   font-weight: 700;
   border: none;
   z-index: 2;
-  transition: border-bottom 0;
 }
 
 main {

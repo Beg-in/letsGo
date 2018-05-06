@@ -91,9 +91,10 @@
           var maxTransitionTime = findAnimateTime(styles.transitionDuration);
           var maxAnimationTime = findAnimateTime(styles.animationDuration) * styles.animationIterationCount;
           var maxTime = Math.ceil(Math.max(maxTransitionTime, maxAnimationTime) * 1000);
-          setTimeout(alterAttributeDone, maxTime);
-          if (styles.animationDuration !== '0s') {
+          if (maxAnimationTime >= maxTransitionTime) {
             element.addEventListener('animationend', alterAttributeDone, false);
+          } else {
+            setTimeout(alterAttributeDone, maxTime);
           }
         } else {
           alterAttributeDone();

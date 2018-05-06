@@ -80,10 +80,10 @@
       element.classList.add(`${attribute[0]}-${command}`);
       if (command === 'remove') {
         if (isClass) {
-            element.classList.remove(attribute[0]);
-          } else {
-            element.removeAttribute(attribute[0]);
-          }
+          element.classList.remove(attribute[0]);
+        } else {
+          element.removeAttribute(attribute[0]);
+        }
       }
       setTimeout(() => {
         let styles = window.getComputedStyle(element, null);
@@ -92,9 +92,10 @@
           let maxTransitionTime = findAnimateTime(styles.transitionDuration);
           let maxAnimationTime = findAnimateTime(styles.animationDuration) * styles.animationIterationCount;
           let maxTime = Math.ceil(Math.max(maxTransitionTime, maxAnimationTime)*1000);
-          setTimeout(alterAttributeDone, maxTime);
-          if (styles.animationDuration !== '0s') {
+          if (maxAnimationTime >= maxTransitionTime) {
             element.addEventListener('animationend', alterAttributeDone, false);
+          } else {
+            setTimeout(alterAttributeDone, maxTime);
           }
         } else {
           alterAttributeDone();
