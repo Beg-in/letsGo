@@ -67,7 +67,7 @@
           if (isClass) {
             element.classList.add(attribute[0]);
           } else {
-            element.setAttribute(attribute[0], attribute[1] ? attribute[1] : '');
+            element.setAttribute(attribute[0], attribute[1] || '');
           }
         }
         element.classList.remove(`${attribute[0]}-${command}`);
