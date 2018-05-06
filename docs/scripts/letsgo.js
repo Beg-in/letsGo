@@ -175,6 +175,14 @@
   addToQueue.toggle = (target, attribute, newQueue) => {
     return addToQueue(validator('toggle', target, attribute), newQueue);
   };
+  
+  addToQueue.show = (target) => {
+    return addToQueue.remove(target, hidden);
+  };
+
+  addToQueue.hide= (target) => {
+    return addToQueue.add(target, hidden);
+  };
 
   let api = {};
   api.add = (target, attribute) => addToQueue.add(target, attribute, true);

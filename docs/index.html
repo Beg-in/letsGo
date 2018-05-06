@@ -88,31 +88,31 @@
               We have run into a handful of situations where we just simply wanted to add some nice CSS transitions. Unfortunately, regular HTML seems to be deprived of this, so we aimed to remedy this problem. We created letsGo because we wanted to create a lightweight framework that features powerful HTML extensions without the weight of a full framework such as Angularjs or Vuejs.
             </p>
           </div>
-          <div id="setup" class="main-section lg-hide">
+          <div id="setup" class="main-section" hidden>
             <h2>Setup</h2>
             <h4>Installation Options:</h4>
 
             <button onclick="letsGo.toggle('#npm')" class="accordion"><h5>npm<h5></button>
-            <div id ="npm" class="panel lg-hide">
+            <div id ="npm" class="panel" hidden>
               <div class="fake-code">
                 npm install letsgo
               </div>
             </div>
 
             <button onclick="letsGo.toggle('#bower')" class="accordion"><h5>Bower<h5></button>
-            <div id="bower" class="panel lg-hide">
+            <div id="bower" class="panel" hidden>
               <div class="fake-code">
                 bower install letsgo
               </div>
             </div>
 
             <button onclick="letsGo.toggle('#manual')" class="accordion"><h5>Manual Download<h5></button>
-              <div id ="manual" class="panel lg-hide">
+              <div id ="manual" class="panel" hidden>
                 <p class="bottom-margin">Download a letsGo .zip via <a href="https://github.com/Beg-in/letsGo/releases/latest" title="letsGo Latest Release" target="_blank">GitHub</a>, then place the unzipped folder inside of your project's folder.</p>
               </div>
 
             <button onclick="letsGo.toggle('#cdn')" class="accordion" class="accordion"><h5>CDN<h5></button>
-              <div id ="cdn" class="panel lg-hide">
+              <div id ="cdn" class="panel" hidden>
                 <p>You will need to pick out the version of letsGo you would like to use, most likely the latest. A list of all releases is available on <a href="https://github.com/Beg-in/letsGo/releases" title="letsGo Releases" target="_blank">GitHub</a>.</p>
                 <pre class="fake-code mb-0">
 <!--           -->&lt;!DOCTYPE html&gt;
@@ -132,13 +132,13 @@
             <p>Paste this class into your css. If you're already using <a href="https://frowcss.com">Frow CSS</a> skip this step.</p>
             <pre class="fake-code mb-0">
 <!--       -->&lt;style&gt;
-<!--       -->  .lg-hide {
+<!--       -->  [hidden] {
 <!--       -->     display:none !important;
 <!--       -->  }
 <!--       -->&lt;/style&gt;
 <!--     --></pre>
           </div>
-          <div id="commands" class="main-section lg-hide">
+          <div id="commands" class="main-section" hidden>
             <h2>Commands</h2>
             <div class="example">
               <span class="greyed">&lt;div onclick="</span>letsGo.<b>command</b>(<b>'target'</b>, <b>'attribute'</b>);<span class="greyed">"&gt;Test&lt;/div&gt;</span>
@@ -176,7 +176,7 @@
 <!--       -->&lt;div onclick="letsGo.hide('#side-bar-menu')"&gt;&lt;/div&gt;
 <!--     --></pre>
           </div>
-          <div id="animations" class="main-section lg-hide">
+          <div id="animations" class="main-section" hidden>
             <h2>Animation Support</h2>
             <p>
               With letsGo the animations themselves are handled completely by CSS. The animations can be done via a CSS Animation or CSS transition. By using letsGo, certain classes are added to the element being altered in a specific order, allowing you to do the CSS animation.

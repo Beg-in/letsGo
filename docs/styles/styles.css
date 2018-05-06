@@ -131,21 +131,21 @@ main {
   z-index: 3;
 }
 
-.main-section.lg-hide-remove {
+.main-section.hidden-remove {
   transition: opacity 0.3s ease-in;
   opacity: 0;
 }
 
-.main-section.lg-hide-remove-active {
+.main-section.hidden-remove-active {
   opacity: 1;
 }
 
-.main-section.lg-hide-add {
+.main-section.hidden-add {
   transition: opacity 0.3s ease-out;
   opacity: 1;
 }
 
-.main-section.lg-hide-add-active {
+.main-section.hidden-add-active {
   opacity: 0;
 }
 
@@ -184,46 +184,46 @@ div.panel {
   overflow: hidden;
 }
 
-#npm.lg-hide-remove, #bower.lg-hide-remove, #manual.lg-hide-remove {
+#npm.hidden-remove, #bower.hidden-remove, #manual.hidden-remove {
   transition: max-height 1s, margin 1s;
   max-height: 0;
   margin: 0px;
 }
 
-#npm.lg-hide-remove-active, #bower.lg-hide-remove-active, #manual.lg-hide-remove-active {
+#npm.hidden-remove-active, #bower.hidden-remove-active, #manual.hidden-remove-active {
   max-height:80px;
   margin: 10px;
 }
 
-#npm.lg-hide-add, #bower.lg-hide-add, #manual.lg-hide-add {
+#npm.hidden-add, #bower.hidden-add, #manual.hidden-add {
   transition: max-height 1s, margin 1s;
   max-height: 80px;
   margin: 10px;
 }
 
-#npm.lg-hide-add-active, #bower.lg-hide-add-active, #manual.lg-hide-add-active {
+#npm.hidden-add-active, #bower.hidden-add-active, #manual.hidden-add-active {
   max-height:0px;
   margin: 0px;
 }
 
-#cdn.lg-hide-remove{
+#cdn.hidden-remove{
   transition: max-height 1s, margin 1s;
   max-height: 0;
   margin: 0px;
 }
 
-#cdn.lg-hide-remove-active {
+#cdn.hidden-remove-active {
   max-height:300px;
   margin: 10px;
 }
 
-#cdn.lg-hide-add {
+#cdn.hidden-add {
   transition: max-height 1s, margin 1s;
   max-height: 300px;
   margin: 10px;
 }
 
-#cdn.lg-hide-add-active {
+#cdn.hidden-add-active {
   max-height: 0px;
 }
 

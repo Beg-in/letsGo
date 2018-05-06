@@ -172,6 +172,14 @@
     return addToQueue(validator('toggle', target, attribute), newQueue);
   };
 
+  addToQueue.show = function (target) {
+    return addToQueue.remove(target, hidden);
+  };
+
+  addToQueue.hide = function (target) {
+    return addToQueue.add(target, hidden);
+  };
+
   var api = {};
   api.add = function (target, attribute) {
     return addToQueue.add(target, attribute, true);
