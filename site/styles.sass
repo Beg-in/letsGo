@@ -1,0 +1,321 @@
+@import ~frow
+@import ./highlight
+@import ./github
+
+// *:not(.lg-animate)
+//   transition: width 0.4s, height 0.4s, font-size 0.4s, font-weight 0.4s
+
+html
+  font-family: 'Assistant', sans-serif
+
+h1
+  font-size: 50px
+  font-weight: 300
+  height: 52px
+
+h2
+  font-size: 35px
+  font-weight: 300
+
+h3
+  margin-top: 40px
+  margin-bottom: 40px
+  font-size: 40px
+  font-weight: 700
+
+h4
+  margin-top: 10px
+  font-size: 30px
+  font-weight: 300
+
+h5
+  margin-top: 20px
+  margin-bottom: 3px
+  font-size: 25px
+  font-weight: 300
+  font-style: italic
+
+p
+  margin: 10px 0 5px
+
+.fake-code
+  padding: 10px 10px
+  display: block
+  border-radius: 3px
+  background-color: #4F4F51
+  color: #E6E6E6
+  font-family: 'Inconsolata', sans-serif
+  font-size: 16px
+  margin-bottom: 20px
+
+.fake-comment
+  color: #AFAFAF
+  a
+    color: #AFAFAF
+    text-decoration: underline
+
+header
+  height: 30%
+  width: 100%
+  background-color: #eee
+  padding-top: 40px
+  svg
+    width: 70%
+    max-width: 400px
+    fill: #3ac371
+    margin: 0 auto
+
+.tab-parent
+  margin-top: 40px
+
+.main-tab
+  width: 100px
+  height: 55px
+  background-color: #fff
+  color: #333
+  border: none
+  border-radius: 0px
+  margin: 0 3px
+  position: relative
+  z-index: 1
+  padding: 10px 7px 7px
+  border-bottom: 1px solid #eee
+  box-shadow: 0px 0px 3px -1px #888888
+  &:hover, &:active, &:focus
+    background-color: #fff
+    color: #333
+    border-bottom: 1px solid #eee
+    box-shadow: 0px 0px 7px -1px #888888
+    -webkit-transform: none
+    transform: none
+  &.disabled-remove
+    transition: none
+  &.disabled-add, &:disabled, &:hover:disabled, &:active:disabled, &:focus:disabled
+    background: #fff
+    color: #3ac371
+    padding: 9px 7px 7px
+    box-shadow: 0px 0px 12px -1px #888888, inset 0px 3px 0px #3AC371
+    font-weight: 700
+    border: none
+    z-index: 2
+
+/* XS
+@media (max-width: 767px)
+  .main-tab
+    width: 78px
+    height: 45px
+    font-size: 13px
+    margin: 0 1px
+    padding: 10px 3px 7px
+
+main
+  padding: 30px 0
+  background-color: #fff
+  position: relative
+  z-index: 3
+
+.main-section
+  &.hidden-remove
+    transition: opacity 0.3s ease-in
+    opacity: 0
+  &.hidden-remove-active
+    opacity: 1
+  &.hidden-add
+    transition: opacity 0.3s ease-out
+    opacity: 1
+  &.hidden-add-active
+    opacity: 0
+
+.section-why
+  padding-top: 25px
+
+.section-why-paragraph
+  padding-top: 10px
+
+button.accordion
+  background-color: #ddd
+  color: black
+  cursor: pointer
+  padding: 8px
+  margin-bottom: 1px
+  width: 100%
+  text-align: left
+  border: none
+  outline: none
+  transition: 0.4s
+
+.accordion h5
+  margin-top: 10px
+  font-size: 20px
+
+button
+  &.accordion-, &.accordion:hover
+    background-color: #3a8fcc
+
+div.panel
+  margin: 10px
+  overflow: hidden
+
+#npm.hidden-remove, #bower.hidden-remove, #manual.hidden-remove
+  transition: max-height 1s, margin 1s
+  max-height: 0
+  margin: 0px
+
+#npm.hidden-remove-active, #bower.hidden-remove-active, #manual.hidden-remove-active
+  max-height: 80px
+  margin: 10px
+
+#npm.hidden-add, #bower.hidden-add, #manual.hidden-add
+  transition: max-height 1s, margin 1s
+  max-height: 80px
+  margin: 10px
+
+#npm.hidden-add-active, #bower.hidden-add-active, #manual.hidden-add-active
+  max-height: 0px
+  margin: 0px
+
+#cdn
+  &.hidden-remove
+    transition: max-height 1s, margin 1s
+    max-height: 0
+    margin: 0px
+  &.hidden-remove-active
+    max-height: 300px
+    margin: 10px
+  &.hidden-add
+    transition: max-height 1s, margin 1s
+    max-height: 300px
+    margin: 10px
+  &.hidden-add-active
+    max-height: 0px
+
+.greyed
+  color: #bbb
+
+.example
+  text-align: center
+  margin-top: 40px
+  font-size: 25px
+
+.example-explanation
+  margin: 50px 0 10px
+  font-size: 20px
+
+.example-keyword
+  font-weight: 700
+
+.example-type
+  font-style: italic
+
+.example-definition, .example-examples
+  margin-left: 50px
+
+.by-line
+  margin-top: 60px
+  text-align: center
+  margin-bottom: 50px
+
+.animate-steps
+  font-size: 20px
+
+.demo-box-container
+  width: 100%
+  height: 100%
+  background-color: #f3f3f3
+  border-radius: 3px
+
+.demo-box
+  width: 140px
+  height: 140px
+  background-color: LightSeaGreen
+
+.blue-background
+  background-color: RoyalBlue
+
+.blue-background-add, .blue-background-remove
+  transition: background-color 1s
+
+.blue-background-add-active
+  background-color: RoyalBlue
+
+.blue-background-remove-active
+  background-color: LightSeaGreen
+
+@-webkit-keyframes spin-clockwise
+  0%
+    -webkit-transform: rotate(0deg)
+    transform: rotate(0deg)
+    border-radius: 0
+
+  50%
+    border-radius: 50%
+
+  100%
+    -webkit-transform: rotate(720deg)
+    transform: rotate(720deg)
+    border-radius: 0
+
+
+@keyframes spin-clockwise
+  0%
+    -webkit-transform: rotate(0deg)
+    transform: rotate(0deg)
+    border-radius: 0
+
+  50%
+    border-radius: 50%
+
+  100%
+    -webkit-transform: rotate(720deg)
+    transform: rotate(720deg)
+    border-radius: 0
+
+
+@-webkit-keyframes spin-counterclockwise
+  0%
+    -webkit-transform: rotate(0)
+    transform: rotate(0)
+    border-radius: 0
+
+  50%
+    border-radius: 50%
+
+  100%
+    -webkit-transform: rotate(-720deg)
+    transform: rotate(-720deg)
+    border-radius: 0
+
+
+@keyframes spin-counterclockwise
+  0%
+    -webkit-transform: rotate(0)
+    transform: rotate(0)
+    border-radius: 0
+
+  50%
+    border-radius: 50%
+
+  100%
+    -webkit-transform: rotate(-720deg)
+    transform: rotate(-720deg)
+    border-radius: 0
+
+
+.demo-animation-box
+  width: 140px
+  height: 140px
+  background-color: LightSeaGreen
+
+.demo-twirl-add
+  -webkit-animation-name: spin-clockwise
+  animation-name: spin-clockwise
+  -webkit-animation-duration: 3s
+  animation-duration: 3s
+  // animation-iteration-count: 2
+
+.demo-twirl-remove
+  -webkit-animation-name: spin-counterclockwise
+  animation-name: spin-counterclockwise
+  -webkit-animation-duration: 3s
+  animation-duration: 3s
+  // animation-iteration-count: 2

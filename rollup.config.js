@@ -3,7 +3,9 @@ import uglify from 'rollup-plugin-uglify';
 import { version } from './package.json';
 
 const input = 'src/letsgo.js';
-const plugins = [babel()];
+const plugins = [babel({
+  plugins: ['external-helpers'],
+})];
 const banner = `/* letsGo v${version} | https://letsgojs.com */`;
 
 export default [{

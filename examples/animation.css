@@ -1,0 +1,23 @@
+@keyframes spin-clockwise {
+  0% {transform: rotate(0deg); border-radius: 0;}
+  50% {border-radius: 50%;}
+  100% {transform: rotate(720deg); border-radius: 0;}
+}
+@keyframes spin-counterclockwise {
+  0% {transform: rotate(0deg); border-radius: 0;}
+  50% {border-radius: 50%;}
+  100% {transform: rotate(-720deg); border-radius: 0;}
+}
+.demo-animation-box {
+  width: 140px;
+  height: 140px;
+  background-color: LightSeaGreen;
+}
+.demo-twirl-add {
+  animation-name: spin-clockwise;
+  animation-duration: 3s;
+}
+.demo-twirl-remove {
+  animation-name: spin-counterclockwise;
+  animation-duration: 3s;
+}

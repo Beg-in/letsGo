@@ -1,4 +1,8 @@
-let getURLParameter = (name) => {
+import './styles.sass';
+import 'file-loader!./CNAME';
+import '../src/letsgo.js';
+
+let getURLParameter = name => {
   return (
     decodeURIComponent(
       (new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [
@@ -12,12 +16,15 @@ let getURLParameter = (name) => {
 let replaceQueryParam = (param, newval, search) => {
   let regex = new RegExp('([?;&])' + param + '[^&;]*[;&]?');
   let query = search.replace(regex, '$1').replace(/&$/, '');
-  
   return (query.length > 2 ? query + '&' : '?') + (newval ? param + '=' + newval : '');
 };
 
-let setURLParameter = (tabName) => {
-  window.history.pushState(null, null, tabName ? replaceQueryParam('tab', tabName, window.location.search) : '/');
+let setURLParameter = tabName => {
+  window.history.pushState(
+    null,
+    null,
+    tabName ? replaceQueryParam('tab', tabName, window.location.search) : '/'
+  );
 };
 
 let setActiveTab = () => {
@@ -47,6 +54,6 @@ window.onload = () => {
     .addEventListener('click', () => setURLParameter('animations'));
 };
 
-window.onpopstate = (e) => {
+window.onpopstate = e => {
   setActiveTab();
 };

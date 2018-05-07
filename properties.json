@@ -1,0 +1,11 @@
+{
+  "domain": "letsgojs.com",
+  "base": {
+    "client": {
+      "entry": "./site/index.js",
+      "cdn": "/",
+      "root": "/"
+    }
+  },
+  "dist": "docs"
+}

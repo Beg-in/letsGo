@@ -1,0 +1,17 @@
+.demo-box {
+  width: 140px;
+  height: 140px;
+  background-color: LightSeaGreen;
+}
+.blue-background {
+  background-color: RoyalBlue;
+}
+.blue-background-add, .blue-background-remove {
+  transition: background-color 1s;
+}
+.blue-background-add-active {
+  background-color: RoyalBlue;
+}
+.blue-background-add-remove {
+  background-color: LightSeaGreen;
+}

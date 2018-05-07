@@ -1,0 +1,25 @@
+#setup.main-section(hidden='')
+  h2 Setup
+  h4 Installation Options:
+  button.accordion(onclick="letsGo.toggle('#npm')")
+    h5 npm
+  #npm.panel(hidden='')
+    .fake-code npm install letsgo
+  button.accordion(onclick="letsGo.toggle('#bower')")
+    h5 Bower
+  #bower.panel(hidden='')
+    .fake-code bower install letsgo
+  button.accordion(onclick="letsGo.toggle('#manual')")
+    h5 Manual Download
+  #manual.panel(hidden='')
+    p.bottom-margin Download a letsGo .zip via #[a(href='https://github.com/Beg-in/letsGo/releases/latest', title='letsGo Latest Release', rel='noopener', target='_blank') GitHub], then place the unzipped folder inside of your project's folder.
+  button.accordion(onclick="letsGo.toggle('#cdn')")
+    h5 CDN
+  #cdn.panel(hidden='')
+    p You will need to pick out the version of letsGo you would like to use, most likely the latest. A list of all releases is available on #[a(href='https://github.com/Beg-in/letsGo/releases', title='letsGo Releases', target='_blank') GitHub].
+    pre.fake-code.mb-0
+      include:hl:pug(pretty=true) ../examples/cdn
+  h5 One last thing...
+  p Paste this class into your css. If you're already using #[a(href='https://frowcss.com', title='Frow CSS', rel='noopener', target='_blank') Frow CSS] skip this step.
+  pre.fake-code.mb-0
+    include:hl:pug(pretty=true) ../examples/style

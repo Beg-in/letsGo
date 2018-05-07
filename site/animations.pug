@@ -1,0 +1,32 @@
+#animations.main-section(hidden='')
+  h2 Animation Support
+  p With letsGo the animations themselves are handled completely by CSS. The animations can be done via a CSS Animation or CSS transition. By using letsGo, certain classes are added to the element being altered in a specific order, allowing you to do the CSS animation.
+  h5 Classes Added Order
+  p Here is an example of the classes added when adding a class. For this example we are adding the class '.kitty-cat'.
+  span.animate-steps
+    p class=""
+    p class="#[b lg-animate]"
+    p class="lg-animate #[b kitty-cat-add]"
+    p class="lg-animate kitty-cat-add #[b kitty-cat-add-active]"
+    p class="lg-animate kitty-cat-add kitty-cat-add-active #[b kitty-cat]"
+    p class="#[b kitty-cat]"
+  h5 Using a CSS Transition
+  .frow.gutters
+    .col-md-2-3
+      pre.fake-code.mb-0
+        include:hl(lang="css") ../examples/transition.css
+    .col-md-1-3
+      .demo-box-container
+        .frow.centered-column.justify-around
+          .demo-box.card-shadow
+          button(type='button', name='button', onclick="letsGo.toggle('.demo-box', '.blue-background');") Test
+  h5 Using a CSS Animation
+  .frow.gutters
+    .col-md-2-3
+      pre.fake-code.mb-0
+        include:hl(lang="css") ../examples/animation.css
+    .col-md-1-3
+      .demo-box-container
+        .frow.centered-column.justify-around
+          .demo-animation-box.card-shadow
+          button(type='button', name='button', onclick="letsGo.toggle('.demo-animation-box', '.demo-twirl');") Test
