@@ -1,7 +1,9 @@
 {
   "name": "letsgo",
   "version": "0.2.3",
-  "files": ["dist/*"],
+  "files": [
+    "dist/*"
+  ],
   "main": "dist/cjs.js",
   "module": "dist/esm.js",
   "unpkg": "dist/letsgo.min.js",
@@ -49,7 +51,7 @@
     "babel-plugin-external-helpers": "6.22.0",
     "babel-preset-env": "1.6.1",
     "babel-preset-stage-3": "6.24.1",
-    "begin-build": "^0.15.0-beta.1",
+    "begin-build": "^0.15.0-beta.2",
     "frow": "git+https://github.com/Beg-in/frow.git#letsgo",
     "jstransformer-pug": "^0.3.0",
     "prismjs": "^1.14.0",

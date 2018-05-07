@@ -4,8 +4,8 @@
     "client": {
       "entry": "./site/index.js",
       "cdn": "/",
-      "root": "/"
+      "root": "/",
+      "dist": "docs"
     }
-  },
-  "dist": "docs"
+  }
 }

@@ -1,5 +1,5 @@
 import './styles.sass';
-import 'file-loader!./CNAME';
+import 'file-loader?name=[name]!./CNAME';
 import '../src/letsgo.js';
 
 let getURLParameter = name => {

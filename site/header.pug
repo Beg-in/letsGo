@@ -1,13 +1,13 @@
 header
-  #header-logo(onclick=`letsGo.remove('.main-tab', 'disabled').add('#main-tab-about', 'disabled=disabled'); letsGo.hide('.main-section').show('#about');`)
-    include ./logo.svg
+  #header-logo(onclick="letsGo.remove('.main-tab', 'disabled').add('#main-tab-about', 'disabled=disabled'); letsGo.hide('.main-section').show('#about');")
+    include logo.svg
   .tab-parent
     .frow
-      button#main-tab-about.main-tab(type='button', disabled='disabled', onclick="letsGo.remove('.main-tab', 'disabled').add('#main-tab-about', 'disabled=disabled'); letsGo.hide('.main-section').show('#about')")
+      button#main-tab-about.main-tab(type="button", disabled="disabled", onclick="letsGo.remove('.main-tab', 'disabled').add('#main-tab-about', 'disabled=disabled'); letsGo.hide('.main-section').show('#about')")
         | About
-      button#main-tab-setup.main-tab(type='button', onclick="letsGo.remove('.main-tab', 'disabled').add('#main-tab-setup', 'disabled=disabled'); letsGo.hide('.main-section').show('#setup')")
+      button#main-tab-setup.main-tab(type="button", onclick="letsGo.remove('.main-tab', 'disabled').add('#main-tab-setup', 'disabled=disabled'); letsGo.hide('.main-section').show('#setup')")
         | Setup
-      button#main-tab-commands.main-tab(type='button', onclick="letsGo.remove('.main-tab', 'disabled').add('#main-tab-commands', 'disabled=disabled'); letsGo.hide('.main-section').show('#commands')")
+      button#main-tab-commands.main-tab(type="button", onclick="letsGo.remove('.main-tab', 'disabled').add('#main-tab-commands', 'disabled=disabled'); letsGo.hide('.main-section').show('#commands')")
         | Commands
-      button#main-tab-animations.main-tab(type='button', onclick="letsGo.remove('.main-tab', 'disabled').add('#main-tab-animations', 'disabled=disabled'); letsGo.hide('.main-section').show('#animations')")
+      button#main-tab-animations.main-tab(type="button", onclick="letsGo.remove('.main-tab', 'disabled').add('#main-tab-animations', 'disabled=disabled'); letsGo.hide('.main-section').show('#animations')")
         | Animations

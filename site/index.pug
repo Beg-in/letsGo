@@ -1,11 +1,15 @@
+mixin external
+  a(target="_blank", rel="noopener")&attributes(attributes)
+    block
+
 doctype html
 html.height100
   head
-    meta(charset='utf-8')
-    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+    meta(charset="utf-8")
+    meta(name="viewport", content="width=device-width, initial-scale=1, shrink-to-fit=no")
     title letsGo
-    link(rel='alternate', type='application/rss+xml', href='https://github.com/Beg-in/letsGo/releases.atom')
-    link(href='https://fonts.googleapis.com/css?family=Inconsolata|Assistant:400,300,700', rel='stylesheet', type='text/css')
+    link(rel="alternate", type="application/rss+xml", href="https://github.com/Beg-in/letsGo/releases.atom")
+    link(href="https://fonts.googleapis.com/css?family=Inconsolata|Assistant:400,300,700", rel="stylesheet", type="text/css")
     script.
       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -14,15 +18,15 @@ html.height100
       ga('create', 'UA-78143032-1', 'auto');
       ga('send', 'pageview');
   body.height-100
-    a.github-corner.hidden-sm.hidden-xs(href='https://github.com/beg-in/letsGo', target='_blank', rel='noopener')
+    +external.github-corner.hidden-sm.hidden-xs(href="https://github.com/beg-in/letsGo")
       include github.svg
-    include ./header
+    include header
     main.frow-container
       .frow
         .col-lg-4-5
-          include ./about
-          include ./setup
-          include ./commands
-          include ./animations
-      p.by-line letsGo is from #[a(href='https://codysherman.com', rel='noopener', target='_blank') Cody Sherman] via #[a(href='https://beg.in', rel='noopener', target='_blank') Begin]
+          include about
+          include setup
+          include commands
+          include animations
+      p.by-line letsGo is from #[+external(href="https://codysherman.com") Cody Sherman] via #[+external(href="https://beg.in") Begin]
 
