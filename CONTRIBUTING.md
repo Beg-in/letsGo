@@ -34,7 +34,7 @@ This repository will only support commit messages in the Angular format from Com
 These messages are easily produced using the interactive commitizen interface
 
 ```bash
-$ npm run cz
+$ npx cz
 ```
 
 ### Releases
