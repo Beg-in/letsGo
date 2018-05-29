@@ -3,6 +3,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import uglify from 'rollup-plugin-uglify';
 import { version } from './package.json';
 
+const name = 'letsGo';
 const input = 'src/index.js';
 const plugins = [resolve(), babel({
   plugins: ['external-helpers'],
@@ -22,7 +23,7 @@ export default [{
   }, {
     banner,
     format: 'umd',
-    name: 'letsGo',
+    name,
     file: 'dist/letsgo.js',
   }],
   plugins,
@@ -31,7 +32,7 @@ export default [{
   output: {
     banner,
     format: 'umd',
-    name: 'letsGo',
+    name,
     file: 'dist/letsgo.min.js',
   },
   plugins: [...plugins, uglify({ output: { comments: 'all' } })],
