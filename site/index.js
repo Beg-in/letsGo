@@ -1,6 +1,8 @@
 import './styles.sass';
 import 'file-loader?name=[name]!./CNAME';
-import '../src/letsgo.js';
+import letsGo from '../src';
+
+window.letsGo = letsGo;
 
 let getURLParameter = name => {
   return (
@@ -20,11 +22,9 @@ let replaceQueryParam = (param, newval, search) => {
 };
 
 let setURLParameter = tabName => {
-  window.history.pushState(
-    null,
-    null,
-    tabName ? replaceQueryParam('tab', tabName, window.location.search) : '/'
-  );
+  window.history.pushState(null, null, tabName
+    ? replaceQueryParam('tab', tabName, window.location.search)
+    : '/');
 };
 
 let setActiveTab = () => {
@@ -54,6 +54,6 @@ window.onload = () => {
     .addEventListener('click', () => setURLParameter('animations'));
 };
 
-window.onpopstate = e => {
+window.onpopstate = () => {
   setActiveTab();
 };

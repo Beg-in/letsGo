@@ -1,12 +1,12 @@
-import { ADD, REMOVE, TOGGLE, HIDDEN } from './constants.js';
-import prepare from './animate.js';
-import validator from './validator.js';
+import { ADD, REMOVE, TOGGLE, HIDDEN } from './constants';
+import prepare from './animate';
+import validator from './validator';
 import * as error from './error';
 
 export default function queue(animation, deferred = Promise.resolve(), cancelled = false) {
   if (animation && !cancelled) {
     try {
-      validator(...animation)
+      validator(...animation);
       let prepared = prepare(...animation);
       deferred = (async () => {
         await deferred;
@@ -16,7 +16,7 @@ export default function queue(animation, deferred = Promise.resolve(), cancelled
           error.handle(e);
         }
       })();
-    } catch(e) {
+    } catch (e) {
       cancelled = true;
       error.handle(e);
     }
@@ -25,7 +25,7 @@ export default function queue(animation, deferred = Promise.resolve(), cancelled
     [ADD]: (...args) => queue([ADD, ...args], deferred, cancelled),
     [REMOVE]: (...args) => queue([REMOVE, ...args], deferred, cancelled),
     [TOGGLE]: (...args) => queue([TOGGLE, ...args], deferred, cancelled),
-    show: target => queue([ADD, target, HIDDEN], deferred, cancelled),
-    hide: target => queue([REMOVE, target, HIDDEN], deferred, cancelled),
+    show: target => queue([REMOVE, target, HIDDEN], deferred, cancelled),
+    hide: target => queue([ADD, target, HIDDEN], deferred, cancelled),
   };
-};
+}

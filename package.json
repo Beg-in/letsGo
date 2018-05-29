@@ -55,8 +55,10 @@
     "frow": "git+https://github.com/Beg-in/frow.git#letsgo",
     "jstransformer-pug": "^0.3.0",
     "prismjs": "^1.14.0",
+    "regenerator-runtime": "^0.11.1",
     "rollup": "0.58.2",
     "rollup-plugin-babel": "3.0.4",
+    "rollup-plugin-node-resolve": "^3.3.0",
     "rollup-plugin-uglify": "3.0.0"
   }
 }

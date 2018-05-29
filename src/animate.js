@@ -1,22 +1,29 @@
-import { ADD, REMOVE, TOGGLE } from './constants.js';
-import * as error from './error.js';
-import { findAnimateTime, determineToggle, animationEnd } from './element.js';
+import { ADD, REMOVE, TOGGLE, HIDDEN } from './constants';
+import * as error from './error';
 
 const MAIN_CLASS = 'lg-animate';
-const getClass (attribute, result, active = false) => {
+const getClass = (attribute, result, active = false) => {
   let out = `${attribute}-${result}`;
   if (active) {
     out = `${out}-active`;
   }
   return out;
-}
-const delay = (duration = 0) => {
-  return new Promise(resolve => setTimeout(resolve, duration));
 };
+const toggle = check => check ? REMOVE : ADD;
+const NUM_REGEX = /[^\d.]/g;
+const fromTime = time => +time.replace(NUM_REGEX, '');
+const findAnimateTime = times =>
+  times.split(',').reduce((out, time) => Math.max(fromTime(time), out), 0);
+const animationEnd = element => new Promise(resolve => {
+  let listener = () => {
+    resolve(listener);
+  };
+  element.addEventListener('animationend', listener, false);
+}).then(listener => element.removeEventListener('animationend', listener, false));
 
-export default function prepare(target, command, attribute) {
+export default function prepare(command, target, attribute = HIDDEN) {
   let elements = [];
-  elements = document.querySelectorAll(target);
+  elements = [...document.querySelectorAll(target)];
   if (elements.length < 1) {
     error.log(`no element of '${target}' found on page.`);
     return async () => {
@@ -34,10 +41,17 @@ export default function prepare(target, command, attribute) {
   } else {
     [attribute, value = ''] = attribute.split('=');
   }
-  return Promise.all(elements.map(async element => {
+  return () => Promise.all(elements.map(async element => {
     let result = command;
-    if (instruction === TOGGLE) {
-      result = determineToggle(element, attribute) ? REMOVE : ADD;
+    if (result === TOGGLE) {
+      if (isClass) {
+        result = toggle(element.className.includes(attribute));
+      } else if (value) {
+        result = toggle(element.hasAttribute(attribute)
+          && (element.getAttribute(attribute) === value));
+      } else {
+        result = toggle(element.hasAttribute(attribute));
+      }
     }
     element.classList.add(MAIN_CLASS);
     let actionClass = getClass(attribute, result);
@@ -51,7 +65,7 @@ export default function prepare(target, command, attribute) {
       }
     }
     let styles = window.getComputedStyle(element, null);
-    if ((styles.transitionDuration !== '0s') || (styles.animationDuration !== '0s')) {
+    if ((fromTime(styles.transitionDuration) > 0) || (fromTime(styles.animationDuration) > 0)) {
       element.classList.add(activeClass);
       let maxTransitionTime = findAnimateTime(styles.transitionDuration);
       let maxAnimationTime = findAnimateTime(styles.animationDuration)
@@ -59,7 +73,8 @@ export default function prepare(target, command, attribute) {
       if (maxAnimationTime >= maxTransitionTime) {
         await animationEnd(element);
       } else {
-        await new Promise(res => setTimeout(res, Math.ceil(Math.max(maxTransitionTime, maxAnimationTime) * 1000)))
+        await new Promise(res =>
+          setTimeout(res, Math.ceil(Math.max(maxTransitionTime, maxAnimationTime) * 1000)));
       }
     }
     if (result === ADD) {
@@ -73,4 +88,4 @@ export default function prepare(target, command, attribute) {
     element.classList.remove(activeClass);
     element.classList.remove(MAIN_CLASS);
   }));
-};
+}
