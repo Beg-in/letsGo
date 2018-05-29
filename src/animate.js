@@ -2,8 +2,8 @@ import { ADD, REMOVE, TOGGLE, HIDDEN } from './constants';
 import * as error from './error';
 
 const MAIN_CLASS = 'lg-animate';
-const getClass = (attribute, result, active = false) => {
-  let out = `${attribute}-${result}`;
+const getClass = (attribute, goal, active = false) => {
+  let out = `${attribute}-${goal}`;
   if (active) {
     out = `${out}-active`;
   }
@@ -26,9 +26,7 @@ export default function prepare(command, target, attribute = HIDDEN) {
   elements = [...document.querySelectorAll(target)];
   if (elements.length < 1) {
     error.log(`no element of '${target}' found on page.`);
-    return async () => {
-      // intentionally left blank. LetsGo will continue with an error at runtime.
-    };
+    return () => Promise.resolve(); // intentional - queue will continue with an error at runtime
   }
   let isClass = false;
   let value = '';
@@ -42,22 +40,22 @@ export default function prepare(command, target, attribute = HIDDEN) {
     [attribute, value = ''] = attribute.split('=');
   }
   return () => Promise.all(elements.map(async element => {
-    let result = command;
-    if (result === TOGGLE) {
+    let goal = command;
+    if (goal === TOGGLE) {
       if (isClass) {
-        result = toggle(element.className.includes(attribute));
+        goal = toggle(element.className.includes(attribute));
       } else if (value) {
-        result = toggle(element.hasAttribute(attribute)
+        goal = toggle(element.hasAttribute(attribute)
           && (element.getAttribute(attribute) === value));
       } else {
-        result = toggle(element.hasAttribute(attribute));
+        goal = toggle(element.hasAttribute(attribute));
       }
     }
     element.classList.add(MAIN_CLASS);
-    let actionClass = getClass(attribute, result);
-    let activeClass = getClass(attribute, result, true);
+    let actionClass = getClass(attribute, goal);
+    let activeClass = getClass(attribute, goal, true);
     element.classList.add(actionClass);
-    if (result === REMOVE) {
+    if (goal === REMOVE) {
       if (isClass) {
         element.classList.remove(attribute);
       } else {
@@ -73,11 +71,11 @@ export default function prepare(command, target, attribute = HIDDEN) {
       if (maxAnimationTime >= maxTransitionTime) {
         await animationEnd(element);
       } else {
-        await new Promise(res =>
-          setTimeout(res, Math.ceil(Math.max(maxTransitionTime, maxAnimationTime) * 1000)));
+        await new Promise(resolve =>
+          setTimeout(resolve, Math.ceil(Math.max(maxTransitionTime, maxAnimationTime) * 1000)));
       }
     }
-    if (result === ADD) {
+    if (goal === ADD) {
       if (isClass) {
         element.classList.add(attribute);
       } else {
