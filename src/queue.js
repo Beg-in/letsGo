@@ -1,22 +1,24 @@
 import { ADD, REMOVE, TOGGLE, HIDDEN } from './constants.js';
-import exec from './exec.js';
+import prepare from './animate.js';
 import validator from './validator.js';
-import { handle } from './error';
+import * as error from './error';
 
 export default function queue(animation, deferred = Promise.resolve(), cancelled = false) {
   if (animation && !cancelled) {
-    if (validator(...animation)) {
+    try {
+      validator(...animation)
       let prepared = prepare(...animation);
       deferred = (async () => {
         await deferred;
         try {
           await prepared();
         } catch (e) {
-          handle(e);
+          error.handle(e);
         }
       })();
-    } else {
+    } catch(e) {
       cancelled = true;
+      error.handle(e);
     }
   }
   return {
