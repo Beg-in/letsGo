@@ -2,24 +2,11 @@ import { ADD, REMOVE, TOGGLE, HIDDEN } from './constants';
 import * as error from './error';
 
 const MAIN_CLASS = 'lg-animate';
-const getClass = (attribute, goal, active = false) => {
-  let out = `${attribute}-${goal}`;
-  if (active) {
-    out = `${out}-active`;
-  }
-  return out;
-};
 const toggle = check => check ? REMOVE : ADD;
+const getClass = (attribute, goal, active) => `${attribute}-${goal}${active ? '-active' : ''}`;
 const NUM_REGEX = /[^\d.]/g;
 const fromTime = time => +time.replace(NUM_REGEX, '');
-const findAnimateTime = times =>
-  times.split(',').reduce((out, time) => Math.max(fromTime(time), out), 0);
-const animationEnd = element => new Promise(resolve => {
-  let listener = () => {
-    resolve(listener);
-  };
-  element.addEventListener('animationend', listener, false);
-}).then(listener => element.removeEventListener('animationend', listener, false));
+const findAnimateTime = t => t.split(',').reduce((out, time) => Math.max(fromTime(time), out), 0);
 
 export default function prepare(command, target, attribute = HIDDEN) {
   let elements = [];
@@ -69,7 +56,12 @@ export default function prepare(command, target, attribute = HIDDEN) {
       let maxAnimationTime = findAnimateTime(styles.animationDuration)
         * styles.animationIterationCount;
       if (maxAnimationTime >= maxTransitionTime) {
-        await animationEnd(element);
+        let listener;
+        await new Promise(resolve => {
+          listener = resolve;
+          element.addEventListener('animationend', listener, false);
+        });
+        element.removeEventListener('animationend', listener, false);
       } else {
         await new Promise(resolve =>
           setTimeout(resolve, Math.ceil(Math.max(maxTransitionTime, maxAnimationTime) * 1000)));

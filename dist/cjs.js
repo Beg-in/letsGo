@@ -733,36 +733,20 @@ function raise() {
 }
 
 var MAIN_CLASS = 'lg-animate';
-var getClass = function getClass(attribute, result) {
-  var active = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-
-  var out = attribute + '-' + result;
-  if (active) {
-    out = out + '-active';
-  }
-  return out;
-};
 var toggle = function toggle(check) {
   return check ? REMOVE : ADD;
+};
+var getClass = function getClass(attribute, goal, active) {
+  return attribute + '-' + goal + (active ? '-active' : '');
 };
 var NUM_REGEX = /[^\d.]/g;
 var fromTime = function fromTime(time) {
   return +time.replace(NUM_REGEX, '');
 };
-var findAnimateTime = function findAnimateTime(times) {
-  return times.split(',').reduce(function (out, time) {
+var findAnimateTime = function findAnimateTime(t) {
+  return t.split(',').reduce(function (out, time) {
     return Math.max(fromTime(time), out);
   }, 0);
-};
-var animationEnd = function animationEnd(element) {
-  return new Promise(function (resolve) {
-    var listener = function listener() {
-      resolve(listener);
-    };
-    element.addEventListener('animationend', listener, false);
-  }).then(function (listener) {
-    return element.removeEventListener('animationend', listener, false);
-  });
 };
 
 function prepare(command, target) {
@@ -774,17 +758,9 @@ function prepare(command, target) {
   elements = [].concat(toConsumableArray(document.querySelectorAll(target)));
   if (elements.length < 1) {
     log('no element of \'' + target + '\' found on page.');
-    return asyncToGenerator(regeneratorRuntime.mark(function _callee() {
-      return regeneratorRuntime.wrap(function _callee$(_context) {
-        while (1) {
-          switch (_context.prev = _context.next) {
-            case 0:
-            case 'end':
-              return _context.stop();
-          }
-        }
-      }, _callee, _this);
-    }));
+    return function () {
+      return Promise.resolve();
+    };
   }
   var isClass = false;
   var value = '';
@@ -805,29 +781,29 @@ function prepare(command, target) {
   }
   return function () {
     return Promise.all(elements.map(function () {
-      var _ref2 = asyncToGenerator(regeneratorRuntime.mark(function _callee2(element) {
-        var result, actionClass, activeClass, styles, maxTransitionTime, maxAnimationTime;
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      var _ref = asyncToGenerator(regeneratorRuntime.mark(function _callee(element) {
+        var goal, actionClass, activeClass, styles, maxTransitionTime, maxAnimationTime, listener;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context.prev = _context.next) {
               case 0:
-                result = command;
+                goal = command;
 
-                if (result === TOGGLE) {
+                if (goal === TOGGLE) {
                   if (isClass) {
-                    result = toggle(element.className.includes(attribute));
+                    goal = toggle(element.className.includes(attribute));
                   } else if (value) {
-                    result = toggle(element.hasAttribute(attribute) && element.getAttribute(attribute) === value);
+                    goal = toggle(element.hasAttribute(attribute) && element.getAttribute(attribute) === value);
                   } else {
-                    result = toggle(element.hasAttribute(attribute));
+                    goal = toggle(element.hasAttribute(attribute));
                   }
                 }
                 element.classList.add(MAIN_CLASS);
-                actionClass = getClass(attribute, result);
-                activeClass = getClass(attribute, result, true);
+                actionClass = getClass(attribute, goal);
+                activeClass = getClass(attribute, goal, true);
 
                 element.classList.add(actionClass);
-                if (result === REMOVE) {
+                if (goal === REMOVE) {
                   if (isClass) {
                     element.classList.remove(attribute);
                   } else {
@@ -837,7 +813,7 @@ function prepare(command, target) {
                 styles = window.getComputedStyle(element, null);
 
                 if (!(fromTime(styles.transitionDuration) > 0 || fromTime(styles.animationDuration) > 0)) {
-                  _context2.next = 19;
+                  _context.next = 21;
                   break;
                 }
 
@@ -846,25 +822,30 @@ function prepare(command, target) {
                 maxAnimationTime = findAnimateTime(styles.animationDuration) * styles.animationIterationCount;
 
                 if (!(maxAnimationTime >= maxTransitionTime)) {
-                  _context2.next = 17;
+                  _context.next = 19;
                   break;
                 }
 
-                _context2.next = 15;
-                return animationEnd(element);
-
-              case 15:
-                _context2.next = 19;
-                break;
-
-              case 17:
-                _context2.next = 19;
-                return new Promise(function (res) {
-                  return setTimeout(res, Math.ceil(Math.max(maxTransitionTime, maxAnimationTime) * 1000));
+                listener = void 0;
+                _context.next = 16;
+                return new Promise(function (resolve) {
+                  listener = resolve;
+                  element.addEventListener('animationend', listener, false);
                 });
 
+              case 16:
+                element.removeEventListener('animationend', listener, false);
+                _context.next = 21;
+                break;
+
               case 19:
-                if (result === ADD) {
+                _context.next = 21;
+                return new Promise(function (resolve) {
+                  return setTimeout(resolve, Math.ceil(Math.max(maxTransitionTime, maxAnimationTime) * 1000));
+                });
+
+              case 21:
+                if (goal === ADD) {
                   if (isClass) {
                     element.classList.add(attribute);
                   } else {
@@ -875,16 +856,16 @@ function prepare(command, target) {
                 element.classList.remove(activeClass);
                 element.classList.remove(MAIN_CLASS);
 
-              case 23:
+              case 25:
               case 'end':
-                return _context2.stop();
+                return _context.stop();
             }
           }
-        }, _callee2, _this);
+        }, _callee, _this);
       }));
 
-      return function (_x3) {
-        return _ref2.apply(this, arguments);
+      return function (_x2) {
+        return _ref.apply(this, arguments);
       };
     }()));
   };
