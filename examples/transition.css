@@ -5,14 +5,17 @@
   border-radius: 0;
 }
 .circle {
+  background-color: RoyalBlue;
   border-radius: 50%;
 }
 .circle-add, .circle-remove {
-  transition: border-radius 1s;
+  transition: background-color 1s, border-radius 1s;
 }
 .circle-add-active {
+  background-color: RoyalBlue;
   border-radius: 50%;
 }
 .circle-add-remove {
+  background-color: LightSeaGreen;
   border-radius: 0;
 }
