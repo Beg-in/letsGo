@@ -1,17 +1,18 @@
-.demo-box {
+.demo-transition-box {
   width: 140px;
   height: 140px;
   background-color: LightSeaGreen;
+  border-radius: 0;
 }
-.blue-background {
-  background-color: RoyalBlue;
+.circle {
+  border-radius: 50%;
 }
-.blue-background-add, .blue-background-remove {
-  transition: background-color 1s;
+.circle-add, .circle-remove {
+  transition: border-radius 1s;
 }
-.blue-background-add-active {
-  background-color: RoyalBlue;
+.circle-add-active {
+  border-radius: 50%;
 }
-.blue-background-add-remove {
-  background-color: LightSeaGreen;
+.circle-add-remove {
+  border-radius: 0;
 }

@@ -2,9 +2,6 @@
 @import ./highlight
 @import ./github
 
-// *:not(.lg-animate)
-//   transition: width 0.4s, height 0.4s, font-size 0.4s, font-weight 0.4s
-
 html
   font-family: 'Assistant', sans-serif
 
@@ -224,22 +221,23 @@ div.panel
   background-color: #f3f3f3
   border-radius: 3px
 
-.demo-box
+.demo-transition-box
   width: 140px
   height: 140px
   background-color: LightSeaGreen
+  border-radius: 0
 
-.blue-background
-  background-color: RoyalBlue
+.circle
+  border-radius: 50%
 
-.blue-background-add, .blue-background-remove
-  transition: background-color 1s
+.circle-add, .circle-remove
+  transition: border-radius 1s
 
-.blue-background-add-active
-  background-color: RoyalBlue
+.circle-add-active
+  border-radius: 50%
 
-.blue-background-remove-active
-  background-color: LightSeaGreen
+.circle-remove-active
+  border-radius: 0
 
 @-webkit-keyframes spin-clockwise
   0%
