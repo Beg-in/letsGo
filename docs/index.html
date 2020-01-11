@@ -209,34 +209,38 @@
             <div class="frow gutters">
               <div class="col-md-2-3">
                 <pre class="fake-code mb-0">
-<!--           -->.demo-box {
+<!--           -->.demo-transition-box {
 <!--           -->  width: 140px;
 <!--           -->  height: 140px;
 <!--           -->  background-color: LightSeaGreen;
+<!--           -->  border-radius: 0;
 <!--           -->}
 <!--           -->
-<!--           -->.blue-background {
+<!--           -->.circle {
 <!--           -->  background-color: RoyalBlue;
+<!--           -->  border-radius: 50%;
 <!--           -->}
 <!--           -->
-<!--           -->.blue-background-add, .blue-background-remove {
-<!--           -->  transition: background-color 1s;
+<!--           -->.circle-add, .circle-remove {
+<!--           -->  transition: background-color 1s, border-radius 1s;
 <!--           -->}
 <!--           -->
-<!--           -->.blue-background-add-active {
+<!--           -->.circle-add-active {
 <!--           -->  background-color: RoyalBlue;
+<!--           -->  border-radius: 50%;
 <!--           -->}
 <!--           -->
-<!--           -->.blue-background-add-remove {
+<!--           -->.circle-remove-active {
 <!--           -->  background-color: LightSeaGreen;
+<!--           -->  border-radius: 0;
 <!--           -->}
 <!--         --></pre>
               </div>
               <div class="col-md-1-3">
                  <div class="demo-box-container">
                    <div class="frow centered-column justify-around">
-                     <div class="demo-box card-shadow"></div>
-                     <button type="button" name="button" onclick="letsGo.toggle('.demo-box', '.blue-background');">Test</button>
+                     <div class="demo-transition-box card-shadow"></div>
+                     <button type="button" name="button" onclick="letsGo.toggle('.demo-transition-box', '.circle');">Try it</button>
                    </div>
                 </div>
               </div>
@@ -278,7 +282,7 @@
                  <div class="demo-box-container">
                    <div class="frow centered-column justify-around">
                      <div class="demo-animation-box card-shadow"></div>
-                     <button type="button" name="button" onclick="letsGo.toggle('.demo-animation-box', '.demo-twirl');">Test</button>
+                     <button type="button" name="button" onclick="letsGo.toggle('.demo-animation-box', '.demo-twirl');">Try it</button>
                    </div>
                 </div>
               </div>

@@ -1,7 +1,3 @@
-/**:not(.lg-animate) {
-  transition: width 0.4s, height 0.4s, font-size 0.4s, font-weight 0.4s;
-}*/
-
 html {
   font-family: 'Assistant', sans-serif;
 }
@@ -116,6 +112,7 @@ header svg {
 }
 
 .main-tab.disabled-remove {
+  -webkit-transition: none;
   transition: none;
 }
 
@@ -137,6 +134,7 @@ main {
 }
 
 .main-section.hidden-remove {
+  -webkit-transition: opacity 0.3s ease-in;
   transition: opacity 0.3s ease-in;
   opacity: 0;
 }
@@ -146,6 +144,7 @@ main {
 }
 
 .main-section.hidden-add {
+  -webkit-transition: opacity 0.3s ease-out;
   transition: opacity 0.3s ease-out;
   opacity: 1;
 }
@@ -172,6 +171,7 @@ button.accordion {
   text-align: left;
   border: none;
   outline: none;
+  -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 
@@ -190,6 +190,7 @@ div.panel {
 }
 
 #npm.hidden-remove, #bower.hidden-remove, #manual.hidden-remove {
+  -webkit-transition: max-height 1s, margin 1s;
   transition: max-height 1s, margin 1s;
   max-height: 0;
   margin: 0px;
@@ -201,6 +202,7 @@ div.panel {
 }
 
 #npm.hidden-add, #bower.hidden-add, #manual.hidden-add {
+  -webkit-transition: max-height 1s, margin 1s;
   transition: max-height 1s, margin 1s;
   max-height: 80px;
   margin: 10px;
@@ -212,6 +214,7 @@ div.panel {
 }
 
 #cdn.hidden-remove{
+  -webkit-transition: max-height 1s, margin 1s;
   transition: max-height 1s, margin 1s;
   max-height: 0;
   margin: 0px;
@@ -223,6 +226,7 @@ div.panel {
 }
 
 #cdn.hidden-add {
+  -webkit-transition: max-height 1s, margin 1s;
   transition: max-height 1s, margin 1s;
   max-height: 300px;
   margin: 10px;
@@ -280,26 +284,31 @@ div.panel {
   border-radius: 3px;
 }
 
-.demo-box {
+.demo-transition-box {
   width: 140px;
   height: 140px;
   background-color: LightSeaGreen;
+  border-radius: 0;
 }
 
-.blue-background {
+.circle {
   background-color: RoyalBlue;
+  border-radius: 50%;
 }
 
-.blue-background-add, .blue-background-remove {
-  transition: background-color 1s;
+.circle-add, .circle-remove {
+  -webkit-transition: background-color 1s, border-radius 1s;
+  transition: background-color 1s, border-radius 1s;
 }
 
-.blue-background-add-active {
+.circle-add-active {
   background-color: RoyalBlue;
+  border-radius: 50%;
 }
 
-.blue-background-remove-active {
+.circle-add-remove {
   background-color: LightSeaGreen;
+  border-radius: 0;
 }
 
 @-webkit-keyframes spin-clockwise {
@@ -335,16 +344,14 @@ div.panel {
 
 .demo-twirl-add {
   -webkit-animation-name: spin-clockwise;
-      animation-name: spin-clockwise;
+          animation-name: spin-clockwise;
   -webkit-animation-duration: 3s;
-      animation-duration: 3s;
-  /*animation-iteration-count: 2;*/
+          animation-duration: 3s;
 }
 
 .demo-twirl-remove {
   -webkit-animation-name: spin-counterclockwise;
-      animation-name: spin-counterclockwise;
+          animation-name: spin-counterclockwise;
   -webkit-animation-duration: 3s;
-      animation-duration: 3s;
-  /*animation-iteration-count: 2;*/
+          animation-duration: 3s;
 }
