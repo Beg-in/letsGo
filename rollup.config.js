@@ -16,6 +16,11 @@ export default [{
     banner,
     format: 'cjs',
     file: 'dist/cjs.js',
+  }, {
+    banner,
+    format: 'umd',
+    name: 'letsgo',
+    file: 'docs/scripts/letsgo.js',
   }],
   plugins,
 }, {
