@@ -189,26 +189,26 @@ div.panel {
   overflow: hidden;
 }
 
-#npm.hidden-remove, #bower.hidden-remove, #manual.hidden-remove {
+#npm.hidden-remove, #manual.hidden-remove {
   -webkit-transition: max-height 1s, margin 1s;
   transition: max-height 1s, margin 1s;
   max-height: 0;
   margin: 0px;
 }
 
-#npm.hidden-remove-active, #bower.hidden-remove-active, #manual.hidden-remove-active {
+#npm.hidden-remove-active, #manual.hidden-remove-active {
   max-height:80px;
   margin: 10px;
 }
 
-#npm.hidden-add, #bower.hidden-add, #manual.hidden-add {
+#npm.hidden-add, #manual.hidden-add {
   -webkit-transition: max-height 1s, margin 1s;
   transition: max-height 1s, margin 1s;
   max-height: 80px;
   margin: 10px;
 }
 
-#npm.hidden-add-active, #bower.hidden-add-active, #manual.hidden-add-active {
+#npm.hidden-add-active, #manual.hidden-add-active {
   max-height:0px;
   margin: 0px;
 }
