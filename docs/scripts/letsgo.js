@@ -1,48 +1,50 @@
-/* letsGo
- * https://letsgojs.com/
- *
- * By: Cody Sherman <cody@beg.in> (codysherman.com)
- */
-(((window, document) => {
-  let error = function() {
-    window.console.error(...arguments);
+/* letsGo v0.2.3 | https://letsgojs.com */
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (factory((global.letsGo = {})));
+}(this, (function (exports) { 'use strict';
+
+  var error = function error() {
+    var _window$console;
+
+    (_window$console = window.console).error.apply(_window$console, arguments);
   };
-  
-  let hidden = 'hidden';
-  
-  let masterQueue = {};
-  let masterId = 0;
 
-  let letsGo = (target, command, attribute, newQueue) => {
-    let activeId = null;
+  var hidden = 'hidden';
 
-    let nextInQueue = lastOne => {
+  var masterQueue = {};
+  var masterId = 0;
+
+  var _letsGo = function _letsGo(target, command, attribute, newQueue) {
+    var activeId = null;
+
+    var nextInQueue = function nextInQueue(lastOne) {
       if (lastOne) {
         masterQueue[activeId].queue.shift();
         if (masterQueue[activeId].queue.length > 0) {
           router();
         } else {
           masterQueue[activeId].running = false;
-          // delete masterQueue[activeId];
         }
       }
     };
 
-    let determineToggle = (element, attribute) => {
+    var determineToggle = function determineToggle(element, attribute) {
       if (attribute.charAt(0) === '.') {
-        return ` ${element.className} `.includes(` ${attribute.substring(1)} `);
+        return (' ' + element.className + ' ').includes(' ' + attribute.substring(1) + ' ');
       } else if (attribute.includes('=')) {
         attribute = attribute.split('=');
-        return (element.hasAttribute(attribute[0])) && (element.getAttribute(attribute[0]) === attribute[1]);
+        return element.hasAttribute(attribute[0]) && element.getAttribute(attribute[0]) === attribute[1];
       } else {
-        return (element.hasAttribute(attribute));
+        return element.hasAttribute(attribute);
       }
     };
 
-    let findAnimateTime = times => {
+    var findAnimateTime = function findAnimateTime(times) {
       if (times.includes(',')) {
         times = times.split(',');
-        for (let i = 0; i < times.length; i++) {
+        for (var i = 0; i < times.length; i++) {
           times[i] = Number(times[i].slice(0, -1));
         }
         times = Math.max.apply(null, times);
@@ -52,16 +54,16 @@
       return times;
     };
 
-    let alterAttribute = (element, command, attribute, lastOne) => {
-      let isClass = false;
+    var alterAttribute = function alterAttribute(element, command, attribute, lastOne) {
+      var isClass = false;
       if (attribute.charAt(0) === '.') {
         isClass = true;
         attribute = [attribute.substring(1)];
       } else {
         attribute = attribute.split('=');
       }
-      
-      let alterAttributeDone = () => {
+
+      var alterAttributeDone = function alterAttributeDone() {
         element.removeEventListener('animationend', alterAttributeDone, false);
         if (command === 'add') {
           if (isClass) {
@@ -70,14 +72,14 @@
             element.setAttribute(attribute[0], attribute[1] || '');
           }
         }
-        element.classList.remove(`${attribute[0]}-${command}`);
-        element.classList.remove(`${attribute[0]}-${command}-active`);
+        element.classList.remove(attribute[0] + '-' + command);
+        element.classList.remove(attribute[0] + '-' + command + '-active');
         element.classList.remove('lg-animate');
         nextInQueue(lastOne);
       };
 
       element.classList.add('lg-animate');
-      element.classList.add(`${attribute[0]}-${command}`);
+      element.classList.add(attribute[0] + '-' + command);
       if (command === 'remove') {
         if (isClass) {
           element.classList.remove(attribute[0]);
@@ -85,13 +87,13 @@
           element.removeAttribute(attribute[0]);
         }
       }
-      setTimeout(() => {
-        let styles = window.getComputedStyle(element, null);
-        if ((styles.transitionDuration !== '0s') || (styles.animationDuration !== '0s')) {
-          element.classList.add(`${attribute[0]}-${command}-active`);
-          let maxTransitionTime = findAnimateTime(styles.transitionDuration);
-          let maxAnimationTime = findAnimateTime(styles.animationDuration) * styles.animationIterationCount;
-          let maxTime = Math.ceil(Math.max(maxTransitionTime, maxAnimationTime)*1000);
+      setTimeout(function () {
+        var styles = window.getComputedStyle(element, null);
+        if (styles.transitionDuration !== '0s' || styles.animationDuration !== '0s') {
+          element.classList.add(attribute[0] + '-' + command + '-active');
+          var maxTransitionTime = findAnimateTime(styles.transitionDuration);
+          var maxAnimationTime = findAnimateTime(styles.animationDuration) * styles.animationIterationCount;
+          var maxTime = Math.ceil(Math.max(maxTransitionTime, maxAnimationTime) * 1000);
           if (maxAnimationTime >= maxTransitionTime) {
             element.addEventListener('animationend', alterAttributeDone, false);
           } else {
@@ -102,22 +104,22 @@
         }
       }, 0);
     };
-    
-    let router = () => {
-      let target = masterQueue[activeId].queue[0].target;
-      let command = masterQueue[activeId].queue[0].command;
-      let attribute = masterQueue[activeId].queue[0].attribute;
-      let lastOne = false;
-      let element = [];
+
+    var router = function router() {
+      var target = masterQueue[activeId].queue[0].target;
+      var command = masterQueue[activeId].queue[0].command;
+      var attribute = masterQueue[activeId].queue[0].attribute;
+      var lastOne = false;
+      var element = [];
       element = document.querySelectorAll(target);
       if (element.length < 1) {
-        return error(`letsGo: no element of '${target}' found on page.`);
+        return error('letsGo: no element of \'' + target + '\' found on page.');
       }
       if (attribute.charAt(0) === '#') {
-        attribute = `id=${attribute.substring(1)}`;
+        attribute = 'id=' + attribute.substring(1);
       }
-      for (let i = 0; i < element.length; i++) {
-        if (i === (element.length - 1) ) {
+      for (var i = 0; i < element.length; i++) {
+        if (i === element.length - 1) {
           lastOne = true;
         }
         if (command === 'toggle') {
@@ -129,68 +131,81 @@
 
     if (newQueue) {
       activeId = ++masterId;
-      masterQueue[activeId] = {running: false, queue: []};
+      masterQueue[activeId] = { running: false, queue: [] };
     }
-    // setTimeout(function() {
-      activeId = activeId || masterId;
-      masterQueue[activeId].queue.push({target, command, attribute});
-      if (!masterQueue[activeId].running) {
-        masterQueue[activeId].running = true;
-        router();
-      }
-    // }, 0);
+
+    activeId = activeId || masterId;
+    masterQueue[activeId].queue.push({ target: target, command: command, attribute: attribute });
+    if (!masterQueue[activeId].running) {
+      masterQueue[activeId].running = true;
+      router();
+    }
   };
 
-  let validator = (command, target, attribute) => {
+  var validator = function validator(command, target, attribute) {
     if (!target) {
       error('letsGo: missing \'target\' parameter');
-      return {validated: false};
+      return { validated: false };
     } else if (typeof target !== 'string') {
       error('letsGo: \'target\' parameter is not a string type');
-      return {validated: false};
+      return { validated: false };
     } else if ((command === 'add' || command === 'remove') && !attribute) {
       error('letsGo: using \'add\' or \'remove\' commands must also have an \'attribute\' parameter');
-      return {validated: false};
+      return { validated: false };
     } else {
-      return {validated: true, command, target, attribute: attribute || hidden};
+      return { validated: true, command: command, target: target, attribute: attribute || hidden };
     }
   };
 
-  let addToQueue = (input, newQueue) => {
-      if (input.validated !== true) {
-        // TODO: skip code here
-      } else {
-        letsGo(input.target, input.command, input.attribute, newQueue);
-      }
-      return addToQueue;
+  var addToQueue = function addToQueue(input, newQueue) {
+    if (input.validated !== true) ; else {
+      _letsGo(input.target, input.command, input.attribute, newQueue);
+    }
+    return addToQueue;
   };
 
-  addToQueue.add = (target, attribute, newQueue) => {
+  addToQueue.add = function (target, attribute, newQueue) {
     return addToQueue(validator('add', target, attribute), newQueue);
   };
 
-  addToQueue.remove = (target, attribute, newQueue) => {
+  addToQueue.remove = function (target, attribute, newQueue) {
     return addToQueue(validator('remove', target, attribute), newQueue);
   };
 
-  addToQueue.toggle = (target, attribute, newQueue) => {
+  addToQueue.toggle = function (target, attribute, newQueue) {
     return addToQueue(validator('toggle', target, attribute), newQueue);
   };
-  
-  addToQueue.show = (target) => {
+
+  addToQueue.show = function (target) {
     return addToQueue.remove(target, hidden);
   };
 
-  addToQueue.hide= (target) => {
+  addToQueue.hide = function (target) {
     return addToQueue.add(target, hidden);
   };
 
-  let api = {};
-  api.add = (target, attribute) => addToQueue.add(target, attribute, true);
-  api.remove = (target, attribute) => addToQueue.remove(target, attribute, true);
-  api.toggle = (target, attribute) => addToQueue.toggle(target, attribute, true);
-  api.show = target => addToQueue.remove(target, hidden, true);
-  api.hide = target => addToQueue.add(target, hidden, true);
+  var add = function add(target, attribute) {
+    return addToQueue.add(target, attribute, true);
+  };
+  var remove = function remove(target, attribute) {
+    return addToQueue.remove(target, attribute, true);
+  };
+  var toggle = function toggle(target, attribute) {
+    return addToQueue.toggle(target, attribute, true);
+  };
+  var show = function show(target) {
+    return addToQueue.remove(target, hidden, true);
+  };
+  var hide = function hide(target) {
+    return addToQueue.add(target, hidden, true);
+  };
 
-  window.letsGo = api;
-}))(window, document);
+  exports.add = add;
+  exports.remove = remove;
+  exports.toggle = toggle;
+  exports.show = show;
+  exports.hide = hide;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
+
+})));

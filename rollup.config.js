@@ -19,7 +19,7 @@ export default [{
   }, {
     banner,
     format: 'umd',
-    name: 'letsgo',
+    name: 'letsGo',
     file: 'docs/scripts/letsgo.js',
   }],
   plugins,
@@ -28,7 +28,7 @@ export default [{
   output: {
     banner,
     format: 'umd',
-    name: 'letsgo',
+    name: 'letsGo',
     file: 'dist/letsgo.min.js',
   },
   plugins: [...plugins, uglify({ output: { comments: 'all' }})],

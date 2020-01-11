@@ -2,6 +2,7 @@
   "name": "letsgo",
   "version": "0.2.3",
   "description": "JavaScript library for hiding, changing, and animating HTML elements https://letsgojs.com",
+  "module": "dist/esm.js",
   "scripts": {
     "autoprefixer": "postcss --no-map -u autoprefixer -r docs/styles/*.css",
     "dist": "rm -rf dist && rollup --config",
